@@ -25,14 +25,14 @@ clone() {
         return 1
     fi
     git clone "$1" 2>/dev/null && cd "$(basename "$1" .git)" || {
-        echo -e "${MAGENTA}Repository '$1' does not exist STUPID! BONK! Owo${RC}"
+        echo -e "${MAGENTA}Repository '$1' does not exist, stupid! BONK! Owo${RC}"
         return 1
     }
 }
 
 if ! command -v command_not_found_handle > /dev/null; then
     command_not_found_handle() {
-        echo -e "${MAGENTA}Command '$1' not found STUPID! BONK! Owo${RC}" >&2
+        echo -e "${MAGENTA}Command '$1' not found, stupid! BONK! Owo${RC}" >&2
         return 127
     }
 fi
