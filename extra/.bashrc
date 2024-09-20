@@ -25,17 +25,17 @@ parse_git_branch() {
 
 clone() { 
     if [ -z "$1" ]; then
-        echo -e "${MAGENTA}You didn't type anything in, stupid! BONK! Owo.${RC}"
+        echo -e "${RC}You didn't type anything in, ${MAGENTA}stupid! BONK!${RC} Owo.${RC}"
         return 1
     fi
     git clone "$1" 2>/dev/null && cd "$(basename "$1" .git)" || {
-        echo -e "${MAGENTA}Repository '$1' does not exist, stupid! BONK! Owo.${RC}"
+        echo -e "${RC}Repository ${MAGENTA}'$1'${RC} does not exist, ${MAGENTA}stupid! BONK!${RC} Owo.${RC}"
         return 1
     }
 }
 
 command_not_found_handle() {
-    echo -e "${MAGENTA}Command '$1' not found, stupid! BONK! Owo.${RC}" >&2
+    echo -e "${RC}Command ${MAGENTA}'$1'${RC} not found, ${MAGENTA}stupid! BONK!${RC} Owo.${RC}" >&2
     return 127
 }
 
