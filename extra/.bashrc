@@ -39,6 +39,7 @@ parse_git_branch() {
     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'
 }
 
+# commit with a message dynamically
 commit() {
     git commit -m "$*"
 }
