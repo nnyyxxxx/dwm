@@ -22,8 +22,7 @@ alias pull='git pull'
 alias push='git push'
 alias branch='git branch'
 alias checkout='git checkout'
-alias add='git add'
-alias commit='git commit'
+alias add='git add .'
 alias push='git push'
 alias pull='git pull'
 alias status='git status'
@@ -38,6 +37,10 @@ export BROWSER='firefox'
 # parse the branch and transfer it to the prompt
 parse_git_branch() {
     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'
+}
+
+commit() {
+    git commit -m "$*"
 }
 
 # cloning and cding into that cloned repo
