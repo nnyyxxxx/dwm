@@ -12,7 +12,7 @@ elif command -v doas > /dev/null 2>&1; then
     su="doas"
 fi
 
-yes | $aur_helper
+$aur_helper --noconfirm
 
 $su pacman -Rns "$(pacman -Qdtq)" --noconfirm
 

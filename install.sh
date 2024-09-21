@@ -4,8 +4,8 @@ clear
 
 if ! command -v yay > /dev/null 2>&1 && ! command -v paru > /dev/null 2>&1
 then
-    git clone https://aur.archlinux.org/paru-bin.git
-    cd paru-bin
+    git clone https://aur.archlinux.org/yay-bin.git
+    cd yay-bin
     makepkg -si
     cd
 fi
