@@ -8,7 +8,6 @@ RC='\033[0m'
 MAGENTA='\033[35m'
 
 # essentials
-alias ls='ls --color=auto'
 alias grep='grep --color=auto'
 alias ff='clear && fastfetch'
 alias c='clear'
@@ -58,12 +57,6 @@ clone() {
     }
 }
 
-# custom command not found message
-command_not_found_handle() {
-    echo -e "Command ${MAGENTA}'$1'${RC} not found, ${MAGENTA}stupid! BONK!${RC} Owo." >&2
-    return 127
-}
-
 # dynamically delete branches while on the branch you want to delete
 branch() {
     if [ "$1" = "-d" ] && [ -n "$2" ]; then
@@ -72,6 +65,22 @@ branch() {
     else
         git branch "$@"
     fi
+}
+
+# custom command not found message
+command_not_found_handle() {
+    echo -e "Command ${MAGENTA}'$1'${RC} not found, ${MAGENTA}stupid! BONK!${RC} Owo." >&2
+    return 127
+}
+
+# custom command not found message 2
+ls() {
+    command ls --color=auto "$@" 2>/dev/null || echo -e "Directory ${MAGENTA}'$*'${RC} does not exist, ${MAGENTA}stupid! BONK!${RC} Owo."
+}
+
+# custom command not found message 3
+cd() {
+    builtin cd "$@" 2>/dev/null || echo -e "Directory ${MAGENTA}'$*'${RC} does not exist, ${MAGENTA}stupid! BONK!${RC} Owo."
 }
 
 shopt -s expand_aliases
