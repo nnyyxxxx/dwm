@@ -21,7 +21,6 @@ alias debloat='~/Documents/debloat.sh'
 alias pull='git pull'
 alias branch='git branch'
 alias checkout='git checkout'
-alias pull='git pull'
 alias status='git status'
 alias log='git log'
 
