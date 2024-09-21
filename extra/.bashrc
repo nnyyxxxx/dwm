@@ -19,11 +19,8 @@ alias debloat='~/Documents/debloat.sh'
 
 # git based actions
 alias pull='git pull'
-alias push='git push'
 alias branch='git branch'
 alias checkout='git checkout'
-alias add='git add .'
-alias push='git push'
 alias pull='git pull'
 alias status='git status'
 alias log='git log'
@@ -41,7 +38,9 @@ parse_git_branch() {
 
 # commit with a message dynamically
 commit() {
+    git add .
     git commit -m "$*"
+    git push
 }
 
 # cloning and cding into that cloned repo
