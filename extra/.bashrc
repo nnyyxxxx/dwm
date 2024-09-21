@@ -83,4 +83,27 @@ cd() {
     builtin cd "$@" 2>/dev/null || echo -e "Directory ${MAGENTA}'$*'${RC} does not exist, ${MAGENTA}stupid! BONK!${RC} Owo."
 }
 
+# rebasing
+rebase() {
+    if [ "$1" = "--abort" ]; then
+        git rebase --abort || {
+            echo -e "Failed to abort rebase, ${MAGENTA}stupid! BONK!${RC} Owo."
+            return 1
+        }
+        return 0
+    fi
+    if ! [[ "$1" =~ ^[0-9]+$ ]]; then
+        echo -e "You didn't specify a valid number of commits, ${MAGENTA}stupid! BONK!${RC} Owo."
+        return 1
+    fi
+    if ! git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+        echo -e "This is not a git repository, ${MAGENTA}stupid! BONK!${RC} Owo."
+        return 1
+    fi
+    git rebase -i HEAD~"$1" || {
+        echo -e "Failed to rebase ${MAGENTA}$1${RC} commits, ${MAGENTA}stupid! BONK!${RC} Owo."
+        return 1
+    }
+}
+
 shopt -s expand_aliases
