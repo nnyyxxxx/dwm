@@ -45,18 +45,18 @@ commit() {
 # cloning and cding into that cloned repo
 clone() { 
     if [ -z "$1" ]; then
-        echo -e "${RC}You didn't type anything in, ${MAGENTA}stupid! BONK!${RC} Owo.${RC}"
+        echo -e "${RC}You didn't type anything in, ${MAGENTA}stupid! BONK!${RC} Owo."
         return 1
     fi
     git clone "$1" 2>/dev/null && cd "$(basename "$1" .git)" || {
-        echo -e "${RC}Repository ${MAGENTA}'$1'${RC} does not exist, ${MAGENTA}stupid! BONK!${RC} Owo.${RC}"
+        echo -e "${RC}Repository ${MAGENTA}'$1'${RC} does not exist, ${MAGENTA}stupid! BONK!${RC} Owo."
         return 1
     }
 }
 
 # custom command not found message
 command_not_found_handle() {
-    echo -e "${RC}Command ${MAGENTA}'$1'${RC} not found, ${MAGENTA}stupid! BONK!${RC} Owo.${RC}" >&2
+    echo -e "${RC}Command ${MAGENTA}'$1'${RC} not found, ${MAGENTA}stupid! BONK!${RC} Owo." >&2
     return 127
 }
 
