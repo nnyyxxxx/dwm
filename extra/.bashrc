@@ -19,8 +19,12 @@ alias debloat='~/Documents/debloat.sh'
 
 # git based actions
 alias pull='git pull'
-alias branch='git branch'
 alias checkout='git checkout'
+alias push='git push'
+alias fetch='git fetch'
+alias merge='git merge'
+alias add='git add .'
+alias stash='git stash && git stash drop'
 alias status='git status'
 alias log='git log'
 
@@ -58,6 +62,16 @@ clone() {
 command_not_found_handle() {
     echo -e "Command ${MAGENTA}'$1'${RC} not found, ${MAGENTA}stupid! BONK!${RC} Owo." >&2
     return 127
+}
+
+# dynamically delete branches while on the branch you want to delete
+branch() {
+    if [ "$1" = "-d" ] && [ -n "$2" ]; then
+        git checkout main 2>/dev/null || git checkout master 2>/dev/null
+        git branch -d "$2"
+    else
+        git branch "$@"
+    fi
 }
 
 shopt -s expand_aliases
