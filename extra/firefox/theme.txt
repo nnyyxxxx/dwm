@@ -1,1 +1,1 @@
-https://addons.mozilla.org/en-US/firefox/addon/catppuccin-mocha-mauve-git/
+https://addons.mozilla.org/firefox/addon/mocha-red/

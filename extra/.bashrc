@@ -3,11 +3,10 @@
 
 # colors
 RC='\033[0m'
-MAGENTA='\033[35m'
-GREEN='\033[0;32m'
+RED='\033[38;2;243;139;168m'
 
 # prompt
-PS1='\[\e[35m\]$(if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then echo "$(parse_git_branch) "; fi)\[\e[0;32m\]\w \$\[\e[0m\] '
+PS1='\[\033[38;2;243;139;168m\]$(if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then echo "\[\033[38;2;243;139;168m\]$(parse_git_branch) "; fi)\[\033[0;32m\]\w \$\[\033[0m\] '
 
 # essential stuff
 stty -ixon # disable ctrl+s and ctrl+q
@@ -59,11 +58,11 @@ commit() {
 # cloning and cding into that cloned repo
 clone() { 
     if [ -z "$1" ]; then
-        echo -e "You didn't type anything in, ${MAGENTA}stupid! BONK!${RC} Owo."
+        echo -e "You didn't type anything in, ${RED}stupid! BONK!${RC} Owo."
         return 1
     fi
     git clone "$1" 2>/dev/null && cd "$(basename "$1" .git)" || {
-        echo -e "Repository ${MAGENTA}'$1'${RC} does not exist, ${MAGENTA}stupid! BONK!${RC} Owo."
+        echo -e "Repository ${RED}'$1'${RC} does not exist, ${RED}stupid! BONK!${RC} Owo."
         return 1
     }
 }
@@ -80,39 +79,39 @@ branch() {
 
 # custom command not found message
 command_not_found_handle() {
-    echo -e "Command ${MAGENTA}'$1'${RC} not found, ${MAGENTA}stupid! BONK!${RC} Owo." >&2
+    echo -e "Command ${RED}'$1'${RC} not found, ${RED}stupid! BONK!${RC} Owo." >&2
     return 127
 }
 
 # custom command not found message 2
 ls() {
-    command ls -hN --color=auto --group-directories-first "$@" 2>/dev/null || echo -e "Directory ${MAGENTA}'$*'${RC} does not exist, ${MAGENTA}stupid! BONK!${RC} Owo."
+    command ls -hN --color=auto --group-directories-first "$@" 2>/dev/null || echo -e "Directory ${RED}'$*'${RC} does not exist, ${RED}stupid! BONK!${RC} Owo."
 }
 
 # custom command not found message 3
 cd() {
-    builtin cd "$@" 2>/dev/null || echo -e "Directory ${MAGENTA}'$*'${RC} does not exist, ${MAGENTA}stupid! BONK!${RC} Owo."
+    builtin cd "$@" 2>/dev/null || echo -e "Directory ${RED}'$*'${RC} does not exist, ${RED}stupid! BONK!${RC} Owo."
 }
 
 # rebasing
 rebase() {
     if [ "$1" = "--abort" ]; then
         git rebase --abort || {
-            echo -e "Failed to abort rebase, ${MAGENTA}stupid! BONK!${RC} Owo."
+            echo -e "Failed to abort rebase, ${RED}stupid! BONK!${RC} Owo."
             return 1
         }
         return 0
     fi
     if ! [[ "$1" =~ ^[0-9]+$ ]]; then
-        echo -e "You didn't specify a valid number of commits, ${MAGENTA}stupid! BONK!${RC} Owo."
+        echo -e "You didn't specify a valid number of commits, ${RED}stupid! BONK!${RC} Owo."
         return 1
     fi
     if ! git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
-        echo -e "This is not a git repository, ${MAGENTA}stupid! BONK!${RC} Owo."
+        echo -e "This is not a git repository, ${RED}stupid! BONK!${RC} Owo."
         return 1
     fi
     git rebase -i HEAD~"$1" || {
-        echo -e "Failed to rebase ${MAGENTA}$1${RC} commits, ${MAGENTA}stupid! BONK!${RC} Owo."
+        echo -e "Failed to rebase ${RED}$1${RC} commits, ${RED}stupid! BONK!${RC} Owo."
         return 1
     }
 }
