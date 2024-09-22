@@ -24,4 +24,4 @@ chmod +x install.sh
 | `ALT + SPACE` | Makes the selected window float |
 
 ### Preview:
-![PV](https://i.imgur.com/ufXx3Fh.png)
+![PV](https://i.imgur.com/YFPjFoq.png)
