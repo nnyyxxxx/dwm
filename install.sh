@@ -33,7 +33,7 @@ $su pacman -S --needed --noconfirm \
     pulseaudio ttf-jetbrains-mono-nerd noto-fonts-emoji ttf-liberation ttf-dejavu \
     ttf-fira-sans ttf-fira-mono pamixer polkit-kde-agent xdg-desktop-portal zip unzip \
     qt5-graphicaleffects qt5-quickcontrols2 noto-fonts-extra noto-fonts-cjk noto-fonts \
-    cmatrix gtk3 neovim hsetroot sddm
+    cmatrix gtk3 neovim hsetroot
 
 $aur_helper -S --needed --noconfirm \
     cava pipes.sh checkupdates-with-aur picom-ftlabs-git
@@ -42,8 +42,6 @@ rm -rf ~/suckless/
 
 $su cp -R ~/dwm/extra/BreezeX-Black /usr/share/icons/
 $su cp -R ~/dwm/extra/catppuccin-mocha /usr/share/themes/
-$su cp -R ~/dwm/extra/sddm/catppuccin-mocha/ /usr/share/sddm/themes/
-$su cp ~/dwm/extra/sddm/sddm-config/sddm.conf /etc/
 cp -R ~/dwm/extra/cava ~/.config/
 cp -R ~/dwm/extra/fastfetch ~/.config/
 cp -R ~/dwm/extra/nvim ~/.config/ 
@@ -60,8 +58,6 @@ cp -R ~/dwm/suckless ~/
 cd ~/suckless/st && $su make clean install && cd
 cd ~/suckless/dwm && $su make clean install && cd
 cd ~/suckless/dmenu && $su make clean install && cd
-
-$su systemctl enable sddm
 
 if pacman -Q grub > /dev/null 2>&1; then
     $su cp -R ~/dwm/extra/grub/catppuccin-mocha-grub/ /usr/share/grub/themes/
