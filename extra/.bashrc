@@ -23,7 +23,7 @@ alias debloat='~/Documents/debloat.sh'
 alias ka='killall'
 alias ss='sudo systemctl'
 alias pacman='sudo pacman'
-alias chmod='chmod -x'
+alias chmod='chmod +x'
 alias ..='cd ..'
 
 # git based actions
