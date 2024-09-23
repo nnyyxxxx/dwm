@@ -30,7 +30,7 @@ $su pacman -S --needed --noconfirm \
     maim bleachbit xorg-xsetroot xorgproto xorg-xset xorg-xrdb xorg-fonts-encodings \
     xorg-xrandr xorg-xprop xorg-setxkbmap xorg-server-common xorg-server xorg-xauth \
     xorg-xmodmap xorg-xkbcomp xorg-xinput xorg-xinit xorg-xhost fastfetch xclip \
-    pulseaudio ttf-jetbrains-mono-nerd noto-fonts-emoji ttf-liberation ttf-dejavu \
+    pipewire ttf-jetbrains-mono-nerd noto-fonts-emoji ttf-liberation ttf-dejavu \
     ttf-fira-sans ttf-fira-mono pamixer polkit-kde-agent xdg-desktop-portal zip unzip \
     qt5-graphicaleffects qt5-quickcontrols2 noto-fonts-extra noto-fonts-cjk noto-fonts \
     cmatrix gtk3 neovim hsetroot
