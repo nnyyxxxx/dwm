@@ -5,7 +5,23 @@ RED='\033[31m'
 YELLOW='\033[33m'
 GREEN='\033[32m'
 
-setPrefs() {
+setEscalationTool() {
+    if command -v sudo > /dev/null 2>&1; then
+        su="sudo"
+    elif command -v doas > /dev/null 2>&1; then
+        su="doas"
+    fi
+}
+
+cloneRepo() {
+    if [ ! -d "$HOME/dwm" ]; then
+        printf "%b\n" "${YELLOW}Cloning repository...${RC}"
+        $su pacman -S git > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to install git.${RC}"; exit 1; }
+        git clone https://github.com/nnyyxxxx/dwm "$HOME/dwm" > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to clone dwm.${RC}"; exit 1; }
+    fi
+}
+
+installAURHelper() {
     if ! command -v yay > /dev/null 2>&1 && ! command -v paru > /dev/null 2>&1; then
         git clone https://aur.archlinux.org/yay-bin.git "$HOME/yay-bin" > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to clone yay.${RC}"; exit 1; }
         cd "$HOME/yay-bin"
@@ -17,12 +33,6 @@ setPrefs() {
         aur_helper="yay"
     elif command -v paru > /dev/null 2>&1; then
         aur_helper="paru"
-    fi
-
-    if command -v sudo > /dev/null 2>&1; then
-        su="sudo"
-    elif command -v doas > /dev/null 2>&1; then
-        su="doas"
     fi
 }
 
@@ -109,14 +119,27 @@ compileSuckless() {
     printf "%b\n" "${GREEN}dmenu compiled (${current_step}/${total_steps})${RC}"
 }
 
-success() {
-    printf "%b\n" "${GREEN}Installation complete.${RC}"
+cleanUp() {
+    printf "%b\n" "${YELLOW}Cleaning up...${RC}"
+    rm -rf "$HOME/yay-bin" > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to remove yay-bin directory.${RC}"; exit 1; }
+    rm -rf "$HOME/dwm" > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to remove dwm directory.${RC}"; exit 1; }
 }
 
-setPrefs
+success() {
+    printf "%b\n" "${GREEN}Installation complete.${RC}"
+    printf "%b" "${YELLOW}Would you like to reboot? (y/N): ${RC}"
+    read -r reboot
+    if [ "$reboot" = "y" ] && [ "$reboot" = "Y" ]; then
+        reboot
+    fi
+}
+
+setEscalationTool
 requestElevation
 setSysOps
+installAURHelper
 installDeps
 setupConfigurations
 compileSuckless
+cleanUp
 success
