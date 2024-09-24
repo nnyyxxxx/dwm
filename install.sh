@@ -26,6 +26,7 @@ setPrefs() {
     fi
 }
 
+# This is here only for aesthetics, without it the script will request elevation after printing the first print statement; and we don't want that.
 requestElevation() {
   if [ "$su" = "sudo" ]; then
     sudo -v && clear || { printf "%b\n" "${RED}Failed to gain elevation.${RC}"; exit 1; }
@@ -102,7 +103,7 @@ compileSuckless() {
     printf "%b\n" "${GREEN}dmenu compiled (${current_step}/${total_steps})${RC}"
 }
 
-setGrubConfig() {
+setupGrubConfig() {
     if pacman -Q grub > /dev/null 2>&1; then
         printf "%b\n" "${YELLOW}Setting up grub config...${RC}"
         $su cp -R "$HOME/dwm/extra/grub/catppuccin-mocha-grub/" /usr/share/grub/themes/ > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to set up grub theme.${RC}"; exit 1; }
@@ -121,5 +122,5 @@ setSysOps
 installDeps
 setupConfigurations
 compileSuckless
-setGrubConfig
+setupGrubConfig
 success
