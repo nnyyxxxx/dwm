@@ -22,6 +22,7 @@ chmod +x install.sh
 | `ALT + LMB` | Drags selected window |
 | `ALT + RMB` | Resizes window in floating & resizes mfact in tiled; when two or more windows are on screen |
 | `ALT + SPACE` | Makes the selected window float |
+| `ALT + R` | Resets mfact |
 
 ### Preview:
 ![PV](https://i.imgur.com/YFPjFoq.png)
