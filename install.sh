@@ -46,6 +46,7 @@ installAURHelper() {
         git clone https://aur.archlinux.org/yay-bin.git "$HOME/yay-bin" > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to clone yay.${RC}"; exit 1; }
         cd "$HOME/yay-bin"
         makepkg -si > /dev/null 2>&1
+        cd "$HOME"
         rm -rf "$HOME/yay-bin"
     fi
 
@@ -130,13 +131,13 @@ compileSuckless() {
     printf "%b\n" "${GREEN}dmenu compiled (${current_step}/${total_steps})${RC}"
 }
 
-cleanUp() {
-    printf "%b\n" "${YELLOW}Cleaning up...${RC}"
-    rm -rf "$HOME/yay-bin" > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to remove yay-bin directory.${RC}"; exit 1; }
-}
-
 success() {
     printf "%b\n" "${GREEN}Installation complete.${RC}"
+    printf "%b" "${YELLOW}Do you want to reboot now? (y/N): ${RC}"
+    read -r answer
+    if [ "$answer" = "y" ] || [ "$answer" = "Y" ]; then
+        reboot
+    fi
 }
 
 warning
@@ -149,5 +150,4 @@ setSysOps
 installDeps
 setupConfigurations
 compileSuckless
-cleanUp
 success
