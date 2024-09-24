@@ -1,7 +1,12 @@
-### Disclaimer:
-I am not the best at C, expect bugs with window centering.
+<p align="center">
+  <img src="https://i.imgur.com/ulTXhIp.png" alt="Image">
+</p>
 
-### Usage:
+<hr>
+
+<div align="center">
+  <h3>Usage</h3>
+</div>
 <details>
   <summary>Install via curl</summary>
 
@@ -21,7 +26,10 @@ I am not the best at C, expect bugs with window centering.
   ```
 </details>
 
-### Keybinds overview:
+<div align="center">
+  <h3>Keybinds overview</h3>
+</div>
+
 | Keybind | Description |  
 | --- | --- |  
 | `ALT SHIFT + Enter` | Spawns st (Terminal) |  
@@ -36,5 +44,8 @@ I am not the best at C, expect bugs with window centering.
 | `ALT + SPACE` | Makes the selected window float |
 | `ALT + R` | Resets mfact |
 
-### Preview:
+<div align="center">
+  <h3>Preview</h3>
+</div>
+
 ![PV](https://i.imgur.com/YFPjFoq.png)
