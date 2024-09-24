@@ -7,17 +7,13 @@
 <div align="center">
   <h3>Usage</h3>
 </div>
-<details>
-  <summary>Install via curl</summary>
 
+Install via curl
   ```shell
   curl -fsSL https://raw.githubusercontent.com/nnyyxxxx/dwm/refs/heads/main/install.sh | sh
   ```
-</details>
 
-<details>
-  <summary>Install via git</summary>
-
+Install via git
   ```shell
   git clone https://github.com/nnyyxxxx/dwm
   cd dwm
