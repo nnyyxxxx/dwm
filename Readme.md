@@ -5,7 +5,7 @@
 <hr>
 
 <div align="center">
-  <h3>Usage</h3>
+  <h2>Usage</h2>
 </div>
 
 Install via curl
@@ -20,10 +20,9 @@ Install via git
   chmod +x install.sh
   ./install.sh
   ```
-</details>
 
 <div align="center">
-  <h3>Keybinds overview</h3>
+  <h2>Keybinds overview</h2>
 </div>
 
 | Keybind | Description |  
@@ -41,7 +40,7 @@ Install via git
 | `ALT + R` | Resets mfact |
 
 <div align="center">
-  <h3>Preview</h3>
+  <h2>Preview</h2>
 </div>
 
 ![PV](https://i.imgur.com/YFPjFoq.png)
