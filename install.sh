@@ -139,6 +139,7 @@ success() {
     fi
 }
 
+moveToHome
 setEscalationTool
 requestElevation
 setSysOps
