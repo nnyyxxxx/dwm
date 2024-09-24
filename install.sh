@@ -5,6 +5,11 @@ RED='\033[31m'
 YELLOW='\033[33m'
 GREEN='\033[32m'
 
+# Moves the user to their home directory incase they are not already in it.
+moveToHome() {
+    cd "$HOME" || { printf "%b\n" "${RED}Failed to move to home directory.${RC}"; exit 1; }
+}
+
 setEscalationTool() {
     if command -v sudo > /dev/null 2>&1; then
         su="sudo"
