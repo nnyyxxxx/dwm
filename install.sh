@@ -67,7 +67,7 @@ installDeps() {
 setupConfigurations() {
     printf "%b\n" "${YELLOW}Setting up configuration files...${RC}"
 
-    rm -rf ~/suckless/ > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to remove old suckless directory.${RC}"; exit 1; }
+    rm -rf "$HOME/suckless" > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to remove old suckless directory.${RC}"; exit 1; }
 
     $su cp -R "$HOME/dwm/extra/BreezeX-Black" /usr/share/icons/ > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to set up breeze cursor.${RC}"; exit 1; }
     $su cp -R "$HOME/dwm/extra/catppuccin-mocha" /usr/share/themes/ > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to set up catppuccin-mocha theme.${RC}"; exit 1; }
@@ -86,7 +86,6 @@ setupConfigurations() {
     cp -R "$HOME/dwm/suckless" "$HOME/" > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to set up suckless directory.${RC}"; exit 1; }
 
     if pacman -Q grub > /dev/null 2>&1; then
-        printf "%b\n" "${YELLOW}Setting up grub config...${RC}"
         $su cp -R "$HOME/dwm/extra/grub/catppuccin-mocha-grub/" /usr/share/grub/themes/ > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to set up grub theme.${RC}"; exit 1; }
         $su cp "$HOME/dwm/extra/grub/grub" /etc/default/ > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to set up grub configuration.${RC}"; exit 1; }
         $su grub-mkconfig -o /boot/grub/grub.cfg > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to generate grub configuration.${RC}"; exit 1; }
