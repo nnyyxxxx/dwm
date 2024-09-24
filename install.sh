@@ -1,7 +1,5 @@
 #!/bin/sh -e
 
-clear
-
 RC='\033[0m'
 RED='\033[31m'
 YELLOW='\033[33m'
@@ -34,6 +32,7 @@ requestElevation() {
   elif [ "$su" = "doas" ]; then
     doas true || { printf "%b\n" "${RED}Failed to gain elevation.${RC}"; exit 1; }
   fi
+  clear
 }
 
 setSysOps() {
