@@ -142,8 +142,8 @@ setEscalationTool
 requestElevation
 moveToHome
 cloneRepo
-setSysOps
 installAURHelper
+setSysOps
 installDeps
 setupConfigurations
 compileSuckless
