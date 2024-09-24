@@ -5,6 +5,13 @@ RED='\033[31m'
 YELLOW='\033[33m'
 GREEN='\033[32m'
 
+warning() {
+    if ! command -v pacman > /dev/null 2>&1; then
+        printf "%b\n" "${RED}Automated installation is only available for Arch Linux, install manually.${RC}"
+        exit 1
+    fi
+}
+
 setEscalationTool() {
     if command -v sudo > /dev/null 2>&1; then
         su="sudo"
@@ -132,6 +139,7 @@ success() {
     printf "%b\n" "${GREEN}Installation complete.${RC}"
 }
 
+warning
 setEscalationTool
 requestElevation
 moveToHome
