@@ -5,6 +5,14 @@ RED='\033[31m'
 YELLOW='\033[33m'
 GREEN='\033[32m'
 
+setEscalationTool() {
+    if command -v sudo > /dev/null 2>&1; then
+        su="sudo"
+    elif command -v doas > /dev/null 2>&1; then
+        su="doas"
+    fi
+}
+
 # This is here only for aesthetics, without it the script will request elevation after printing the first print statement; and we don't want that.
 requestElevation() {
   if [ "$su" = "sudo" ]; then
@@ -17,14 +25,6 @@ requestElevation() {
 # Moves the user to their home directory incase they are not already in it.
 moveToHome() {
     cd "$HOME" || { printf "%b\n" "${RED}Failed to move to home directory.${RC}"; exit 1; }
-}
-
-setEscalationTool() {
-    if command -v sudo > /dev/null 2>&1; then
-        su="sudo"
-    elif command -v doas > /dev/null 2>&1; then
-        su="doas"
-    fi
 }
 
 cloneRepo() {
@@ -138,9 +138,9 @@ success() {
     fi
 }
 
+setEscalationTool
 requestElevation
 moveToHome
-setEscalationTool
 setSysOps
 installAURHelper
 installDeps

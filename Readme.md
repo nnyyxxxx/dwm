@@ -6,7 +6,7 @@ I am not the best at C, expect bugs with window centering.
   <summary>Install via curl</summary>
 
   ```shell
-  curl -fsSL https://raw.githubusercontent.com/nnyyxxxx/dwm/refs/heads/catppuccin-mocha/install.sh | sh
+  curl -fsSL https://raw.githubusercontent.com/nnyyxxxx/dwm/refs/heads/main/install.sh | sh
   ```
 </details>
 
