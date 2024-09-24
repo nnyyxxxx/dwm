@@ -28,6 +28,14 @@ setPrefs() {
     fi
 }
 
+requestElevation() {
+  if [ "$su" = "sudo" ]; then
+    sudo -v || { printf "%b\n" "${RED}Failed to gain elevation.${RC}"; exit 1; }
+  elif [ "$su" = "doas" ]; then
+    doas true || { printf "%b\n" "${RED}Failed to gain elevation.${RC}"; exit 1; }
+  fi
+}
+
 setSysOps() {
     printf "%b\n" "${YELLOW}Setting up Parallel Downloads...${RC}"
     $su sed -i 's/^#ParallelDownloads = 5$/ParallelDownloads = 5/' /etc/pacman.conf > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to set Parallel Downloads.${RC}"; exit 1; }
@@ -110,6 +118,7 @@ success() {
 }
 
 setPrefs
+requestElevation
 setSysOps
 installDeps
 setupConfigurations
