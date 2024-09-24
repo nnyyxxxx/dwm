@@ -28,11 +28,10 @@ setPrefs() {
 
 requestElevation() {
   if [ "$su" = "sudo" ]; then
-    sudo -v || { printf "%b\n" "${RED}Failed to gain elevation.${RC}"; exit 1; }
+    sudo -v && clear || { printf "%b\n" "${RED}Failed to gain elevation.${RC}"; exit 1; }
   elif [ "$su" = "doas" ]; then
-    doas true || { printf "%b\n" "${RED}Failed to gain elevation.${RC}"; exit 1; }
+    doas true && clear || { printf "%b\n" "${RED}Failed to gain elevation.${RC}"; exit 1; }
   fi
-  clear
 }
 
 setSysOps() {
