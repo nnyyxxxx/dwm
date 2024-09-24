@@ -126,7 +126,6 @@ compileSuckless() {
 cleanUp() {
     printf "%b\n" "${YELLOW}Cleaning up...${RC}"
     rm -rf "$HOME/yay-bin" > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to remove yay-bin directory.${RC}"; exit 1; }
-    rm -rf "$HOME/dwm" > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to remove dwm directory.${RC}"; exit 1; }
 }
 
 success() {
