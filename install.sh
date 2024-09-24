@@ -141,6 +141,7 @@ success() {
 setEscalationTool
 requestElevation
 moveToHome
+cloneRepo
 setSysOps
 installAURHelper
 installDeps
