@@ -2,12 +2,24 @@
 I am not the best at C, expect bugs with window centering.
 
 ### Usage:
-```css
-git clone https://github.com/nnyyxxxx/dwm
-cd dwm
-chmod +x install.sh
-./install.sh
-```
+<details>
+  <summary>Install via curl</summary>
+
+  ```shell
+  curl -fsSL https://github.com/nnyyxxxx/dwm/raw/main/install.sh | sh
+  ```
+</details>
+
+<details>
+  <summary>Install via git</summary>
+
+  ```shell
+  git clone https://github.com/nnyyxxxx/dwm
+  cd dwm
+  chmod +x install.sh
+  ./install.sh
+  ```
+</details>
 
 ### Keybinds overview:
 | Keybind | Description |  
