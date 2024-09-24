@@ -133,11 +133,6 @@ compileSuckless() {
 
 success() {
     printf "%b\n" "${GREEN}Installation complete.${RC}"
-    printf "%b" "${YELLOW}Do you want to reboot now? (y/N): ${RC}"
-    read -r answer
-    if [ "$answer" = "y" ] || [ "$answer" = "Y" ]; then
-        reboot
-    fi
 }
 
 warning
