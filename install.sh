@@ -132,7 +132,7 @@ success() {
     printf "%b\n" "${GREEN}Installation complete.${RC}"
     printf "%b" "${YELLOW}Would you like to reboot? (y/N): ${RC}"
     read -r reboot
-    if [ "$reboot" = "y" ] && [ "$reboot" = "Y" ]; then
+    if [ "$reboot" = "y" ] || [ "$reboot" = "Y" ]; then
         reboot
     fi
 }
