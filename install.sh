@@ -84,6 +84,13 @@ setupConfigurations() {
     chmod +x "$HOME/Documents/debloat.sh" > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to make debloat.sh executable.${RC}"; exit 1; }
 
     cp -R "$HOME/dwm/suckless" "$HOME/" > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to set up suckless directory.${RC}"; exit 1; }
+
+    if pacman -Q grub > /dev/null 2>&1; then
+        printf "%b\n" "${YELLOW}Setting up grub config...${RC}"
+        $su cp -R "$HOME/dwm/extra/grub/catppuccin-mocha-grub/" /usr/share/grub/themes/ > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to set up grub theme.${RC}"; exit 1; }
+        $su cp "$HOME/dwm/extra/grub/grub" /etc/default/ > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to set up grub configuration.${RC}"; exit 1; }
+        $su grub-mkconfig -o /boot/grub/grub.cfg > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to generate grub configuration.${RC}"; exit 1; }
+    fi
 }
 
 compileSuckless() {
@@ -103,15 +110,6 @@ compileSuckless() {
     printf "%b\n" "${GREEN}dmenu compiled (${current_step}/${total_steps})${RC}"
 }
 
-setupGrubConfig() {
-    if pacman -Q grub > /dev/null 2>&1; then
-        printf "%b\n" "${YELLOW}Setting up grub config...${RC}"
-        $su cp -R "$HOME/dwm/extra/grub/catppuccin-mocha-grub/" /usr/share/grub/themes/ > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to set up grub theme.${RC}"; exit 1; }
-        $su cp "$HOME/dwm/extra/grub/grub" /etc/default/ > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to set up grub configuration.${RC}"; exit 1; }
-        $su grub-mkconfig -o /boot/grub/grub.cfg > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to generate grub configuration.${RC}"; exit 1; }
-    fi
-}
-
 success() {
     printf "%b\n" "${GREEN}Installation complete.${RC}"
 }
@@ -122,5 +120,4 @@ setSysOps
 installDeps
 setupConfigurations
 compileSuckless
-setupGrubConfig
 success
