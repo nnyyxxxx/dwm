@@ -10,7 +10,7 @@
 
 Install via curl
   ```shell
-  curl -fsSL https://raw.githubusercontent.com/nnyyxxxx/dwm/refs/heads/main/install.sh | sh
+  curl -fsSL https://github.com/nnyyxxxx/dwm/raw/main/install.sh | sh
   ```
 
 Install via git
