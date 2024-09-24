@@ -1491,7 +1491,7 @@ resizeclient(Client *c, int x, int y, int w, int h)
 void
 resizemouse(const Arg *arg)
 {
-    int ocx, ocy, nw, nh;
+    int x, y, ocw, och, nw, nh;
     Client *c;
     Monitor *m;
     XEvent ev;
@@ -1502,14 +1502,15 @@ resizemouse(const Arg *arg)
     if (c->isfullscreen) /* no support resizing fullscreen windows by mouse */
         return;
     restack(selmon);
-    ocx = c->x;
-    ocy = c->y;
+	ocw = c->w;
+	och = c->h;
     if (XGrabPointer(dpy, root, False, MOUSEMASK, GrabModeAsync, GrabModeAsync,
         None, cursor[CurResize]->cursor, CurrentTime) != GrabSuccess)
         return;
 
     if (c->isfloating) {
-        XWarpPointer(dpy, None, c->win, 0, 0, 0, 0, c->w + c->bw - 1, c->h + c->bw - 1);
+		if(!getrootptr(&x, &y))
+			return;
     }
 
     do {
@@ -1525,8 +1526,8 @@ resizemouse(const Arg *arg)
                 continue;
             lasttime = ev.xmotion.time;
 
-            nw = MAX(ev.xmotion.x - ocx - 2 * c->bw + 1, 1);
-            nh = MAX(ev.xmotion.y - ocy - 2 * c->bw + 1, 1);
+			nw = MAX(ocw + (ev.xmotion.x - x), 1);
+			nh = MAX(och + (ev.xmotion.y - y), 1);
 
             if (!selmon->lt[selmon->sellt]->arrange || c->isfloating) {
                 resize(c, c->x, c->y, nw, nh, 1);
