@@ -168,6 +168,7 @@ static void clientmessage(XEvent *e);
 static void configure(Client *c);
 static void configurenotify(XEvent *e);
 static void configurerequest(XEvent *e);
+static void resetmfact(const Arg *arg);
 static Monitor *createmon(void);
 static void destroynotify(XEvent *e);
 static void detach(Client *c);
@@ -2535,6 +2536,13 @@ zoom(const Arg *arg)
 	if (c == nexttiled(selmon->clients) && !(c = nexttiled(c->next)))
 		return;
 	pop(c);
+}
+
+void
+resetmfact(const Arg *arg)
+{
+    selmon->mfact = mfact;
+    arrange(selmon);
 }
 
 int
