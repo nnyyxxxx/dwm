@@ -5,6 +5,15 @@ RED='\033[31m'
 YELLOW='\033[33m'
 GREEN='\033[32m'
 
+# This is here only for aesthetics, without it the script will request elevation after printing the first print statement; and we don't want that.
+requestElevation() {
+  if [ "$su" = "sudo" ]; then
+    sudo -v && clear || { printf "%b\n" "${RED}Failed to gain elevation.${RC}"; exit 1; }
+  elif [ "$su" = "doas" ]; then
+    doas true && clear || { printf "%b\n" "${RED}Failed to gain elevation.${RC}"; exit 1; }
+  fi
+}
+
 # Moves the user to their home directory incase they are not already in it.
 moveToHome() {
     cd "$HOME" || { printf "%b\n" "${RED}Failed to move to home directory.${RC}"; exit 1; }
@@ -38,15 +47,6 @@ installAURHelper() {
     elif command -v paru > /dev/null 2>&1; then
         aur_helper="paru"
     fi
-}
-
-# This is here only for aesthetics, without it the script will request elevation after printing the first print statement; and we don't want that.
-requestElevation() {
-  if [ "$su" = "sudo" ]; then
-    sudo -v && clear || { printf "%b\n" "${RED}Failed to gain elevation.${RC}"; exit 1; }
-  elif [ "$su" = "doas" ]; then
-    doas true && clear || { printf "%b\n" "${RED}Failed to gain elevation.${RC}"; exit 1; }
-  fi
 }
 
 setSysOps() {
@@ -138,9 +138,9 @@ success() {
     fi
 }
 
+requestElevation
 moveToHome
 setEscalationTool
-requestElevation
 setSysOps
 installAURHelper
 installDeps
