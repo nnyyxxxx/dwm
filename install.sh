@@ -14,17 +14,17 @@ warning() {
 
 setEscalationTool() {
     if command -v sudo > /dev/null 2>&1; then
-        su="sudo"
+        ESCALATION_TOOL="sudo"
     elif command -v doas > /dev/null 2>&1; then
-        su="doas"
+        ESCALATION_TOOL="doas"
     fi
 }
 
 # This is here only for aesthetics, without it the script will request elevation after printing the first print statement; and we don't want that.
 requestElevation() {
-  if [ "$su" = "sudo" ]; then
+  if [ "$ESCALATION_TOOL" = "sudo" ]; then
     sudo -v && clear || { printf "%b\n" "${RED}Failed to gain elevation.${RC}"; exit 1; }
-  elif [ "$su" = "doas" ]; then
+  elif [ "$ESCALATION_TOOL" = "doas" ]; then
     doas true && clear || { printf "%b\n" "${RED}Failed to gain elevation.${RC}"; exit 1; }
   fi
 }
@@ -37,7 +37,7 @@ moveToHome() {
 cloneRepo() {
     printf "%b\n" "${YELLOW}Cloning repository...${RC}"
     rm -rf "$HOME/dwm" > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to remove old dwm directory.${RC}"; exit 1; }
-    $su pacman -S --needed --noconfirm git > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to install git.${RC}"; exit 1; }
+    $ESCALATION_TOOL pacman -S --needed --noconfirm git > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to install git.${RC}"; exit 1; }
     git clone https://github.com/nnyyxxxx/dwm "$HOME/dwm" > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to clone dwm.${RC}"; exit 1; }
 }
 
@@ -51,18 +51,18 @@ installAURHelper() {
     fi
 
     if command -v yay > /dev/null 2>&1; then
-        aur_helper="yay"
+        AUR_HELPER="yay"
     elif command -v paru > /dev/null 2>&1; then
-        aur_helper="paru"
+        AUR_HELPER="paru"
     fi
 }
 
 setSysOps() {
     printf "%b\n" "${YELLOW}Setting up Parallel Downloads...${RC}"
-    $su sed -i 's/^#ParallelDownloads = 5$/ParallelDownloads = 5/' /etc/pacman.conf > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to set Parallel Downloads.${RC}"; exit 1; }
+    $ESCALATION_TOOL sed -i 's/^#ParallelDownloads = 5$/ParallelDownloads = 5/' /etc/pacman.conf > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to set Parallel Downloads.${RC}"; exit 1; }
 
     printf "%b\n" "${YELLOW}Setting up breeze cursor...${RC}"
-    $su sed -i 's/^Inherits=Adwaita$/Inherits=BreezeX-Black/' /usr/share/icons/default/index.theme > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to set breeze cursor.${RC}"; exit 1; }
+    $ESCALATION_TOOL sed -i 's/^Inherits=Adwaita$/Inherits=BreezeX-Black/' /usr/share/icons/default/index.theme > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to set breeze cursor.${RC}"; exit 1; }
 }
 
 installDeps() {
@@ -70,7 +70,7 @@ installDeps() {
     total_steps=2
     current_step=1
 
-    $su pacman -S --needed --noconfirm \
+    $ESCALATION_TOOL pacman -S --needed --noconfirm \
         maim bleachbit xorg-xsetroot xorgproto xorg-xset xorg-xrdb xorg-fonts-encodings \
         xorg-xrandr xorg-xprop xorg-setxkbmap xorg-server-common xorg-server xorg-xauth \
         xorg-xmodmap xorg-xkbcomp xorg-xinput xorg-xinit xorg-xhost fastfetch xclip \
@@ -81,7 +81,7 @@ installDeps() {
     printf "%b\n" "${GREEN}Dependencies installed (${current_step}/${total_steps})${RC}"
     current_step=$((current_step + 1))
 
-    $aur_helper -S --needed --noconfirm \
+    $AUR_HELPER -S --needed --noconfirm \
         cava pipes.sh checkupdates-with-aur picom-ftlabs-git > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to install AUR dependencies.${RC}"; exit 1; }
     printf "%b\n" "${GREEN}AUR dependencies installed (${current_step}/${total_steps})${RC}"
 }
@@ -91,8 +91,8 @@ setupConfigurations() {
 
     rm -rf "$HOME/suckless" > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to remove old suckless directory.${RC}"; exit 1; }
 
-    $su cp -R "$HOME/dwm/extra/BreezeX-Black" /usr/share/icons/ > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to set up breeze cursor.${RC}"; exit 1; }
-    $su cp -R "$HOME/dwm/extra/catppuccin-mocha" /usr/share/themes/ > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to set up catppuccin-mocha theme.${RC}"; exit 1; }
+    $ESCALATION_TOOL cp -R "$HOME/dwm/extra/BreezeX-Black" /usr/share/icons/ > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to set up breeze cursor.${RC}"; exit 1; }
+    $ESCALATION_TOOL cp -R "$HOME/dwm/extra/catppuccin-mocha" /usr/share/themes/ > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to set up catppuccin-mocha theme.${RC}"; exit 1; }
     cp -R "$HOME/dwm/extra/cava" "$HOME/.config/" > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to set up cava configuration.${RC}"; exit 1; }
     cp -R "$HOME/dwm/extra/fastfetch" "$HOME/.config/" > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to set up fastfetch configuration.${RC}"; exit 1; }
     cp -R "$HOME/dwm/extra/nvim" "$HOME/.config/" > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to set up nvim configuration.${RC}"; exit 1; }
@@ -108,9 +108,9 @@ setupConfigurations() {
     cp -R "$HOME/dwm/suckless" "$HOME/" > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to set up suckless directory.${RC}"; exit 1; }
 
     if pacman -Q grub > /dev/null 2>&1; then
-        $su cp -R "$HOME/dwm/extra/grub/catppuccin-mocha-grub/" /usr/share/grub/themes/ > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to set up grub theme.${RC}"; exit 1; }
-        $su cp "$HOME/dwm/extra/grub/grub" /etc/default/ > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to set up grub configuration.${RC}"; exit 1; }
-        $su grub-mkconfig -o /boot/grub/grub.cfg > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to generate grub configuration.${RC}"; exit 1; }
+        $ESCALATION_TOOL cp -R "$HOME/dwm/extra/grub/catppuccin-mocha-grub/" /usr/share/grub/themes/ > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to set up grub theme.${RC}"; exit 1; }
+        $ESCALATION_TOOL cp "$HOME/dwm/extra/grub/grub" /etc/default/ > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to set up grub configuration.${RC}"; exit 1; }
+        $ESCALATION_TOOL grub-mkconfig -o /boot/grub/grub.cfg > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to generate grub configuration.${RC}"; exit 1; }
     fi
 }
 
@@ -119,15 +119,15 @@ compileSuckless() {
     total_steps=3
     current_step=1
 
-    cd "$HOME/suckless/st" && $su make clean install > /dev/null 2>&1 && cd || { printf "%b\n" "${RED}Failed to compile st.${RC}"; exit 1; }
+    cd "$HOME/suckless/st" && $ESCALATION_TOOL make clean install > /dev/null 2>&1 && cd || { printf "%b\n" "${RED}Failed to compile st.${RC}"; exit 1; }
     printf "%b\n" "${GREEN}st compiled (${current_step}/${total_steps})${RC}"
     current_step=$((current_step + 1))
 
-    cd "$HOME/suckless/dwm" && $su make clean install > /dev/null 2>&1 && cd || { printf "%b\n" "${RED}Failed to compile dwm.${RC}"; exit 1; }
+    cd "$HOME/suckless/dwm" && $ESCALATION_TOOL make clean install > /dev/null 2>&1 && cd || { printf "%b\n" "${RED}Failed to compile dwm.${RC}"; exit 1; }
     printf "%b\n" "${GREEN}dwm compiled (${current_step}/${total_steps})${RC}"
     current_step=$((current_step + 1))
 
-    cd "$HOME/suckless/dmenu" && $su make clean install > /dev/null 2>&1 && cd || { printf "%b\n" "${RED}Failed to compile dmenu.${RC}"; exit 1; }
+    cd "$HOME/suckless/dmenu" && $ESCALATION_TOOL make clean install > /dev/null 2>&1 && cd || { printf "%b\n" "${RED}Failed to compile dmenu.${RC}"; exit 1; }
     printf "%b\n" "${GREEN}dmenu compiled (${current_step}/${total_steps})${RC}"
 }
 
