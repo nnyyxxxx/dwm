@@ -38,6 +38,9 @@ setSysOps() {
 
 installDeps() {
     printf "%b\n" "${YELLOW}Installing dependencies...${RC}"
+    total_steps=2
+    current_step=1
+
     $su pacman -S --needed --noconfirm \
         maim bleachbit xorg-xsetroot xorgproto xorg-xset xorg-xrdb xorg-fonts-encodings \
         xorg-xrandr xorg-xprop xorg-setxkbmap xorg-server-common xorg-server xorg-xauth \
@@ -46,9 +49,12 @@ installDeps() {
         ttf-fira-sans ttf-fira-mono polkit-kde-agent xdg-desktop-portal zip unzip \
         qt5-graphicaleffects qt5-quickcontrols2 noto-fonts-extra noto-fonts-cjk noto-fonts \
         cmatrix gtk3 neovim hsetroot pavucontrol > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to install dependencies.${RC}"; exit 1; }
+    printf "%b\n" "${GREEN}Dependencies installed (${current_step}/${total_steps})${RC}"
+    current_step=$((current_step + 1))
 
     $aur_helper -S --needed --noconfirm \
         cava pipes.sh checkupdates-with-aur picom-ftlabs-git > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to install AUR dependencies.${RC}"; exit 1; }
+    printf "%b\n" "${GREEN}AUR dependencies installed (${current_step}/${total_steps})${RC}"
 }
 
 setupConfigurations() {
@@ -75,13 +81,22 @@ setupConfigurations() {
 
 compileSuckless() {
     printf "%b\n" "${YELLOW}Compiling suckless utils...${RC}"
+    total_steps=3
+    current_step=1
 
     cd "$HOME/suckless/st" && $su make clean install > /dev/null 2>&1 && cd || { printf "%b\n" "${RED}Failed to compile st.${RC}"; exit 1; }
+    printf "%b\n" "${GREEN}st compiled (${current_step}/${total_steps})${RC}"
+    current_step=$((current_step + 1))
+
     cd "$HOME/suckless/dwm" && $su make clean install > /dev/null 2>&1 && cd || { printf "%b\n" "${RED}Failed to compile dwm.${RC}"; exit 1; }
+    printf "%b\n" "${GREEN}dwm compiled (${current_step}/${total_steps})${RC}"
+    current_step=$((current_step + 1))
+
     cd "$HOME/suckless/dmenu" && $su make clean install > /dev/null 2>&1 && cd || { printf "%b\n" "${RED}Failed to compile dmenu.${RC}"; exit 1; }
+    printf "%b\n" "${GREEN}dmenu compiled (${current_step}/${total_steps})${RC}"
 }
 
-setupGrubConfig() {
+setGrubConfig() {
     if pacman -Q grub > /dev/null 2>&1; then
         printf "%b\n" "${YELLOW}Setting up grub config...${RC}"
         $su cp -R "$HOME/dwm/extra/grub/catppuccin-mocha-grub/" /usr/share/grub/themes/ > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to set up grub theme.${RC}"; exit 1; }
@@ -90,7 +105,7 @@ setupGrubConfig() {
     fi
 }
 
-successOutput() {
+success() {
     printf "%b\n" "${GREEN}Installation complete.${RC}"
 }
 
@@ -99,5 +114,5 @@ setSysOps
 installDeps
 setupConfigurations
 compileSuckless
-setupGrubConfig
-successOutput
+setGrubConfig
+success
