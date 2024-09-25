@@ -65,6 +65,16 @@ setSysOps() {
     $ESCALATION_TOOL sed -i 's/^Inherits=Adwaita$/Inherits=BreezeX-Black/' /usr/share/icons/default/index.theme > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to set breeze cursor.${RC}"; exit 1; }
 }
 
+setupAutoLogin() {
+    USERNAME=$(whoami)
+    printf "%b\n" "${YELLOW}Setting up TTY auto-login for user ${USERNAME}...${RC}"
+    
+    $ESCALATION_TOOL mkdir -p /etc/systemd/system/getty@tty1.service.d
+    echo "[Service]
+    ExecStart=
+    ExecStart=-/sbin/agetty --autologin ${USERNAME} --noclear %I \$TERM" | $ESCALATION_TOOL tee /etc/systemd/system/getty@tty1.service.d/override.conf > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to set up TTY auto-login.${RC}"; exit 1; }
+}
+
 installDeps() {
     printf "%b\n" "${YELLOW}Installing dependencies...${RC}"
     total_steps=2
@@ -142,6 +152,7 @@ moveToHome
 cloneRepo
 installAURHelper
 setSysOps
+setupAutoLogin
 installDeps
 setupConfigurations
 compileSuckless
