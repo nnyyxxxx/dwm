@@ -1,12 +1,13 @@
-#!/bin/sh -e
+#!/bin/bash
 
+pamixer &
 picom -b
 /usr/lib/polkit-kde-authentication-agent-1 &
 
 while true; do
     time=$(date "+%I:%M %p")
 
-    volume=$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{print int($2*100)"%"}')
+    volume=$(pamixer --get-volume-human)
 
     updates=$(checkupdates | wc -l)
 
