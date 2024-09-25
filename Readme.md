@@ -33,6 +33,13 @@ Updating dotfiles
 > This will overwrite your existing configuration, if you have made any changes to the dotfiles, make sure to back them up before running the install script.
 
 <div align="center">
+  <h2>Information</h2>
+</div>
+
+Important notes
+- These dotfiles use bash as the default shell, and as such be prepared to manually set up your shell if you do not plan on using bash.
+
+<div align="center">
   <h2>Keybinds overview</h2>
 </div>
 

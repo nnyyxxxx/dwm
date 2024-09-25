@@ -87,7 +87,7 @@ installDeps() {
         pipewire ttf-jetbrains-mono-nerd noto-fonts-emoji ttf-liberation ttf-dejavu \
         ttf-fira-sans ttf-fira-mono polkit-kde-agent xdg-desktop-portal zip unzip \
         qt5-graphicaleffects qt5-quickcontrols2 noto-fonts-extra noto-fonts-cjk noto-fonts \
-        cmatrix gtk3 neovim hsetroot pamixer vlc feh > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to install dependencies.${RC}"; exit 1; }
+        cmatrix gtk3 neovim hsetroot pamixer vlc feh dash > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to install dependencies.${RC}"; exit 1; }
     printf "%b\n" "${GREEN}Dependencies installed (${current_step}/${total_steps})${RC}"
     current_step=$((current_step + 1))
 
@@ -111,6 +111,9 @@ setupConfigurations() {
     cp "$HOME/dwm/extra/.xinitrc" "$HOME/" > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to set up .xinitrc.${RC}"; exit 1; }
     cp "$HOME/dwm/extra/.bashrc" "$HOME/" > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to set up .bashrc.${RC}"; exit 1; }
     cp "$HOME/dwm/extra/.bash_profile" "$HOME/" > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to set up .bash_profile.${RC}"; exit 1; }
+
+    $ESCALATION_TOOL ln -sf /bin/dash /bin/sh || { printf "%b\n" "${RED}Failed to create symlink for sh.${RC}"; exit 1; }
+    chsh -s /bin/bash || { printf "%b\n" "${RED}Failed to set bash as default shell.${RC}"; exit 1; }
 
     mkdir -p "$HOME/Documents" > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to create Documents directory.${RC}"; exit 1; }
     cp "$HOME/dwm/extra/debloat.sh" "$HOME/Documents/" > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to set up debloat.sh.${RC}"; exit 1; }
@@ -143,6 +146,7 @@ compileSuckless() {
 }
 
 success() {
+    printf "%b\n" "${YELLOW}Please reboot your system to apply the changes.${RC}"
     printf "%b\n" "${GREEN}Installation complete.${RC}"
 }
 
