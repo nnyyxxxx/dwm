@@ -80,6 +80,9 @@ installDeps() {
     total_steps=2
     current_step=1
 
+    $ESCALATION_TOOL pacman -Rns --noconfirm \
+        sddm lightdm gdm lxdm lemurs emptty xorg-xdm ly > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to uninstall display managers.${RC}"; exit 1; }
+
     $ESCALATION_TOOL pacman -S --needed --noconfirm \
         maim bleachbit xorg-xsetroot xorgproto xorg-xset xorg-xrdb xorg-fonts-encodings \
         xorg-xrandr xorg-xprop xorg-setxkbmap xorg-server-common xorg-server xorg-xauth \
