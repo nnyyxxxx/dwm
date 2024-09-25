@@ -61,7 +61,7 @@ setSysOps() {
     printf "%b\n" "${YELLOW}Setting up Parallel Downloads...${RC}"
     $ESCALATION_TOOL sed -i 's/^#ParallelDownloads = 5$/ParallelDownloads = 5/' /etc/pacman.conf > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to set Parallel Downloads.${RC}"; exit 1; }
 
-    printf "%b\n" "${YELLOW}Setting up breeze cursor...${RC}"
+    printf "%b\n" "${YELLOW}Setting up default cursor...${RC}"
     $ESCALATION_TOOL sed -i 's/^Inherits=Adwaita$/Inherits=BreezeX-Black/' /usr/share/icons/default/index.theme > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to set breeze cursor.${RC}"; exit 1; }
 }
 
