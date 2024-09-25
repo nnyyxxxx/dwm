@@ -80,7 +80,7 @@ installDeps() {
     total_steps=2
     current_step=1
 
-    $ESCALATION_TOOL pacman -Rns --noconfirm \
+    $ESCALATION_TOOL pacman -Rns --needed --noconfirm \
         sddm lightdm gdm lxdm lemurs emptty xorg-xdm ly > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to uninstall display managers.${RC}"; exit 1; }
 
     $ESCALATION_TOOL pacman -S --needed --noconfirm \
