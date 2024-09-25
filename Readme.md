@@ -24,6 +24,14 @@ Install via git
 Starting dwm
 - After installing via curl or git; you'll have to reboot your system, after doing so you'll be greeted with either your display manager or DWM, it is highly recommended that you do NOT use a display manager e.g. (sddm, lightdm*) with these dotfiles, and instead resort to using ``startx`` in the tty. If you do not want to manually start DWM from the tty then don't worry as the install script automatically sets up auto-start/auto-login for DWM & tty.
 
+Updating dotfiles
+- To sync your clone of DWM with the latest version, you can use the following command:
+  ```shell
+  curl -fsSL https://github.com/nnyyxxxx/dwm/raw/main/install.sh | sh
+  ```
+> [!WARNING]  
+> This will overwrite your existing configuration, if you have made any changes to the dotfiles, make sure to back them up before running the install script.
+
 <div align="center">
   <h2>Keybinds overview</h2>
 </div>
