@@ -64,6 +64,6 @@ Important notes
 
 ![PV](https://i.imgur.com/YFPjFoq.png)
 
-<div align="center">
-  ![SCRIPTPV](https://i.imgur.com/pPQaIXc.png)
-</div>
+<p align="center">
+  <img src="https://i.imgur.com/pPQaIXc.png" alt="Image">
+</p>
