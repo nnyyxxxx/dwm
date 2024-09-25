@@ -21,6 +21,9 @@ Install via git
   ./install.sh
   ```
 
+Starting dwm
+- After installing via curl or git; you'll have to reboot your system, after doing so you'll be greeted with either your display manager or DWM, it is highly recommended that you do NOT use a display manager e.g. (sddm, lightdm*) with these dotfiles, and instead resort to using ``startx`` in the tty. If you do not want to manually start DWM from the tty then don't worry as the install script automatically sets up auto-start/auto-login for DWM & tty.
+
 <div align="center">
   <h2>Keybinds overview</h2>
 </div>
