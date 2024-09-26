@@ -65,5 +65,5 @@ Important notes
 ![PV](https://i.imgur.com/YFPjFoq.png)
 
 <p align="center">
-  <img src="https://i.imgur.com/pPQaIXc.png" alt="Image">
+  <img src="https://i.imgur.com/IWEAfzW.png" alt="Image">
 </p>
