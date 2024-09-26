@@ -7,7 +7,7 @@ GREEN='\033[32m'
 
 warning() {
     if ! command -v pacman > /dev/null 2>&1; then
-        printf "%b\n" "${RED}Automated installation is only available for Arch Linux, install manually.${RC}"
+        printf "%b\n" "${RED}Automated installation is only available for Arch-based distributions, install manually.${RC}"
         exit 1
     fi
 }
