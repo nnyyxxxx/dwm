@@ -77,6 +77,7 @@ setupAutoLogin() {
 
 installDeps() {
     printf "%b\n" "${YELLOW}Installing dependencies...${RC}"
+    printf "%b\n" "${YELLOW}This might take a minute or two...${RC}"
     total_steps=2
     current_step=1
 
