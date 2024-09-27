@@ -21,6 +21,7 @@ alias rm='rm -rf'
 alias vim='nvim'
 alias debloat='~/Documents/debloat.sh'
 alias chmod='chmod +x'
+alias cd='z'
 alias ..='cd ..'
 
 # git based actions
