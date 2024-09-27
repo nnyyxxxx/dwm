@@ -11,7 +11,7 @@ while true; do
 
     updates=$(checkupdates | wc -l)
 
-    status="🕒 $time  ⬇ $updates  🎧 $volume"
+    status="  $time    $updates    $volume"
 
     xsetroot -name "$status"
 
