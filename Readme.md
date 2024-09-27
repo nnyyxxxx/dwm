@@ -62,7 +62,7 @@ Important notes
   <h2>Preview</h2>
 </div>
 
-![PV](https://i.imgur.com/YFPjFoq.png)
+![PV](https://i.imgur.com/ALQTE8Z.png)
 
 <p align="center">
   <img src="https://i.imgur.com/IWEAfzW.png" alt="Image">
