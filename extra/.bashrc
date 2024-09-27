@@ -21,7 +21,6 @@ alias rm='rm -rf'
 alias vim='nvim'
 alias debloat='~/Documents/debloat.sh'
 alias chmod='chmod +x'
-alias cd='z'
 alias ..='cd ..'
 
 # git based actions
@@ -117,4 +116,4 @@ rebase() {
 shopt -s expand_aliases
 
 # used for zoxide (dont remove unless you dont want zoxide)
-eval "$(zoxide init bash)"
+eval "$(zoxide init bash --cmd cd)"
