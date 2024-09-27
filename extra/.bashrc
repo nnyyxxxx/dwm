@@ -85,11 +85,6 @@ ls() {
     command ls -hN --color=auto --group-directories-first "$@" 2>/dev/null || echo -e "Directory ${RED}'$*'${RC} does not exist, ${RED}stupid! BONK!${RC} Owo."
 }
 
-# custom command not found message 3
-#cd() {
-#    builtin cd "$@" 2>/dev/null || echo -e "Directory ${RED}'$*'${RC} does not exist, ${RED}stupid! BONK!${RC} Owo."
-#}
-
 # rebasing
 rebase() {
     if [ "$1" = "--abort" ]; then
@@ -117,3 +112,7 @@ shopt -s expand_aliases
 
 # used for zoxide (dont remove unless you dont want zoxide)
 eval "$(zoxide init bash --cmd cd)"
+
+cd() {
+    z "$@" 2>/dev/null || echo -e "Directory ${RED}$*${RC} not found! ${RED}stupid! BONK!${RC} Owo."
+}
