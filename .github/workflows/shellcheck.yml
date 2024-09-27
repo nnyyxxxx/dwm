@@ -3,7 +3,7 @@ name: ShellCheck
 on:
   pull_request:
     paths:
-      - 'core/tabs/**/*.sh'
+      - '**/*.sh'
   workflow_dispatch:
 
 jobs:
