@@ -114,3 +114,6 @@ rebase() {
 }
 
 shopt -s expand_aliases
+
+# used for zoxide (dont remove unless you dont want zoxide)
+eval "$(zoxide init bash)"

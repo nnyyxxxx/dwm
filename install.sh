@@ -92,7 +92,7 @@ installDeps() {
         ttf-fira-sans ttf-fira-mono polkit-kde-agent xdg-desktop-portal zip unzip \
         qt5-graphicaleffects qt5-quickcontrols2 noto-fonts-extra noto-fonts-cjk noto-fonts \
         cmatrix gtk3 neovim hsetroot pamixer vlc feh dash pipewire-pulse easyeffects qt5ct \
-        bashtop > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to install dependencies.${RC}"; }
+        bashtop zoxide > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to install dependencies.${RC}"; }
     printf "%b\n" "${GREEN}Dependencies installed (${current_step}/${total_steps})${RC}"
     current_step=$((current_step + 1))
 
