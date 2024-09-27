@@ -1,3 +1,5 @@
+# Copyright (c) 2024 Chris Titus
+
 name: Issue slash commands
 
 on:
