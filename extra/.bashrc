@@ -87,9 +87,9 @@ ls() {
 }
 
 # custom command not found message 3
-cd() {
-    builtin cd "$@" 2>/dev/null || echo -e "Directory ${RED}'$*'${RC} does not exist, ${RED}stupid! BONK!${RC} Owo."
-}
+#cd() {
+#    builtin cd "$@" 2>/dev/null || echo -e "Directory ${RED}'$*'${RC} does not exist, ${RED}stupid! BONK!${RC} Owo."
+#}
 
 # rebasing
 rebase() {
