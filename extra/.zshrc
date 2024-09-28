@@ -10,7 +10,6 @@ PS1='%F{204}$(if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then echo 
 # essential stuff
 stty -ixon # disable ctrl+s and ctrl+q
 setopt autocd # cd into directories just by typing the name
-HISTSIZE= HISTFILESIZE= # unlimited history
 
 # essentials
 alias grep='grep --color=auto'
