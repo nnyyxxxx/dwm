@@ -43,15 +43,15 @@ uninstallSuckless() {
     total_steps=3
     current_step=1
 
-    { cd "$DWM_DIR/suckless/st" && $ESCALATION_TOOL make uninstall > /dev/null 2>&1 && cd -; } || { printf "%b\n" "${RED}Failed to uninstall st.${RC}"; }
+    { cd "$DWM_DIR/suckless/st" && $ESCALATION_TOOL make uninstall > /dev/null 2>&1 && cd - > /dev/null; } || { printf "%b\n" "${RED}Failed to uninstall st.${RC}"; }
     printf "%b\n" "${GREEN}st uninstalled (${current_step}/${total_steps})${RC}"
     current_step=$((current_step + 1))
 
-    { cd "$DWM_DIR/suckless/dwm" && $ESCALATION_TOOL make uninstall > /dev/null 2>&1 && cd -; } || { printf "%b\n" "${RED}Failed to uninstall dwm.${RC}"; }
+    { cd "$DWM_DIR/suckless/dwm" && $ESCALATION_TOOL make uninstall > /dev/null 2>&1 && cd - > /dev/null; } || { printf "%b\n" "${RED}Failed to uninstall dwm.${RC}"; }
     printf "%b\n" "${GREEN}dwm uninstalled (${current_step}/${total_steps})${RC}"
     current_step=$((current_step + 1))
 
-    { cd "$DWM_DIR/suckless/dmenu" && $ESCALATION_TOOL make uninstall > /dev/null 2>&1 && cd -; } || { printf "%b\n" "${RED}Failed to uninstall dmenu.${RC}"; }
+    { cd "$DWM_DIR/suckless/dmenu" && $ESCALATION_TOOL make uninstall > /dev/null 2>&1 && cd - > /dev/null; } || { printf "%b\n" "${RED}Failed to uninstall dmenu.${RC}"; }
     printf "%b\n" "${GREEN}dmenu uninstalled (${current_step}/${total_steps})${RC}"
 }
 
