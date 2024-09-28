@@ -14,5 +14,6 @@
     "terminal.external.linuxExec": "st",
     "terminal.explorerKind": "both",
     "terminal.sourceControlRepositoriesKind": "both",
-    "telemetry.telemetryLevel": "off"
+    "telemetry.telemetryLevel": "off",
+    "catppuccin.accentColor": "red"
 }
