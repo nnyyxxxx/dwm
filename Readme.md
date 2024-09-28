@@ -38,8 +38,8 @@ Uninstalling dotfiles
   ```shell
   curl -fsSL https://github.com/nnyyxxxx/dwm/raw/main/uninstall.sh | sh
   ```
-> [!WARNING]  
-> This will not restore any previous configuration files; it will only remove the symlinks created by the install script.
+> [!NOTE]  
+> This will restore any previous configuration files overwritten by the install script.
 
 <div align="center">
   <h2>Information</h2>
