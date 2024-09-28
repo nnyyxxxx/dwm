@@ -23,9 +23,9 @@ setEscalationTool() {
 # This is here only for aesthetics, without it the script will request elevation after printing the first print statement; and we don't want that.
 requestElevation() {
   if [ "$ESCALATION_TOOL" = "sudo" ]; then
-      { sudo -v && clear } || { printf "%b\n" "${RED}Failed to gain elevation.${RC}"; }
+      { sudo -v && clear; } || { printf "%b\n" "${RED}Failed to gain elevation.${RC}"; }
   elif [ "$ESCALATION_TOOL" = "doas" ]; then
-      { doas true && clear } || { printf "%b\n" "${RED}Failed to gain elevation.${RC}"; }
+      { doas true && clear; } || { printf "%b\n" "${RED}Failed to gain elevation.${RC}"; }
   fi
 }
 
@@ -39,6 +39,13 @@ cloneRepo() {
     rm -rf "$HOME/dwm" > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to remove old dwm directory.${RC}"; exit 1; }
     $ESCALATION_TOOL pacman -S --needed --noconfirm git > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to install git.${RC}"; exit 1; }
     git clone https://github.com/nnyyxxxx/dwm "$HOME/dwm" > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to clone dwm.${RC}"; exit 1; }
+}
+
+declareFuncs() {
+    DWM_DIR="$HOME/dwm"
+    mkdir -p "$HOME/.config"
+    XDG_CONFIG_HOME="$HOME/.config"
+    USERNAME=$(whoami)
 }
 
 installAURHelper() {
@@ -67,7 +74,6 @@ setSysOps() {
 }
 
 setupAutoLogin() {
-    USERNAME=$(whoami)
     printf "%b\n" "${YELLOW}Setting up TTY auto-login for user ${USERNAME}...${RC}"
     
     $ESCALATION_TOOL mkdir -p /etc/systemd/system/getty@tty1.service.d
@@ -105,21 +111,16 @@ installDeps() {
 setupConfigurations() {
     printf "%b\n" "${YELLOW}Setting up configuration files...${RC}"
 
-    USERNAME=$(whoami)
-
-    rm -rf "$HOME/suckless" > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to remove old suckless directory.${RC}"; }
-
-    $ESCALATION_TOOL cp -R "$HOME/dwm/extra/BreezeX-Black" /usr/share/icons/ > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to set up breeze cursor.${RC}"; }
-    $ESCALATION_TOOL cp -R "$HOME/dwm/extra/gtk-3.0/catppuccin-mocha" /usr/share/themes/ > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to set up catppuccin-mocha theme.${RC}"; }
-    cp -R "$HOME/dwm/extra/cava" "$HOME/.config/" > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to set up cava configuration.${RC}"; }
-    cp -R "$HOME/dwm/extra/fastfetch" "$HOME/.config/" > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to set up fastfetch configuration.${RC}"; }
-    cp -R "$HOME/dwm/extra/nvim" "$HOME/.config/" > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to set up nvim configuration.${RC}"; }
-    cp -R "$HOME/dwm/extra/gtk-3.0" "$HOME/.config/" > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to set up gtk-3.0 configuration.${RC}"; }
-    cp -R "$HOME/dwm/extra/picom" "$HOME/.config/" > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to set up picom configuration.${RC}"; }
-    cp -R "$HOME/dwm/suckless" "$HOME/" > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to set up suckless directory.${RC}"; }
-    cp "$HOME/dwm/extra/.xinitrc" "$HOME/" > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to set up .xinitrc.${RC}"; }
-    cp "$HOME/dwm/extra/.bashrc" "$HOME/" > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to set up .bashrc.${RC}"; }
-    cp "$HOME/dwm/extra/.bash_profile" "$HOME/" > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to set up .bash_profile.${RC}"; }
+    $ESCALATION_TOOL cp -R "$DWM_DIR/extra/BreezeX-Black" /usr/share/icons/ > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to set up breeze cursor.${RC}"; }
+    $ESCALATION_TOOL cp -R "$DWM_DIR/extra/gtk-3.0/catppuccin-mocha" /usr/share/themes/ > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to set up catppuccin-mocha theme.${RC}"; }
+    ln -sf "$DWM_DIR/extra/cava" "$XDG_CONFIG_HOME/cava" > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to set up cava configuration.${RC}"; }
+    ln -sf "$DWM_DIR/extra/fastfetch" "$XDG_CONFIG_HOME/fastfetch" > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to set up fastfetch configuration.${RC}"; }
+    ln -sf "$DWM_DIR/extra/nvim" "$XDG_CONFIG_HOME/nvim" > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to set up nvim configuration.${RC}"; }
+    ln -sf "$DWM_DIR/extra/gtk-3.0" "$XDG_CONFIG_HOME/gtk-3.0" > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to set up gtk-3.0 configuration.${RC}"; }
+    ln -sf "$DWM_DIR/extra/picom" "$XDG_CONFIG_HOME/picom" > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to set up picom configuration.${RC}"; }
+    ln -sf "$DWM_DIR/extra/.xinitrc" "$HOME/.xinitrc" > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to set up .xinitrc.${RC}"; }
+    ln -sf "$DWM_DIR/extra/.bashrc" "$HOME/.bashrc" > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to set up .bashrc.${RC}"; }
+    ln -sf "$DWM_DIR/extra/.bash_profile" "$HOME/.bash_profile" > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to set up .bash_profile.${RC}"; }
 
     systemctl --user enable pipewire > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to set up pipewire.${RC}"; }
     systemctl --user enable pipewire-pulse > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to set up pipewire-pulse.${RC}"; }
@@ -127,16 +128,16 @@ setupConfigurations() {
     $ESCALATION_TOOL ln -sf /bin/dash /bin/sh > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to create symlink for sh.${RC}"; }
     $ESCALATION_TOOL usermod -s /bin/bash "$USERNAME" > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to change shell.${RC}"; }
 
-    cp -r "$HOME/dwm/extra/qt5ct" "$HOME/.config/" > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to set up qt5ct.${RC}"; }
+    ln -sf "$DWM_DIR/extra/qt5ct" "$XDG_CONFIG_HOME/" > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to set up qt5ct.${RC}"; }
     echo "QT_QPA_PLATFORMTHEME=qt5ct" | $ESCALATION_TOOL tee -a /etc/environment > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to set qt5ct in environment.${RC}"; }
 
     mkdir -p "$HOME/Documents" > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to create Documents directory.${RC}"; }
-    cp "$HOME/dwm/extra/debloat.sh" "$HOME/Documents/" > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to set up debloat.sh.${RC}"; }
-    chmod +x "$HOME/Documents/debloat.sh" > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to make debloat.sh executable.${RC}"; }
+    chmod +x "$DWM_DIR/extra/debloat.sh" > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to make debloat.sh executable.${RC}"; }
+    ln -sf "$DWM_DIR/extra/debloat.sh" "$HOME/Documents/debloat.sh" > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to set up debloat.sh.${RC}"; }
 
     if pacman -Q grub > /dev/null 2>&1; then
-        $ESCALATION_TOOL cp -R "$HOME/dwm/extra/grub/catppuccin-mocha-grub/" /usr/share/grub/themes/ > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to set up grub theme.${RC}"; }
-        $ESCALATION_TOOL cp "$HOME/dwm/extra/grub/grub" /etc/default/ > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to set up grub configuration.${RC}"; }
+        $ESCALATION_TOOL cp -R "$DWM_DIR/extra/grub/catppuccin-mocha-grub/" /usr/share/grub/themes/ > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to set up grub theme.${RC}"; }
+        $ESCALATION_TOOL cp "$DWM_DIR/extra/grub/grub" /etc/default/ > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to set up grub configuration.${RC}"; }
         $ESCALATION_TOOL grub-mkconfig -o /boot/grub/grub.cfg > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to generate grub configuration.${RC}"; }
     fi
 }
@@ -146,15 +147,15 @@ compileSuckless() {
     total_steps=3
     current_step=1
 
-    { cd "$HOME/suckless/st" && $ESCALATION_TOOL make clean install > /dev/null 2>&1 && cd } || { printf "%b\n" "${RED}Failed to compile st.${RC}"; }
+    { cd "$DWM_DIR/suckless/st" && $ESCALATION_TOOL make clean install > /dev/null 2>&1 && cd -; } || { printf "%b\n" "${RED}Failed to compile st.${RC}"; }
     printf "%b\n" "${GREEN}st compiled (${current_step}/${total_steps})${RC}"
     current_step=$((current_step + 1))
 
-    { cd "$HOME/suckless/dwm" && $ESCALATION_TOOL make clean install > /dev/null 2>&1 && cd } || { printf "%b\n" "${RED}Failed to compile dwm.${RC}"; }
+    { cd "$DWM_DIR/suckless/dwm" && $ESCALATION_TOOL make clean install > /dev/null 2>&1 && cd -; } || { printf "%b\n" "${RED}Failed to compile dwm.${RC}"; }
     printf "%b\n" "${GREEN}dwm compiled (${current_step}/${total_steps})${RC}"
     current_step=$((current_step + 1))
 
-    { cd "$HOME/suckless/dmenu" && $ESCALATION_TOOL make clean install > /dev/null 2>&1 && cd } || { printf "%b\n" "${RED}Failed to compile dmenu.${RC}"; }
+    { cd "$DWM_DIR/suckless/dmenu" && $ESCALATION_TOOL make clean install > /dev/null 2>&1 && cd -; } || { printf "%b\n" "${RED}Failed to compile dmenu.${RC}"; }
     printf "%b\n" "${GREEN}dmenu compiled (${current_step}/${total_steps})${RC}"
 }
 
@@ -168,6 +169,7 @@ setEscalationTool
 requestElevation
 moveToHome
 cloneRepo
+declareFuncs
 installAURHelper
 setSysOps
 setupAutoLogin
