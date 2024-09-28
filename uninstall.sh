@@ -38,21 +38,27 @@ declareFuncs() {
     XDG_CONFIG_HOME="$HOME/.config"
 }
 
-uninstallSuckless() {
-    printf "%b\n" "${YELLOW}Uninstalling suckless utils...${RC}"
-    total_steps=3
-    current_step=1
+restoreSysOps() {
+    printf "%b\n" "${YELLOW}Restoring Parallel Downloads...${RC}"
+    $ESCALATION_TOOL sed -i 's/^ParallelDownloads = 5$/#ParallelDownloads = 5/' /etc/pacman.conf > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to restore ParallelDownloads in pacman.conf.${RC}"; }
 
-    { cd "$DWM_DIR/suckless/st" && $ESCALATION_TOOL make uninstall > /dev/null 2>&1 && cd - > /dev/null; } || { printf "%b\n" "${RED}Failed to uninstall st.${RC}"; }
-    printf "%b\n" "${GREEN}st uninstalled (${current_step}/${total_steps})${RC}"
-    current_step=$((current_step + 1))
+    printf "%b\n" "${YELLOW}Restoring default cursor...${RC}"
+    $ESCALATION_TOOL sed -i 's/^Inherits=BreezeX-Black$/Inherits=Adwaita/' /usr/share/icons/default/index.theme > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to restore default cursor.${RC}"; }
+}
 
-    { cd "$DWM_DIR/suckless/dwm" && $ESCALATION_TOOL make uninstall > /dev/null 2>&1 && cd - > /dev/null; } || { printf "%b\n" "${RED}Failed to uninstall dwm.${RC}"; }
-    printf "%b\n" "${GREEN}dwm uninstalled (${current_step}/${total_steps})${RC}"
-    current_step=$((current_step + 1))
+removeAutoLogin() {
+    printf "%b\n" "${YELLOW}Removing TTY auto-login...${RC}"
+    $ESCALATION_TOOL rm -rf /etc/systemd/system/getty@tty1.service.d/override.conf > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to remove TTY auto-login.${RC}"; }
+}
 
-    { cd "$DWM_DIR/suckless/dmenu" && $ESCALATION_TOOL make uninstall > /dev/null 2>&1 && cd - > /dev/null; } || { printf "%b\n" "${RED}Failed to uninstall dmenu.${RC}"; }
-    printf "%b\n" "${GREEN}dmenu uninstalled (${current_step}/${total_steps})${RC}"
+removeDeps() {
+    printf "%b\n" "${YELLOW}Removing dependencies...${RC}"
+    printf "%b\n" "${YELLOW}This might take a minute or two...${RC}"
+    $ESCALATION_TOOL pacman -Rns --noconfirm maim bleachbit \
+    fastfetch xclip ttf-jetbrains-mono-nerd noto-fonts-emoji ttf-liberation ttf-dejavu \
+    ttf-fira-sans ttf-fira-mono polkit-kde-agent xdg-desktop-portal zip unzip qt5-graphicaleffects \
+    qt5-quickcontrols2 noto-fonts-extra noto-fonts-cjk cmatrix neovim hsetroot \
+    pamixer vlc feh dash easyeffects qt5ct bashtop zoxide cava pipes.sh picom-ftlabs-git > /dev/null 2>&1
 }
 
 removeConfigurations() {
@@ -68,7 +74,7 @@ removeConfigurations() {
     mv "$XDG_CONFIG_HOME/fastfetch-bak" "$XDG_CONFIG_HOME/fastfetch" > /dev/null 2>&1
     mv "$XDG_CONFIG_HOME/cava-bak" "$XDG_CONFIG_HOME/cava" > /dev/null 2>&1
 
-    rm -rf "$DWM_DIR" "$HOME/.xinitrc" "$HOME/Documents/debloat.sh" > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to remove .xinitrc.${RC}"; }
+    rm -rf "$HOME/.xinitrc" "$HOME/Documents/debloat.sh" > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to remove .xinitrc.${RC}"; }
     $ESCALATION_TOOL rm -rf /usr/share/icons/BreezeX-Black /usr/share/themes/catppuccin-mocha > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to remove system-wide themes.${RC}"; }
     $ESCALATION_TOOL sed -i '/QT_QPA_PLATFORMTHEME=qt5ct/d' /etc/environment > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to remove QT_QPA_PLATFORMTHEME from environment.${RC}"; }
     $ESCALATION_TOOL ln -sf /bin/bash /bin/sh > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to restore symlink.${RC}"; }
@@ -79,26 +85,23 @@ removeConfigurations() {
     fi
 }
 
-removeDeps() {
-    printf "%b\n" "${YELLOW}Removing dependencies...${RC}"
-    printf "%b\n" "${YELLOW}This might take a minute or two...${RC}"
-    $ESCALATION_TOOL pacman -Rns --noconfirm maim bleachbit \
-    fastfetch xclip ttf-jetbrains-mono-nerd noto-fonts-emoji ttf-liberation ttf-dejavu \
-    ttf-fira-sans ttf-fira-mono polkit-kde-agent xdg-desktop-portal zip unzip qt5-graphicaleffects \
-    qt5-quickcontrols2 noto-fonts-extra noto-fonts-cjk cmatrix neovim hsetroot \
-    pamixer vlc feh dash easyeffects qt5ct bashtop zoxide cava pipes.sh picom-ftlabs-git > /dev/null 2>&1
-}
+uninstallSuckless() {
+    printf "%b\n" "${YELLOW}Uninstalling suckless utils...${RC}"
+    total_steps=3
+    current_step=1
 
-removeAutoLogin() {
-    printf "%b\n" "${YELLOW}Removing TTY auto-login...${RC}"
-    $ESCALATION_TOOL rm -rf /etc/systemd/system/getty@tty1.service.d/override.conf > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to remove TTY auto-login.${RC}"; }
-}
+    { cd "$DWM_DIR/suckless/st" && $ESCALATION_TOOL make uninstall > /dev/null 2>&1 && cd - > /dev/null; } || { printf "%b\n" "${RED}Failed to uninstall st.${RC}"; }
+    printf "%b\n" "${GREEN}st uninstalled (${current_step}/${total_steps})${RC}"
+    current_step=$((current_step + 1))
 
-restoreSysOps() {
-    printf "%b\n" "${YELLOW}Restoring Parallel Downloads...${RC}"
-    $ESCALATION_TOOL sed -i 's/^ParallelDownloads = 5$/#ParallelDownloads = 5/' /etc/pacman.conf > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to restore ParallelDownloads in pacman.conf.${RC}"; }
-    printf "%b\n" "${YELLOW}Restoring default cursor...${RC}"
-    $ESCALATION_TOOL sed -i 's/^Inherits=BreezeX-Black$/Inherits=Adwaita/' /usr/share/icons/default/index.theme > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to restore default cursor.${RC}"; }
+    { cd "$DWM_DIR/suckless/dwm" && $ESCALATION_TOOL make uninstall > /dev/null 2>&1 && cd - > /dev/null; } || { printf "%b\n" "${RED}Failed to uninstall dwm.${RC}"; }
+    printf "%b\n" "${GREEN}dwm uninstalled (${current_step}/${total_steps})${RC}"
+    current_step=$((current_step + 1))
+
+    { cd "$DWM_DIR/suckless/dmenu" && $ESCALATION_TOOL make uninstall > /dev/null 2>&1 && cd - > /dev/null; } || { printf "%b\n" "${RED}Failed to uninstall dmenu.${RC}"; }
+    printf "%b\n" "${GREEN}dmenu uninstalled (${current_step}/${total_steps})${RC}"
+
+    rm -rf "$HOME/dwm" > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to remove dwm directory.${RC}"; exit 1; }
 }
 
 success() {
@@ -111,9 +114,9 @@ setEscalationTool
 requestElevation
 moveToHome
 declareFuncs
-uninstallSuckless
-removeConfigurations
-removeDeps
-removeAutoLogin
 restoreSysOps
+removeAutoLogin
+removeDeps
+removeConfigurations
+uninstallSuckless
 success
