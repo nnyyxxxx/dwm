@@ -22,7 +22,7 @@ Install via git
   ```
 
 Starting dwm
-- DWM is auto-started from tty1 via autologin and bashprofile only after rebooting / logging out & logging back in.
+- DWM is auto-started from tty1 via autologin and zprofile only after rebooting / logging out & logging back in.
 
 Updating dotfiles
 - To sync your clone of DWM with the latest version, you can use the following command:
