@@ -23,9 +23,9 @@ setEscalationTool() {
 # This is here only for aesthetics, without it the script will request elevation after printing the first print statement; and we don't want that.
 requestElevation() {
   if [ "$ESCALATION_TOOL" = "sudo" ]; then
-      { sudo -v && clear } || { printf "%b\n" "${RED}Failed to gain elevation.${RC}"; }
+      { sudo -v && clear; } || { printf "%b\n" "${RED}Failed to gain elevation.${RC}"; }
   elif [ "$ESCALATION_TOOL" = "doas" ]; then
-      { doas true && clear } || { printf "%b\n" "${RED}Failed to gain elevation.${RC}"; }
+      { doas true && clear; } || { printf "%b\n" "${RED}Failed to gain elevation.${RC}"; }
   fi
 }
 
@@ -39,6 +39,13 @@ cloneRepo() {
     rm -rf "$HOME/dwm" > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to remove old dwm directory.${RC}"; exit 1; }
     $ESCALATION_TOOL pacman -S --needed --noconfirm git > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to install git.${RC}"; exit 1; }
     git clone https://github.com/nnyyxxxx/dwm "$HOME/dwm" > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to clone dwm.${RC}"; exit 1; }
+}
+
+declareFuncs() {
+    DWM_DIR="$HOME/dwm"
+    mkdir -p "$HOME/.config"
+    XDG_CONFIG_HOME="$HOME/.config"
+    USERNAME=$(whoami)
 }
 
 installAURHelper() {
@@ -67,7 +74,6 @@ setSysOps() {
 }
 
 setupAutoLogin() {
-    USERNAME=$(whoami)
     printf "%b\n" "${YELLOW}Setting up TTY auto-login for user ${USERNAME}...${RC}"
     
     $ESCALATION_TOOL mkdir -p /etc/systemd/system/getty@tty1.service.d
@@ -105,14 +111,6 @@ installDeps() {
 setupConfigurations() {
     printf "%b\n" "${YELLOW}Setting up configuration files...${RC}"
 
-    USERNAME=$(whoami)
-    DWM_DIR="$HOME/dwm"
-
-    if [ -z "$XDG_CONFIG_HOME" ]; then
-        mkdir "$HOME/.config"
-        XDG_CONFIG_HOME="$HOME/.config"
-    fi
-
     $ESCALATION_TOOL cp -R "$DWM_DIR/extra/BreezeX-Black" /usr/share/icons/ > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to set up breeze cursor.${RC}"; }
     $ESCALATION_TOOL cp -R "$DWM_DIR/extra/gtk-3.0/catppuccin-mocha" /usr/share/themes/ > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to set up catppuccin-mocha theme.${RC}"; }
     ln -sf "$DWM_DIR/extra/cava" "$XDG_CONFIG_HOME/cava" > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to set up cava configuration.${RC}"; }
@@ -145,21 +143,19 @@ setupConfigurations() {
 }
 
 compileSuckless() {
-    DWM_DIR="$HOME/dwm"
-
     printf "%b\n" "${YELLOW}Compiling suckless utils...${RC}"
     total_steps=3
     current_step=1
 
-    { cd "$DWM_DIR/suckless/st" && $ESCALATION_TOOL make clean install > /dev/null 2>&1 && cd } || { printf "%b\n" "${RED}Failed to compile st.${RC}"; }
+    { cd "$DWM_DIR/suckless/st" && $ESCALATION_TOOL make clean install > /dev/null 2>&1 && cd -; } || { printf "%b\n" "${RED}Failed to compile st.${RC}"; }
     printf "%b\n" "${GREEN}st compiled (${current_step}/${total_steps})${RC}"
     current_step=$((current_step + 1))
 
-    { cd "$DWM_DIR/suckless/dwm" && $ESCALATION_TOOL make clean install > /dev/null 2>&1 && cd } || { printf "%b\n" "${RED}Failed to compile dwm.${RC}"; }
+    { cd "$DWM_DIR/suckless/dwm" && $ESCALATION_TOOL make clean install > /dev/null 2>&1 && cd -; } || { printf "%b\n" "${RED}Failed to compile dwm.${RC}"; }
     printf "%b\n" "${GREEN}dwm compiled (${current_step}/${total_steps})${RC}"
     current_step=$((current_step + 1))
 
-    { cd "$DWM_DIR/suckless/dmenu" && $ESCALATION_TOOL make clean install > /dev/null 2>&1 && cd } || { printf "%b\n" "${RED}Failed to compile dmenu.${RC}"; }
+    { cd "$DWM_DIR/suckless/dmenu" && $ESCALATION_TOOL make clean install > /dev/null 2>&1 && cd -; } || { printf "%b\n" "${RED}Failed to compile dmenu.${RC}"; }
     printf "%b\n" "${GREEN}dmenu compiled (${current_step}/${total_steps})${RC}"
 }
 
@@ -173,6 +169,7 @@ setEscalationTool
 requestElevation
 moveToHome
 cloneRepo
+declareFuncs
 installAURHelper
 setSysOps
 setupAutoLogin

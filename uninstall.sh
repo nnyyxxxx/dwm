@@ -22,9 +22,9 @@ setEscalationTool() {
 
 requestElevation() {
     if [ "$ESCALATION_TOOL" = "sudo" ]; then
-        { sudo -v && clear } || { printf "%b\n" "${RED}Failed to gain elevation.${RC}"; exit 1; }
+        { sudo -v && clear; } || { printf "%b\n" "${RED}Failed to gain elevation.${RC}"; exit 1; }
     elif [ "$ESCALATION_TOOL" = "doas" ]; then
-        { doas true && clear } || { printf "%b\n" "${RED}Failed to gain elevation.${RC}"; exit 1; }
+        { doas true && clear; } || { printf "%b\n" "${RED}Failed to gain elevation.${RC}"; exit 1; }
     fi
 }
 
@@ -32,33 +32,33 @@ moveToHome() {
     cd "$HOME" || { printf "%b\n" "${RED}Failed to move to home directory.${RC}"; exit 1; }
 }
 
-uninstallSuckless() {
+declareFuncs() {
     DWM_DIR="$HOME/dwm"
+    mkdir -p "$HOME/.config"
+    XDG_CONFIG_HOME="$HOME/.config"
+}
+
+uninstallSuckless() {
     printf "%b\n" "${YELLOW}Uninstalling suckless utils...${RC}"
     total_steps=3
     current_step=1
 
-    { cd "$DWM_DIR/suckless/st" && $ESCALATION_TOOL make uninstall > /dev/null 2>&1 && cd } || { printf "%b\n" "${RED}Failed to uninstall st.${RC}"; }
+    { cd "$DWM_DIR/suckless/st" && $ESCALATION_TOOL make uninstall > /dev/null 2>&1 && cd -; } || { printf "%b\n" "${RED}Failed to uninstall st.${RC}"; }
     printf "%b\n" "${GREEN}st uninstalled (${current_step}/${total_steps})${RC}"
     current_step=$((current_step + 1))
 
-    { cd "$DWM_DIR/suckless/dwm" && $ESCALATION_TOOL make uninstall > /dev/null 2>&1 && cd } || { printf "%b\n" "${RED}Failed to uninstall dwm.${RC}"; }
+    { cd "$DWM_DIR/suckless/dwm" && $ESCALATION_TOOL make uninstall > /dev/null 2>&1 && cd -; } || { printf "%b\n" "${RED}Failed to uninstall dwm.${RC}"; }
     printf "%b\n" "${GREEN}dwm uninstalled (${current_step}/${total_steps})${RC}"
     current_step=$((current_step + 1))
 
-    { cd "$DWM_DIR/suckless/dmenu" && $ESCALATION_TOOL make uninstall > /dev/null 2>&1 && cd } || { printf "%b\n" "${RED}Failed to uninstall dmenu.${RC}"; }
+    { cd "$DWM_DIR/suckless/dmenu" && $ESCALATION_TOOL make uninstall > /dev/null 2>&1 && cd -; } || { printf "%b\n" "${RED}Failed to uninstall dmenu.${RC}"; }
     printf "%b\n" "${GREEN}dmenu uninstalled (${current_step}/${total_steps})${RC}"
 }
 
 removeConfigurations() {
     printf "%b\n" "${YELLOW}Removing configuration files...${RC}"
 
-    if [ -z "$XDG_CONFIG_HOME" ]; then
-        mkdir "$HOME/.config"
-        XDG_CONFIG_HOME="$HOME/.config"
-    fi
-
-    find "$XDG_CONFIG_HOME" -xtype l -exec rm {} + || { printf "%b\n" "${RED}Failed to remove configuration files.${RC}"; }    # Find & remove all broken symlinks
+    find "$XDG_CONFIG_HOME" -xtype l -exec rm {} + || { printf "%b\n" "${RED}Failed to remove configuration files.${RC}"; }
     rm -rf "$DWM_DIR" "$HOME/.xinitrc" "$HOME/Documents/debloat.sh" > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to remove configuration files.${RC}"; }
     $ESCALATION_TOOL rm -rf /usr/share/icons/BreezeX-Black /usr/share/themes/catppuccin-mocha > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to remove system-wide themes.${RC}"; }
     $ESCALATION_TOOL sed -i '/QT_QPA_PLATFORMTHEME=qt5ct/d' /etc/environment > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to remove QT_QPA_PLATFORMTHEME from environment.${RC}"; }
@@ -101,6 +101,7 @@ warning
 setEscalationTool
 requestElevation
 moveToHome
+declareFuncs
 uninstallSuckless
 removeConfigurations
 removeDeps
