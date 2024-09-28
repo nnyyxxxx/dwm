@@ -60,6 +60,14 @@ removeConfigurations() {
 
     find "$XDG_CONFIG_HOME" -type l -exec rm {} + || { printf "%b\n" "${RED}Failed to remove configuration files.${RC}"; }
 
+    printf "%b\n" "${YELLOW}Restoring old configuration files...${RC}"
+    mv "$HOME/nvim-bak" "$XDG_CONFIG_HOME/nvim" > /dev/null 2>&1
+    mv "$HOME/picom-bak" "$XDG_CONFIG_HOME/picom" > /dev/null 2>&1
+    mv "$HOME/qt5ct-bak" "$XDG_CONFIG_HOME/qt5ct" > /dev/null 2>&1
+    mv "$HOME/gtk-3.0-bak" "$XDG_CONFIG_HOME/gtk-3.0" > /dev/null 2>&1
+    mv "$HOME/fastfetch-bak" "$XDG_CONFIG_HOME/fastfetch" > /dev/null 2>&1
+    mv "$HOME/cava-bak" "$XDG_CONFIG_HOME/cava" > /dev/null 2>&1
+
     rm -rf "$DWM_DIR" "$HOME/.xinitrc" "$HOME/Documents/debloat.sh" > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to remove .xinitrc.${RC}"; }
     $ESCALATION_TOOL rm -rf /usr/share/icons/BreezeX-Black /usr/share/themes/catppuccin-mocha > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to remove system-wide themes.${RC}"; }
     $ESCALATION_TOOL sed -i '/QT_QPA_PLATFORMTHEME=qt5ct/d' /etc/environment > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to remove QT_QPA_PLATFORMTHEME from environment.${RC}"; }

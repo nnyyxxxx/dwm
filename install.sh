@@ -115,6 +115,13 @@ setupConfigurations() {
 
     find "$HOME" -type l -exec rm {} + || { printf "%b\n" "${RED}Failed to remove symlinks.${RC}"; }
 
+    mv "$XDG_CONFIG_HOME/nvim" "$HOME/nvim-bak" > /dev/null 2>&1
+    mv "$XDG_CONFIG_HOME/picom" "$HOME/picom-bak" > /dev/null 2>&1
+    mv "$XDG_CONFIG_HOME/qt5ct" "$HOME/qt5ct-bak" > /dev/null 2>&1
+    mv "$XDG_CONFIG_HOME/gtk-3.0" "$HOME/gtk-3.0-bak" > /dev/null 2>&1
+    mv "$XDG_CONFIG_HOME/fastfetch" "$HOME/fastfetch-bak" > /dev/null 2>&1
+    mv "$XDG_CONFIG_HOME/cava" "$HOME/cava-bak" > /dev/null 2>&1
+
     $ESCALATION_TOOL cp -R "$DWM_DIR/extra/BreezeX-Black" /usr/share/icons/ > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to set up breeze cursor.${RC}"; }
     $ESCALATION_TOOL cp -R "$DWM_DIR/extra/gtk-3.0/catppuccin-mocha" /usr/share/themes/ > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to set up catppuccin-mocha theme.${RC}"; }
     ln -sf "$DWM_DIR/extra/cava" "$XDG_CONFIG_HOME/cava" > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to set up cava configuration.${RC}"; }
