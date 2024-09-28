@@ -1,16 +1,15 @@
-# prompt
 [[ $- != *i* ]] && return
 
 # colors
-RC='\033[0m'
-RED='\033[38;2;243;139;168m'
+autoload -U colors && colors
 
 # prompt
-PS1='\[\033[38;2;243;139;168m\]$(if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then echo "\[\033[38;2;243;139;168m\]$(parse_git_branch) "; fi)\[\033[0;32m\]\w \$\[\033[0m\] '
+setopt PROMPT_SUBST
+PS1='%F{204}$(if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then echo "$(parse_git_branch) "; fi)%F{#89b4fa}%~ %F{#89b4fa}$ %f'
 
 # essential stuff
 stty -ixon # disable ctrl+s and ctrl+q
-shopt -s autocd # cd into directories just by typing the name
+setopt autocd # cd into directories just by typing the name
 HISTSIZE= HISTFILESIZE= # unlimited history
 
 # essentials
@@ -55,11 +54,11 @@ commit() {
 # cloning and cding into that cloned repo
 clone() { 
     if [ -z "$1" ]; then
-        echo -e "You didn't type anything in, ${RED}stupid! BONK!${RC} Owo."
+        print -P "You didn't type anything in, %F{#f38ba8}stupid! BONK!%f Owo."
         return 1
     fi
     git clone "$1" 2>/dev/null && cd "$(basename "$1" .git)" || {
-        echo -e "Repository ${RED}'$1'${RC} does not exist, ${RED}stupid! BONK!${RC} Owo."
+        print -P "Repository '%F{#f38ba8}$1%f' does not exist, %F{#f38ba8}stupid! BONK!%f Owo."
         return 1
     }
 }
@@ -75,44 +74,50 @@ branch() {
 }
 
 # custom command not found message
-command_not_found_handle() {
-    echo -e "Command ${RED}'$1'${RC} not found, ${RED}stupid! BONK!${RC} Owo." >&2
+command_not_found_handler() {
+    print -P "Command '%F{#f38ba8}$1%f' not found, %F{#f38ba8}stupid! BONK!%f Owo." >&2
     return 127
 }
 
-# custom command not found message 2
+# Update the ls function with colored error message
 ls() {
-    command ls -hN --color=auto --group-directories-first "$@" 2>/dev/null || echo -e "Directory ${RED}'$*'${RC} does not exist, ${RED}stupid! BONK!${RC} Owo."
+    command ls -hN --color=auto --group-directories-first "$@" 2>/dev/null || print -P "Directory '%F{#f38ba8}$*%f' does not exist, %F{#f38ba8}stupid! BONK!%f Owo."
 }
 
 # rebasing
 rebase() {
     if [ "$1" = "--abort" ]; then
         git rebase --abort || {
-            echo -e "Failed to abort rebase, ${RED}stupid! BONK!${RC} Owo."
+            print -P "Failed to abort rebase, %F{#f38ba8}stupid! BONK!%f Owo."
             return 1
         }
         return 0
     fi
     if ! [[ "$1" =~ ^[0-9]+$ ]]; then
-        echo -e "You didn't specify a valid number of commits, ${RED}stupid! BONK!${RC} Owo."
+        print -P "You didn't specify a valid number of commits, %F{#f38ba8}stupid! BONK!%f Owo."
         return 1
     fi
     if ! git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
-        echo -e "This is not a git repository, ${RED}stupid! BONK!${RC} Owo."
+        print -P "This is not a git repository, %F{#f38ba8}stupid! BONK!%f Owo."
         return 1
     fi
     git rebase -i HEAD~"$1" || {
-        echo -e "Failed to rebase ${RED}$1${RC} commits, ${RED}stupid! BONK!${RC} Owo."
+        print -P "Failed to rebase %F{#f38ba8}$1%f commits, %F{#f38ba8}stupid! BONK!%f Owo."
         return 1
     }
 }
 
-shopt -s expand_aliases
-
-# used for zoxide (dont remove unless you dont want zoxide)
-eval "$(zoxide init bash)"
+eval "$(zoxide init zsh)"
 
 cd() {
-    z "$@" 2>/dev/null || echo -e "Directory ${RED}$*${RC} not found! ${RED}stupid! BONK!${RC} Owo."
+    z "$@" 2>/dev/null || print -P "Directory '%F{#f38ba8}$*%f' not found! %F{#f38ba8}stupid! BONK!%f Owo."
 }
+
+# syntax highlighting
+typeset -A ZSH_HIGHLIGHT_STYLES
+ZSH_HIGHLIGHT_STYLES[command]="fg=#f38ba8"
+ZSH_HIGHLIGHT_STYLES[builtin]="fg=#f38ba8"
+ZSH_HIGHLIGHT_STYLES[alias]="fg=#f38ba8"
+ZSH_HIGHLIGHT_STYLES[function]="fg=#f38ba8"
+
+source ~/.zshplugins/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
