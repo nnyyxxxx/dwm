@@ -52,9 +52,14 @@ uninstallSuckless() {
 
 removeConfigurations() {
     printf "%b\n" "${YELLOW}Removing configuration files...${RC}"
-    rm -rf "$HOME/.config/cava" "$HOME/.config/fastfetch" "$HOME/.config/nvim" \
-           "$HOME/.config/gtk-3.0" "$HOME/.config/picom" "$HOME/dwm/suckless" \
-           "$HOME/.xinitrc" "$HOME/.config/qt5ct" "$HOME/Documents/debloat.sh" > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to remove configuration files.${RC}"; }
+
+    if [ -z "$XDG_CONFIG_HOME" ]; then
+        mkdir "$HOME/.config"
+        XDG_CONFIG_HOME="$HOME/.config"
+    fi
+
+    find "$XDG_CONFIG_HOME" -xtype l -exec rm {} + || { printf "%b\n" "${RED}Failed to remove configuration files.${RC}"; }    # Find & remove all broken symlinks
+    rm -rf "$DWM_DIR" "$HOME/.xinitrc" "$HOME/Documents/debloat.sh" > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to remove configuration files.${RC}"; }
     $ESCALATION_TOOL rm -rf /usr/share/icons/BreezeX-Black /usr/share/themes/catppuccin-mocha > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to remove system-wide themes.${RC}"; }
     $ESCALATION_TOOL sed -i '/QT_QPA_PLATFORMTHEME=qt5ct/d' /etc/environment > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to remove QT_QPA_PLATFORMTHEME from environment.${RC}"; }
     $ESCALATION_TOOL ln -sf /bin/bash /bin/sh > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to restore symlink.${RC}"; }
