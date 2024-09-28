@@ -39,6 +39,7 @@ Updating dotfiles
 Important notes
 - These dotfiles use bash as the default shell, and as such be prepared to manually set up your shell if you do not plan on using bash.
 - The install script will uninstall any existing display managers so compatibility can be reached.
+- The uninstall script will nuke basically everything in install.sh, if you plan on using it, proceed with caution.
 
 <div align="center">
   <h2>Keybinds overview</h2>
