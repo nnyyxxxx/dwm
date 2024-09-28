@@ -22,7 +22,7 @@ Install via git
   ```
 
 Starting dwm
-- After installing via curl or git; you'll have to reboot your system, after doing so you'll be greeted with either your display manager or DWM, it is highly recommended that you do NOT use a display manager e.g. (sddm, lightdm*) with these dotfiles, and instead resort to using ``startx`` in the tty. If you do not want to manually start DWM from the tty then don't worry as the install script automatically sets up auto-start/auto-login for DWM & tty.
+- DWM is auto-started from tty1 via autologin and bashprofile only after rebooting / logging out & logging back in.
 
 Updating dotfiles
 - To sync your clone of DWM with the latest version, you can use the following command:
@@ -47,6 +47,7 @@ Uninstalling dotfiles
 
 Important notes
 - These dotfiles use bash as the default shell, and as such be prepared to manually set up your shell if you do not plan on using bash.
+- The DWM folder in your home directory is used as the primary configuration folder, if you remove it every symlink created by the install script will cease to work; and if you want to change anything inside of the dotfiles it is recommended that you make your changes in the DWM folder. Most of the configuration is done in the extra directory, that is where you'll find all of the important config files.
 
 <div align="center">
   <h2>Keybinds overview</h2>
