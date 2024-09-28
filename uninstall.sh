@@ -80,8 +80,9 @@ removeAutoLogin() {
 }
 
 restoreSysOps() {
-    printf "%b\n" "${YELLOW}Restoring sys ops...${RC}"
+    printf "%b\n" "${YELLOW}Restoring Parallel Downloads...${RC}"
     $ESCALATION_TOOL sed -i 's/^ParallelDownloads = 5$/#ParallelDownloads = 5/' /etc/pacman.conf > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to restore ParallelDownloads in pacman.conf.${RC}"; }
+    printf "%b\n" "${YELLOW}Restoring default cursor...${RC}"
     $ESCALATION_TOOL sed -i 's/^Inherits=BreezeX-Black$/Inherits=Adwaita/' /usr/share/icons/default/index.theme > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to restore default cursor.${RC}"; }
 }
 
