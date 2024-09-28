@@ -111,13 +111,6 @@ installDeps() {
 setupConfigurations() {
     printf "%b\n" "${YELLOW}Setting up configuration files...${RC}"
 
-    mkdir -p "$XDG_CONFIG_HOME/cava"
-    mkdir -p "$XDG_CONFIG_HOME/fastfetch"
-    mkdir -p "$XDG_CONFIG_HOME/nvim"
-    mkdir -p "$XDG_CONFIG_HOME/gtk-3.0"
-    mkdir -p "$XDG_CONFIG_HOME/picom"
-    mkdir -p "$XDG_CONFIG_HOME/qt5ct"
-
     $ESCALATION_TOOL cp -R "$DWM_DIR/extra/BreezeX-Black" /usr/share/icons/ > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to set up breeze cursor.${RC}"; }
     $ESCALATION_TOOL cp -R "$DWM_DIR/extra/gtk-3.0/catppuccin-mocha" /usr/share/themes/ > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to set up catppuccin-mocha theme.${RC}"; }
     ln -sf "$DWM_DIR/extra/cava" "$XDG_CONFIG_HOME/cava" > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to set up cava configuration.${RC}"; }
