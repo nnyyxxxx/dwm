@@ -10,7 +10,6 @@ This does not apply to bashprofile / bashrc.
 - use present tense in commit messages
 - use present tense in PR titles
 - be clear and concise
-- do not include PR titles in commit messages
 - do not include issue numbers in PR titles
 - follow the conventional commits standard
 
