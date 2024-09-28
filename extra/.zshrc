@@ -171,5 +171,5 @@ ZSH_HIGHLIGHT_STYLES[cursor]='fg=#cdd6f4'
 
 bindkey '^I' autosuggest-accept
 
-source ~/.zshplugins/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source ~/.zshplugins/custom/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+source ~/dwm/extra/.zshplugins/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source ~/dwm/extra/.zshplugins/custom/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
