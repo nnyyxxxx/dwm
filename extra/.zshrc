@@ -9,7 +9,14 @@ PS1='%F{204}$(if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then echo 
 
 # essential stuff
 stty -ixon # disable ctrl+s and ctrl+q
-setopt autocd # cd into directories just by typing the name
+HISTFILE=~/.zsh_history
+HISTSIZE=1000000000
+SAVEHIST=1000000000
+setopt SHARE_HISTORY
+setopt APPEND_HISTORY
+setopt INC_APPEND_HISTORY
+setopt HIST_IGNORE_DUPS
+setopt HIST_REDUCE_BLANKS
 
 # essentials
 alias grep='grep --color=auto'
