@@ -53,7 +53,7 @@ installAURHelper() {
         $ESCALATION_TOOL pacman -S --needed --noconfirm base-devel > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to install build dependencies.${RC}"; exit 1; }
         git clone https://aur.archlinux.org/yay-bin.git "$HOME/yay-bin" > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to clone yay.${RC}"; }
         cd "$HOME/yay-bin"
-        makepkg -si > /dev/null 2>&1
+        makepkg -si --noconfirm > /dev/null 2>&1
         cd "$HOME"
         rm -rf "$HOME/yay-bin"
     fi
