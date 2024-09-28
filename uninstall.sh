@@ -53,8 +53,7 @@ removeConfigurations() {
     printf "%b\n" "${YELLOW}Removing configuration files...${RC}"
     rm -rf "$HOME/.config/cava" "$HOME/.config/fastfetch" "$HOME/.config/nvim" \
            "$HOME/.config/gtk-3.0" "$HOME/.config/picom" "$HOME/suckless" \
-           "$HOME/.xinitrc" "$HOME/.bashrc" "$HOME/.bash_profile" \
-           "$HOME/.config/qt5ct" "$HOME/Documents/debloat.sh" > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to remove configuration files.${RC}"; }
+           "$HOME/.xinitrc" "$HOME/.config/qt5ct" "$HOME/Documents/debloat.sh" > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to remove configuration files.${RC}"; }
     $ESCALATION_TOOL rm -rf /usr/share/icons/BreezeX-Black /usr/share/themes/catppuccin-mocha > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to remove system-wide themes.${RC}"; }
     $ESCALATION_TOOL sed -i '/QT_QPA_PLATFORMTHEME=qt5ct/d' /etc/environment > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to remove QT_QPA_PLATFORMTHEME from environment.${RC}"; }
     if [ -d /usr/share/grub/themes/catppuccin-mocha-grub ]; then
