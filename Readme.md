@@ -33,6 +33,10 @@ Updating dotfiles
 > This will overwrite your existing configuration, if you have made any changes to the dotfiles, make sure to back them up before running the install script.
 > This will also uninstall any existing display managers so compatibility can be reached.
 
+> [!IMPORTANT]  
+> This rice relies on having a permament existing ``dwm/`` directory. Do **NOT** remove the directory after setup.
+> Any changes to the dotfiles should be made in the ``dwm/`` directory, any changes made in ``~/.config/`` will **NOT** work.
+
 Uninstalling dotfiles
 - To uninstall the dotfiles, you can use the following command:
   ```shell
@@ -46,7 +50,7 @@ Uninstalling dotfiles
 </div>
 
 Important notes
-- These dotfiles use bash as the default shell, and as such be prepared to manually set up your shell if you do not plan on using bash.
+- These dotfiles use zsh as the default shell, and as such be prepared to manually set up your shell if you do not plan on using zsh.
 - The DWM folder in your home directory is used as the primary configuration folder, if you remove it every symlink created by the install script will cease to work; and if you want to change anything inside of the dotfiles it is recommended that you make your changes in the DWM folder. Most of the configuration is done in the extra directory, that is where you'll find all of the important config files.
 - The install script will nuke any existing symlinks in your home dir, if you want to keep them, make sure to back them up before running it.
 
