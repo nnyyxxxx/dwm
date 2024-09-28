@@ -23,9 +23,9 @@ setEscalationTool() {
 # This is here only for aesthetics, without it the script will request elevation after printing the first print statement; and we don't want that.
 requestElevation() {
   if [ "$ESCALATION_TOOL" = "sudo" ]; then
-    sudo -v && clear || { printf "%b\n" "${RED}Failed to gain elevation.${RC}"; }
+      { sudo -v && clear } || { printf "%b\n" "${RED}Failed to gain elevation.${RC}"; }
   elif [ "$ESCALATION_TOOL" = "doas" ]; then
-    doas true && clear || { printf "%b\n" "${RED}Failed to gain elevation.${RC}"; }
+      { doas true && clear } || { printf "%b\n" "${RED}Failed to gain elevation.${RC}"; }
   fi
 }
 
@@ -43,6 +43,7 @@ cloneRepo() {
 
 installAURHelper() {
     if ! command -v yay > /dev/null 2>&1 && ! command -v paru > /dev/null 2>&1; then
+        $ESCALATION_TOOL pacman -S --needed --noconfirm base-devel > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to install build dependencies.${RC}"; exit 1; }
         git clone https://aur.archlinux.org/yay-bin.git "$HOME/yay-bin" > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to clone yay.${RC}"; }
         cd "$HOME/yay-bin"
         makepkg -si > /dev/null 2>&1
@@ -145,15 +146,15 @@ compileSuckless() {
     total_steps=3
     current_step=1
 
-    cd "$HOME/suckless/st" && $ESCALATION_TOOL make clean install > /dev/null 2>&1 && cd || { printf "%b\n" "${RED}Failed to compile st.${RC}"; }
+    { cd "$HOME/suckless/st" && $ESCALATION_TOOL make clean install > /dev/null 2>&1 && cd } || { printf "%b\n" "${RED}Failed to compile st.${RC}"; }
     printf "%b\n" "${GREEN}st compiled (${current_step}/${total_steps})${RC}"
     current_step=$((current_step + 1))
 
-    cd "$HOME/suckless/dwm" && $ESCALATION_TOOL make clean install > /dev/null 2>&1 && cd || { printf "%b\n" "${RED}Failed to compile dwm.${RC}"; }
+    { cd "$HOME/suckless/dwm" && $ESCALATION_TOOL make clean install > /dev/null 2>&1 && cd } || { printf "%b\n" "${RED}Failed to compile dwm.${RC}"; }
     printf "%b\n" "${GREEN}dwm compiled (${current_step}/${total_steps})${RC}"
     current_step=$((current_step + 1))
 
-    cd "$HOME/suckless/dmenu" && $ESCALATION_TOOL make clean install > /dev/null 2>&1 && cd || { printf "%b\n" "${RED}Failed to compile dmenu.${RC}"; }
+    { cd "$HOME/suckless/dmenu" && $ESCALATION_TOOL make clean install > /dev/null 2>&1 && cd } || { printf "%b\n" "${RED}Failed to compile dmenu.${RC}"; }
     printf "%b\n" "${GREEN}dmenu compiled (${current_step}/${total_steps})${RC}"
 }
 
