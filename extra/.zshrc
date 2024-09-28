@@ -115,9 +115,19 @@ cd() {
 
 # syntax highlighting
 typeset -A ZSH_HIGHLIGHT_STYLES
-ZSH_HIGHLIGHT_STYLES[command]="fg=#f38ba8"
-ZSH_HIGHLIGHT_STYLES[builtin]="fg=#f38ba8"
-ZSH_HIGHLIGHT_STYLES[alias]="fg=#f38ba8"
-ZSH_HIGHLIGHT_STYLES[function]="fg=#f38ba8"
+ZSH_HIGHLIGHT_STYLES[command]="fg=#fab387"
+ZSH_HIGHLIGHT_STYLES[builtin]="fg=#89b4fa"
+ZSH_HIGHLIGHT_STYLES[alias]="fg=#f5c2e7"
+ZSH_HIGHLIGHT_STYLES[function]="fg=#a6e3a1"
+ZSH_HIGHLIGHT_STYLES[precommand]="fg=#cba6f7"
+ZSH_HIGHLIGHT_STYLES[keyword]="fg=#f38ba8"
+ZSH_HIGHLIGHT_STYLES[option]="fg=#74c7ec"
+ZSH_HIGHLIGHT_STYLES[path]="fg=#f9e2af"
+ZSH_HIGHLIGHT_STYLES[single-quoted-argument]="fg=#eba0ac"
+ZSH_HIGHLIGHT_STYLES[double-quoted-argument]="fg=#f2cdcd"
+ZSH_HIGHLIGHT_STYLES[comment]="fg=#6c7086"
+ZSH_HIGHLIGHT_STYLES[globbing]="fg=#94e2d5"
+ZSH_HIGHLIGHT_STYLES[variable]="fg=#b4befe"
+ZSH_HIGHLIGHT_STYLES[unknown-token]="fg=#f38ba8"
 
 source ~/.zshplugins/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
