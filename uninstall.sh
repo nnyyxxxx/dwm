@@ -22,9 +22,9 @@ setEscalationTool() {
 
 requestElevation() {
     if [ "$ESCALATION_TOOL" = "sudo" ]; then
-        sudo -v && clear || { printf "%b\n" "${RED}Failed to gain elevation.${RC}"; exit 1; }
+        { sudo -v && clear } || { printf "%b\n" "${RED}Failed to gain elevation.${RC}"; exit 1; }
     elif [ "$ESCALATION_TOOL" = "doas" ]; then
-        doas true && clear || { printf "%b\n" "${RED}Failed to gain elevation.${RC}"; exit 1; }
+        { doas true && clear } || { printf "%b\n" "${RED}Failed to gain elevation.${RC}"; exit 1; }
     fi
 }
 
@@ -37,15 +37,15 @@ uninstallSuckless() {
     total_steps=3
     current_step=1
 
-    cd "$HOME/suckless/st" && $ESCALATION_TOOL make uninstall > /dev/null 2>&1 && cd || { printf "%b\n" "${RED}Failed to uninstall st.${RC}"; }
+    { cd "$HOME/suckless/st" && $ESCALATION_TOOL make uninstall > /dev/null 2>&1 && cd } || { printf "%b\n" "${RED}Failed to uninstall st.${RC}"; }
     printf "%b\n" "${GREEN}st uninstalled (${current_step}/${total_steps})${RC}"
     current_step=$((current_step + 1))
 
-    cd "$HOME/suckless/dwm" && $ESCALATION_TOOL make uninstall > /dev/null 2>&1 && cd || { printf "%b\n" "${RED}Failed to uninstall dwm.${RC}"; }
+    { cd "$HOME/suckless/dwm" && $ESCALATION_TOOL make uninstall > /dev/null 2>&1 && cd } || { printf "%b\n" "${RED}Failed to uninstall dwm.${RC}"; }
     printf "%b\n" "${GREEN}dwm uninstalled (${current_step}/${total_steps})${RC}"
     current_step=$((current_step + 1))
 
-    cd "$HOME/suckless/dmenu" && $ESCALATION_TOOL make uninstall > /dev/null 2>&1 && cd || { printf "%b\n" "${RED}Failed to uninstall dmenu.${RC}"; }
+    { cd "$HOME/suckless/dmenu" && $ESCALATION_TOOL make uninstall > /dev/null 2>&1 && cd } || { printf "%b\n" "${RED}Failed to uninstall dmenu.${RC}"; }
     printf "%b\n" "${GREEN}dmenu uninstalled (${current_step}/${total_steps})${RC}"
 }
 
