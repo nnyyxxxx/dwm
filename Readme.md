@@ -38,7 +38,7 @@ Uninstalling dotfiles
   ```shell
   curl -fsSL https://github.com/nnyyxxxx/dwm/raw/main/uninstall.sh | sh
   ```
-> [!NOTICE]  
+> [!NOTE]  
 > This will restore any previous configuration files overwritten by the install script.
 
 <div align="center">
