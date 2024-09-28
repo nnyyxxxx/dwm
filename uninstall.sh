@@ -60,7 +60,7 @@ removeConfigurations() {
 
     find "$XDG_CONFIG_HOME" -type l -exec rm {} + || { printf "%b\n" "${RED}Failed to remove configuration files.${RC}"; }
 
-    printf "%b\n" "${YELLOW}Restoring previous configurations...${RC}"
+    printf "%b\n" "${YELLOW}Restoring old configuration files...${RC}"
     mv "$HOME/nvim-bak" "$XDG_CONFIG_HOME/nvim" > /dev/null 2>&1
     mv "$HOME/picom-bak" "$XDG_CONFIG_HOME/picom" > /dev/null 2>&1
     mv "$HOME/qt5ct-bak" "$XDG_CONFIG_HOME/qt5ct" > /dev/null 2>&1
