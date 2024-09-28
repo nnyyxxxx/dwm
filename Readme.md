@@ -73,6 +73,14 @@ Important notes
 
 ![PV](.github/images/preview.png)
 
+<div align="center">
+  <h2>Script previews</h2>
+</div>
+
 <p align="center">
   <img src=".github/images/previewScript.png" alt="Image">
+</p>
+
+<p align="center">
+  <img src=".github/images/previewScript2.png" alt="Image">
 </p>
