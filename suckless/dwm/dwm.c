@@ -94,7 +94,6 @@ struct Client {
 	char name[256];
 	float mina, maxa;
 	int x, y, w, h;
-	int sfx, sfy, sfw, sfh; /* stored float geometry, used on mode revert */
 	int oldx, oldy, oldw, oldh;
 	int basew, baseh, incw, inch, maxw, maxh, minw, minh, hintsvalid;
 	int bw, oldbw;
@@ -1301,68 +1300,11 @@ movemouse(const Arg *arg)
 
 			nx = ocx + (ev.xmotion.x - x);
 			ny = ocy + (ev.xmotion.y - y);
-			if (abs(selmon->wx - nx) < snap)
-				nx = selmon->wx;
-			else if (abs((selmon->wx + selmon->ww) - (nx + WIDTH(c))) < snap)
-				nx = selmon->wx + selmon->ww - WIDTH(c);
-			if (abs(selmon->wy - ny) < snap)
-				ny = selmon->wy;
-			else if (abs((selmon->wy + selmon->wh) - (ny + HEIGHT(c))) < snap)
-				ny = selmon->wy + selmon->wh - HEIGHT(c);
+			if (!c->isfloating && selmon->lt[selmon->sellt]->arrange
+			&& (abs(nx - c->x) > snap || abs(ny - c->y) > snap))
+				togglefloating(NULL);
 			if (!selmon->lt[selmon->sellt]->arrange || c->isfloating)
 				resize(c, nx, ny, c->w, c->h, 1);
-			else if (selmon->lt[selmon->sellt]->arrange || !c->isfloating) {
-				if ((m = recttomon(ev.xmotion.x_root, ev.xmotion.y_root, 1, 1)) != selmon) {
-					sendmon(c, m);
-					selmon = m;
-					focus(NULL);
-				}
-
-				Client *cc = c->mon->clients;
-				while (1) {
-					if (cc == 0) break;
-					if(
-					 cc != c && !cc->isfloating && ISVISIBLE(cc) &&
-					 ev.xmotion.x_root > cc->x &&
-					 ev.xmotion.x_root < cc->x + cc->w &&
-					 ev.xmotion.y_root > cc->y &&
-					 ev.xmotion.y_root < cc->y + cc->h ) {
-						break;
-					}
-
-					cc = cc->next;
-				}
-
-				if (cc) {
-					Client *cl1, *cl2, ocl1;
-					
-					if (!selmon->lt[selmon->sellt]->arrange) return;
-
-					cl1 = c;
-					cl2 = cc;
-					ocl1 = *cl1;
-					strcpy(cl1->name, cl2->name);
-					cl1->win = cl2->win;
-					cl1->x = cl2->x;
-					cl1->y = cl2->y;
-					cl1->w = cl2->w;
-					cl1->h = cl2->h;
-					
-					cl2->win = ocl1.win;
-					strcpy(cl2->name, ocl1.name);
-					cl2->x = ocl1.x;
-					cl2->y = ocl1.y;
-					cl2->w = ocl1.w;
-					cl2->h = ocl1.h;
-					
-					selmon->sel = cl2;
-
-					c = cc;
-					focus(c);
-					
-					arrange(cl1->mon);
-				}
-			}
 			break;
 		}
 	} while (ev.type != ButtonRelease);
@@ -1451,15 +1393,13 @@ recttomon(int x, int y, int w, int h)
 void
 resize(Client *c, int x, int y, int w, int h, int interact)
 {
+    if (!c) return;
     if (c->isfloating || !selmon->lt[selmon->sellt]->arrange) {
-        if (w < MIN_WINDOW_WIDTH)
-            w = MIN_WINDOW_WIDTH;
-        if (h < MIN_WINDOW_HEIGHT)
-            h = MIN_WINDOW_HEIGHT;
-    }
-
-    if (applysizehints(c, &x, &y, &w, &h, interact))
         resizeclient(c, x, y, w, h);
+    } else {
+        if (applysizehints(c, &x, &y, &w, &h, interact))
+            resizeclient(c, x, y, w, h);
+    }
 }
 
 void
@@ -1959,19 +1899,21 @@ togglefloating(const Arg *arg)
         return;
     if (selmon->sel->isfullscreen) /* no support for fullscreen windows */
         return;
+    
     selmon->sel->isfloating = !selmon->sel->isfloating || selmon->sel->isfixed;
+    
     if (selmon->sel->isfloating) {
-        resize(selmon->sel, selmon->sel->sfx, selmon->sel->sfy,
-               MAX(selmon->sel->sfw, MIN_WINDOW_WIDTH),
-               MAX(selmon->sel->sfh, MIN_WINDOW_HEIGHT), False);
+        int newWidth = MIN_WINDOW_WIDTH;
+        int newHeight = MIN_WINDOW_HEIGHT;
         
-        selmon->sel->x = selmon->sel->mon->mx + (selmon->sel->mon->mw - WIDTH(selmon->sel)) / 2;
-        selmon->sel->y = selmon->sel->mon->my + (selmon->sel->mon->mh - HEIGHT(selmon->sel)) / 2;
-    } else {
-        selmon->sel->sfx = selmon->sel->x;
-        selmon->sel->sfy = selmon->sel->y;
-        selmon->sel->sfw = selmon->sel->w;
-        selmon->sel->sfh = selmon->sel->h;
+        int newX = selmon->sel->mon->mx + (selmon->sel->mon->mw - newWidth) / 2;
+        int newY = selmon->sel->mon->my + (selmon->sel->mon->mh - newHeight) / 2;
+        
+        XMoveResizeWindow(dpy, selmon->sel->win, newX, newY, newWidth, newHeight);
+        selmon->sel->x = newX;
+        selmon->sel->y = newY;
+        selmon->sel->w = newWidth;
+        selmon->sel->h = newHeight;
     }
     arrange(selmon);
 }
