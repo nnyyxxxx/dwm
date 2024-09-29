@@ -1205,22 +1205,31 @@ manage(Window w, XWindowAttributes *wa)
     attachstack(c);
     XChangeProperty(dpy, root, netatom[NetClientList], XA_WINDOW, 32, PropModeAppend,
         (unsigned char *) &(c->win), 1);
-    XMoveResizeWindow(dpy, c->win, c->x + 2 * sw, c->y, c->w, c->h);
     setclientstate(c, NormalState);
     if (c->mon == selmon)
         unfocus(selmon->sel, 0);
     c->mon->sel = c;
     arrange(c->mon);
+
+    if (c->isfloating) {
+        int newWidth = MIN_WINDOW_WIDTH;
+        int newHeight = MIN_WINDOW_HEIGHT;
+    
+        int newX = c->mon->mx + (c->mon->mw - newWidth) / 2;
+        int newY = c->mon->my + (c->mon->mh - newHeight) / 2;
+    
+        c->x = newX;
+        c->y = newY;
+        c->w = newWidth;
+        c->h = newHeight;
+    }
+
+    XMoveResizeWindow(dpy, c->win, c->x, c->y, c->w, c->h);
     XMapWindow(dpy, c->win);
+
     if (term)
         swallow(term, c);
     focus(NULL);
-
-    if (c->isfloating || !c->mon->lt[c->mon->sellt]->arrange) {
-        c->x = c->mon->mx + (c->mon->mw - WIDTH(c)) / 2;
-        c->y = c->mon->my + (c->mon->mh - HEIGHT(c)) / 2;
-        XMoveWindow(dpy, c->win, c->x, c->y);
-    }
 
     setclienttagprop(c);
 }
@@ -1909,11 +1918,7 @@ togglefloating(const Arg *arg)
         int newX = selmon->sel->mon->mx + (selmon->sel->mon->mw - newWidth) / 2;
         int newY = selmon->sel->mon->my + (selmon->sel->mon->mh - newHeight) / 2;
         
-        XMoveResizeWindow(dpy, selmon->sel->win, newX, newY, newWidth, newHeight);
-        selmon->sel->x = newX;
-        selmon->sel->y = newY;
-        selmon->sel->w = newWidth;
-        selmon->sel->h = newHeight;
+        resize(selmon->sel, newX, newY, newWidth, newHeight, 1);
     }
     arrange(selmon);
 }
