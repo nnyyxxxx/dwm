@@ -10,12 +10,12 @@
 
 Install via curl
   ```shell
-  curl -fsSL https://github.com/nnyyxxxx/dwm/raw/main/install.sh | sh
+  curl -fsSL https://github.com/nnyyxxxx/dwm/raw/minimal/install.sh | sh
   ```
 
 Install via git
   ```shell
-  git clone https://github.com/nnyyxxxx/dwm
+  git clone -b minimal https://github.com/nnyyxxxx/dwm
   cd dwm
   chmod +x install.sh
   ./install.sh
@@ -27,7 +27,7 @@ Starting dwm
 Updating dotfiles
 - To sync your clone of DWM with the latest version, you can use the following command:
   ```shell
-  curl -fsSL https://github.com/nnyyxxxx/dwm/raw/main/install.sh | sh
+  curl -fsSL https://github.com/nnyyxxxx/dwm/raw/minimal/install.sh | sh
   ```
 > [!WARNING]  
 > This will overwrite your existing configuration, if you have made any changes to the dotfiles, make sure to back them up before running the install script.
@@ -40,7 +40,7 @@ Updating dotfiles
 Uninstalling dotfiles
 - To uninstall the dotfiles, you can use the following command:
   ```shell
-  curl -fsSL https://github.com/nnyyxxxx/dwm/raw/main/uninstall.sh | sh
+  curl -fsSL https://github.com/nnyyxxxx/dwm/raw/minimal/uninstall.sh | sh
   ```
 > [!NOTE]  
 > This will restore any previous configuration files overwritten by the install script.
