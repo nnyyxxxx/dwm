@@ -96,28 +96,28 @@ unsigned int tabspaces = 8;
 /* Terminal colors (16 first used in escape sequence) */
 static const char *colorname[] = {
 	/* 8 normal colors */
-	"#45475A",
-	"#F38BA8",
-	"#A6E3A1",
-	"#F9E2AF",
-	"#89B4FA",
-	"#F5C2E7",
-	"#94E2D5",
-	"#BAC2DE",
+	"#45475a",
+	"#cba6f7",
+	"#a6e3a1",
+	"#f9e2af",
+	"#89b4fa",
+	"#f38ba8",
+	"#94e2d5",
+	"#bac2de",
 
 	/* 8 bright colors */
-	"#585B70",
-	"#F38BA8",
-	"#A6E3A1",
-	"#F9E2AF",
-	"#89B4FA",
-	"#F5C2E7",
-	"#94E2D5",
-	"#A6ADC8",
+	"#585b70",
+	"#cba6f7",
+	"#a6e3a1",
+	"#f9e2af",
+	"#89b4fa",
+	"#f38ba8",
+	"#94e2d5",
+	"#a6adc8",
 
-[256] = "#CDD6F4", /* default foreground colour */
-[257] = "#1E1E2E", /* default background colour */
-[258] = "#F5E0DC", /*575268*/
+[256] = "#cdd6f4", /* default foreground colour */
+[257] = "#1d1d2d", /* default background colour */
+[258] = "#f5e0dc", /*575268*/
 
 };
 
@@ -472,4 +472,3 @@ static char ascii_printable[] =
 	" !\"#$%&'()*+,-./0123456789:;<=>?"
 	"@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_"
 	"`abcdefghijklmnopqrstuvwxyz{|}~";
-
