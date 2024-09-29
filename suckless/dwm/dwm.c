@@ -99,6 +99,7 @@ struct Client {
 	int bw, oldbw;
 	unsigned int tags;
 	int isfixed, isfloating, isurgent, neverfocus, oldstate, isfullscreen, isterminal, noswallow;
+	int wasfloating;
 	pid_t pid;
 	Client *next;
 	Client *snext;
@@ -1450,15 +1451,13 @@ recttomon(int x, int y, int w, int h)
 void
 resize(Client *c, int x, int y, int w, int h, int interact)
 {
+    if (!c) return;
     if (c->isfloating || !selmon->lt[selmon->sellt]->arrange) {
-        if (w < MIN_WINDOW_WIDTH)
-            w = MIN_WINDOW_WIDTH;
-        if (h < MIN_WINDOW_HEIGHT)
-            h = MIN_WINDOW_HEIGHT;
-    }
-
-    if (applysizehints(c, &x, &y, &w, &h, interact))
         resizeclient(c, x, y, w, h);
+    } else {
+        if (applysizehints(c, &x, &y, &w, &h, interact))
+            resizeclient(c, x, y, w, h);
+    }
 }
 
 void
@@ -1958,7 +1957,9 @@ togglefloating(const Arg *arg)
         return;
     if (selmon->sel->isfullscreen) /* no support for fullscreen windows */
         return;
+    
     selmon->sel->isfloating = !selmon->sel->isfloating || selmon->sel->isfixed;
+    
     if (selmon->sel->isfloating) {
         int newWidth = MIN_WINDOW_WIDTH;
         int newHeight = MIN_WINDOW_HEIGHT;
