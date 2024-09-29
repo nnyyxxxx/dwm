@@ -29,7 +29,6 @@ alias chmod='chmod +x'
 alias ..='cd ..'
 
 # git based actions
-alias pull='git pull'
 alias checkout='git checkout'
 alias push='git push'
 alias fetch='git fetch'
@@ -38,6 +37,12 @@ alias add='git add .'
 alias stash='git stash && git stash drop'
 alias status='git status'
 alias log='git log'
+
+pull() {
+    git stash
+    git pull
+    git stash pop
+}
 
 # env's
 export EDITOR='nvim'
