@@ -94,7 +94,6 @@ struct Client {
 	char name[256];
 	float mina, maxa;
 	int x, y, w, h;
-	int sfx, sfy, sfw, sfh; /* stored float geometry, used on mode revert */
 	int oldx, oldy, oldw, oldh;
 	int basew, baseh, incw, inch, maxw, maxh, minw, minh, hintsvalid;
 	int bw, oldbw;
@@ -1961,17 +1960,17 @@ togglefloating(const Arg *arg)
         return;
     selmon->sel->isfloating = !selmon->sel->isfloating || selmon->sel->isfixed;
     if (selmon->sel->isfloating) {
-        resize(selmon->sel, selmon->sel->sfx, selmon->sel->sfy,
-               MAX(selmon->sel->sfw, MIN_WINDOW_WIDTH),
-               MAX(selmon->sel->sfh, MIN_WINDOW_HEIGHT), False);
+        int newWidth = MIN_WINDOW_WIDTH;
+        int newHeight = MIN_WINDOW_HEIGHT;
         
-        selmon->sel->x = selmon->sel->mon->mx + (selmon->sel->mon->mw - WIDTH(selmon->sel)) / 2;
-        selmon->sel->y = selmon->sel->mon->my + (selmon->sel->mon->mh - HEIGHT(selmon->sel)) / 2;
-    } else {
-        selmon->sel->sfx = selmon->sel->x;
-        selmon->sel->sfy = selmon->sel->y;
-        selmon->sel->sfw = selmon->sel->w;
-        selmon->sel->sfh = selmon->sel->h;
+        int newX = selmon->sel->mon->mx + (selmon->sel->mon->mw - newWidth) / 2;
+        int newY = selmon->sel->mon->my + (selmon->sel->mon->mh - newHeight) / 2;
+        
+        XMoveResizeWindow(dpy, selmon->sel->win, newX, newY, newWidth, newHeight);
+        selmon->sel->x = newX;
+        selmon->sel->y = newY;
+        selmon->sel->w = newWidth;
+        selmon->sel->h = newHeight;
     }
     arrange(selmon);
 }
