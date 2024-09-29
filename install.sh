@@ -101,7 +101,7 @@ installDeps() {
         ttf-fira-sans ttf-fira-mono polkit-kde-agent xdg-desktop-portal zip unzip \
         qt5-graphicaleffects qt5-quickcontrols2 noto-fonts-extra noto-fonts-cjk noto-fonts \
         cmatrix gtk3 neovim hsetroot pamixer vlc feh zsh dash pipewire-pulse easyeffects qt5ct \
-        bashtop zoxide > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to install dependencies.${RC}"; }
+        bashtop zoxide zsh-syntax-highlighting > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to install dependencies.${RC}"; }
     printf "%b\n" "${GREEN}Dependencies installed (${current_step}/${total_steps})${RC}"
     current_step=$((current_step + 1))
 
@@ -126,7 +126,6 @@ setupConfigurations() {
     $ESCALATION_TOOL mkdir -p /etc/zsh/ > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to create zsh directory.${RC}"; }
     $ESCALATION_TOOL touch /etc/zsh/zshenv > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to create zshenv.${RC}"; }
     echo "export ZDOTDIR=\"$HOME\"" | $ESCALATION_TOOL tee -a /etc/zsh/zshenv > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to set ZDOTDIR.${RC}"; }
-    ln -sf "$DWM_DIR/extra/.zshplugins" "$HOME/.zshplugins" > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to set up .zshplugins.${RC}"; }
     ln -sf "$DWM_DIR/extra/.zshrc" "$HOME/.zshrc" > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to set up .zshrc.${RC}"; }
     ln -sf "$DWM_DIR/extra/.zprofile" "$HOME/.zprofile" > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to set up .zprofile.${RC}"; }
     touch "$HOME/.zlogin" "$HOME/.zshenv" > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to create zlogin and zshenv.${RC}"; }
