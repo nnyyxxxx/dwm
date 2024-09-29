@@ -9,7 +9,7 @@ static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const char *fonts[]          = { "JetBrainsMono Nerd Font:size=10" };
 static const char col_bg[] = "#1E1E2E";
-static const char col_fg[] = "#f38ba8";
+static const char col_fg[] = "#CDD6F4";
 static const char *colors[][4] = {
     /*               fg         bg         border   */
     [SchemeNorm] = { col_fg, col_bg, col_fg },
