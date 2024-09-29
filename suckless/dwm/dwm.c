@@ -1276,53 +1276,110 @@ motionnotify(XEvent *e)
 void
 movemouse(const Arg *arg)
 {
-	int x, y, ocx, ocy, nx, ny;
-	Client *c;
-	Monitor *m;
-	XEvent ev;
-	Time lasttime = 0;
+    int x, y, ocx, ocy, nx, ny;
+    Client *c;
+    Monitor *m;
+    XEvent ev;
+    Time lasttime = 0;
 
-	if (!(c = selmon->sel))
-		return;
-	if (c->isfullscreen) /* no support moving fullscreen windows by mouse */
-		return;
-	restack(selmon);
-	ocx = c->x;
-	ocy = c->y;
-	if (XGrabPointer(dpy, root, False, MOUSEMASK, GrabModeAsync, GrabModeAsync,
-		None, cursor[CurMove]->cursor, CurrentTime) != GrabSuccess)
-		return;
-	if (!getrootptr(&x, &y))
-		return;
-	do {
-		XMaskEvent(dpy, MOUSEMASK|ExposureMask|SubstructureRedirectMask, &ev);
-		switch(ev.type) {
-		case ConfigureRequest:
-		case Expose:
-		case MapRequest:
-			handler[ev.type](&ev);
-			break;
-		case MotionNotify:
-			if ((ev.xmotion.time - lasttime) <= (1000 / 60))
-				continue;
-			lasttime = ev.xmotion.time;
+    if (!(c = selmon->sel))
+        return;
+    if (c->isfullscreen) /* no support moving fullscreen windows by mouse */
+        return;
+    restack(selmon);
+    ocx = c->x;
+    ocy = c->y;
+    if (XGrabPointer(dpy, root, False, MOUSEMASK, GrabModeAsync, GrabModeAsync,
+        None, cursor[CurMove]->cursor, CurrentTime) != GrabSuccess)
+        return;
+    if (!getrootptr(&x, &y))
+        return;
+    do {
+        XMaskEvent(dpy, MOUSEMASK|ExposureMask|SubstructureRedirectMask, &ev);
+        switch(ev.type) {
+        case ConfigureRequest:
+        case Expose:
+        case MapRequest:
+            handler[ev.type](&ev);
+            break;
+        case MotionNotify:
+            if ((ev.xmotion.time - lasttime) <= (1000 / 60))
+                continue;
+            lasttime = ev.xmotion.time;
 
-			nx = ocx + (ev.xmotion.x - x);
-			ny = ocy + (ev.xmotion.y - y);
-			if (!c->isfloating && selmon->lt[selmon->sellt]->arrange
-			&& (abs(nx - c->x) > snap || abs(ny - c->y) > snap))
-				togglefloating(NULL);
-			if (!selmon->lt[selmon->sellt]->arrange || c->isfloating)
-				resize(c, nx, ny, c->w, c->h, 1);
-			break;
-		}
-	} while (ev.type != ButtonRelease);
-	XUngrabPointer(dpy, CurrentTime);
-	if ((m = recttomon(c->x, c->y, c->w, c->h)) != selmon) {
-		sendmon(c, m);
-		selmon = m;
-		focus(NULL);
-	}
+            nx = ocx + (ev.xmotion.x - x);
+            ny = ocy + (ev.xmotion.y - y);
+            if (abs(selmon->wx - nx) < snap)
+                nx = selmon->wx;
+            else if (abs((selmon->wx + selmon->ww) - (nx + WIDTH(c))) < snap)
+                nx = selmon->wx + selmon->ww - WIDTH(c);
+            if (abs(selmon->wy - ny) < snap)
+                ny = selmon->wy;
+            else if (abs((selmon->wy + selmon->wh) - (ny + HEIGHT(c))) < snap)
+                ny = selmon->wy + selmon->wh - HEIGHT(c);
+            if (!selmon->lt[selmon->sellt]->arrange || c->isfloating)
+                resize(c, nx, ny, c->w, c->h, 1);
+            else if (selmon->lt[selmon->sellt]->arrange || !c->isfloating) {
+                if ((m = recttomon(ev.xmotion.x_root, ev.xmotion.y_root, 1, 1)) != selmon) {
+                    sendmon(c, m);
+                    selmon = m;
+                    focus(NULL);
+                }
+
+                Client *cc = c->mon->clients;
+                while (1) {
+                    if (cc == 0) break;
+                    if(
+                     cc != c && !cc->isfloating && ISVISIBLE(cc) &&
+                     ev.xmotion.x_root > cc->x &&
+                     ev.xmotion.x_root < cc->x + cc->w &&
+                     ev.xmotion.y_root > cc->y &&
+                     ev.xmotion.y_root < cc->y + cc->h ) {
+                        break;
+                    }
+
+                    cc = cc->next;
+                }
+
+                if (cc) {
+                    Client *cl1, *cl2, ocl1;
+                    
+                    if (!selmon->lt[selmon->sellt]->arrange) return;
+
+                    cl1 = c;
+                    cl2 = cc;
+                    ocl1 = *cl1;
+                    strcpy(cl1->name, cl2->name);
+                    cl1->win = cl2->win;
+                    cl1->x = cl2->x;
+                    cl1->y = cl2->y;
+                    cl1->w = cl2->w;
+                    cl1->h = cl2->h;
+                    
+                    cl2->win = ocl1.win;
+                    strcpy(cl2->name, ocl1.name);
+                    cl2->x = ocl1.x;
+                    cl2->y = ocl1.y;
+                    cl2->w = ocl1.w;
+                    cl2->h = ocl1.h;
+                    
+                    selmon->sel = cl2;
+
+                    c = cc;
+                    focus(c);
+                    
+                    arrange(cl1->mon);
+                }
+            }
+            break;
+        }
+    } while (ev.type != ButtonRelease);
+    XUngrabPointer(dpy, CurrentTime);
+    if ((m = recttomon(c->x, c->y, c->w, c->h)) != selmon) {
+        sendmon(c, m);
+        selmon = m;
+        focus(NULL);
+    }
 }
 
 Client *
