@@ -102,6 +102,9 @@ uninstallSuckless() {
     { cd "$DWM_DIR/suckless/dmenu" && $ESCALATION_TOOL make uninstall > /dev/null 2>&1 && cd - > /dev/null; } || { printf "%b\n" "${RED}Failed to uninstall dmenu.${RC}"; }
     printf "%b\n" "${GREEN}dmenu uninstalled (${current_step}/${total_steps})${RC}"
 
+    { cd "$DWM_DIR/suckless/dwmblocks" && $ESCALATION_TOOL make uninstall > /dev/null 2>&1 && cd - > /dev/null; } || { printf "%b\n" "${RED}Failed to uninstall dwmblocks.${RC}"; }
+    printf "%b\n" "${GREEN}dwmblocks uninstalled (${current_step}/${total_steps})${RC}"
+
     rm -rf "$HOME/dwm" > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to remove dwm directory.${RC}"; exit 1; }
 }
 

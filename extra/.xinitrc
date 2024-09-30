@@ -4,20 +4,7 @@ pamixer &
 picom -b
 feh --randomize --bg-fill ~/dwm/extra/catppuccin-wallpapers/mocha-wall/* &
 /usr/lib/polkit-kde-authentication-agent-1 &
-
-while true; do
-    time=$(date "+%I:%M %p")
-
-    volume=$(pamixer --get-volume-human)
-
-    updates=$(checkupdates | wc -l)
-
-    status="  $time    $updates    $volume"
-
-    xsetroot -name "$status"
-
-    sleep 1m
-done &
+dwmblocks &
 
 hsetroot -solid "#1E1E2E"
 

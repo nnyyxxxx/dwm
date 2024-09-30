@@ -50,6 +50,7 @@ Important notes
 - These dotfiles use zsh as the default shell, and as such be prepared to manually set up your shell if you do not plan on using zsh.
 - The DWM folder in your home directory is used as the primary configuration folder, if you remove it every symlink created by the install script will cease to work; and if you want to change anything inside of the dotfiles it is recommended that you make your changes in the DWM folder. Most of the configuration is done in the extra directory, that is where you'll find all of the important config files.
 - The install script will nuke any existing symlinks in your home dir, if you want to keep them, make sure to back them up before running it.
+- The dwmblocks is buggy atm, can be improved in the future.
 
 <div align="center">
   <h2>Keybinds overview</h2>
