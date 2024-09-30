@@ -54,16 +54,16 @@ removeAutoLogin() {
 removeDeps() {
     printf "%b\n" "${YELLOW}Removing dependencies...${RC}"
     printf "%b\n" "${YELLOW}This might take a minute or two...${RC}"
+
     $ESCALATION_TOOL pacman -Rns --noconfirm maim bleachbit \
     fastfetch xclip ttf-jetbrains-mono-nerd noto-fonts-emoji ttf-liberation ttf-dejavu \
     ttf-fira-sans ttf-fira-mono polkit-kde-agent xdg-desktop-portal zip unzip qt5-graphicaleffects \
     qt5-quickcontrols2 noto-fonts-extra noto-fonts-cjk cmatrix neovim hsetroot \
-    pamixer vlc feh dash easyeffects qt5ct bashtop zoxide cava pipes.sh > /dev/null 2>&1
+    pamixer mpv feh dash easyeffects qt5ct bashtop zoxide cava pipes.sh ffmpeg > /dev/null 2>&1
 }
 
 removeConfigurations() {
     printf "%b\n" "${YELLOW}Removing configuration files...${RC}"
-
     find "$XDG_CONFIG_HOME" -type l -exec rm {} + || { printf "%b\n" "${RED}Failed to remove configuration files.${RC}"; }
 
     printf "%b\n" "${YELLOW}Restoring old configuration files...${RC}"
@@ -74,9 +74,11 @@ removeConfigurations() {
     mv "$XDG_CONFIG_HOME/cava-bak" "$XDG_CONFIG_HOME/cava" > /dev/null 2>&1
 
     rm -rf "$HOME/.xinitrc" "$HOME/Documents/debloat.sh" > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to remove .xinitrc.${RC}"; }
+
     $ESCALATION_TOOL rm -rf /usr/share/icons/BreezeX-Black /usr/share/themes/catppuccin-mocha > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to remove system-wide themes.${RC}"; }
     $ESCALATION_TOOL sed -i '/QT_QPA_PLATFORMTHEME=qt5ct/d' /etc/environment > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to remove QT_QPA_PLATFORMTHEME from environment.${RC}"; }
     $ESCALATION_TOOL ln -sf /bin/bash /bin/sh > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to restore symlink.${RC}"; }
+
     if [ -d /usr/share/grub/themes/catppuccin-mocha-grub ]; then
         $ESCALATION_TOOL rm -rf /usr/share/grub/themes/catppuccin-mocha-grub > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to remove GRUB theme.${RC}"; }
         $ESCALATION_TOOL sed -i '/GRUB_THEME/d' /etc/default/grub > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to remove GRUB theme from config.${RC}"; }
