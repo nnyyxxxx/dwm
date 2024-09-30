@@ -20,7 +20,6 @@ static const char col_pink[]        = "#cba6f7";
 static const char *colors[][3] = {
     /*               fg         bg         border   */
     [SchemeNorm] = { col_fg,    col_bg,    col_fg },
-    [SchemeSel]  = { col_fg,    col_fg,    col_fg },
     [SchemeStatus]  = { col_fg, col_bg,    col_bg }, // Statusbar right {text,background,border}
     [SchemeTagsSel]  = { col_bg, col_fg,   col_fg }, // Tagbar left selected {text,background,border}
     [SchemeTagsNorm]  = { col_fg, col_bg,  col_bg }, // Tagbar left unselected {text,background,border}
