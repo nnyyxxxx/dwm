@@ -34,7 +34,7 @@ declareFuncs() {
 
 checkUserChanges() {
     if [ -n "$(git diff)" ]; then
-        printf "%b" "${YELLOW}Do you want to save your changes? (Y/n) ${RC}"
+        printf "%b" "${YELLOW}Do you want to save your changes? (Y/n): ${RC}"
         read -r input
         case $input in
             n|N)
@@ -62,14 +62,12 @@ updateRepository() {
     git fetch origin main > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to fetch the repository.${RC}"; exit 1; }
     git reset --hard origin/main > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to reset the repository.${RC}"; exit 1; }
     git pull --rebase origin main > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to pull the repository.${RC}"; exit 1; }
-    printf "%b\n" "${GREEN}Repository updated.${RC}"
 }
 
 reapplyUserChanges() {
     if [ "$SAVE_USER_CHANGES" -eq 1 ]; then
         printf "%b\n" "${YELLOW}Re-applying user changes...${RC}"
         git stash pop > /dev/null 2>&1 || printf "%b\n" "${RED}Failed to pop the stash.${RC}"
-        printf "%b\n" "${GREEN}Changes re-applied.${RC}"
     fi
 }
 
