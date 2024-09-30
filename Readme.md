@@ -69,8 +69,6 @@ Important notes
 | `ALT + RMB` | Resizes window in floating & resizes mfact in tiled; when two or more windows are on screen |
 | `ALT + SPACE` | Makes the selected window float |
 | `ALT + R` | Resets mfact |
-| `ALT + W` | Spawns browser (firefox) |
-| `ALT + Q` | Spawns vesktop (discord client " Only works if you have it installed ") |
 
 <div align="center">
   <h2>Preview</h2>
