@@ -791,7 +791,7 @@ dirtomon(int dir)
 void
 drawbar(Monitor *m)
 {
-    int x, w, tw = 0;
+    int x = 0, w, tw = 0;
     int tlpad;
     int boxs = drw->fonts->h / 9;
     int boxw = drw->fonts->h / 6 + 2;
