@@ -65,6 +65,8 @@ static const char *dmenucmd[] = { "dmenu_run", NULL };
 static const char *screenshotcmd[] = { "sh", "-c", "maim -su | xclip -selection clipboard -t image/png -i", NULL };
 static const char *randomizebgcmd[] = { "sh", "-c", "feh --randomize --bg-fill ~/dwm/extra/catppuccin-wallpapers/mocha-wall/*", NULL };
 static const char *termcmd[] = { "st", NULL };
+static const char *vesktopcmd[] = { "vesktop", NULL };
+static const char *browsercmd[] = { "firefox", NULL };
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -72,6 +74,8 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_Escape, spawn,          {.v = screenshotcmd } },
 	{ MODKEY|ShiftMask,             XK_r,      spawn,          {.v = randomizebgcmd } },
+	{ MODKEY,                       XK_q,      spawn,          {.v = vesktopcmd } },
+	{ MODKEY,                       XK_w,      spawn,          {.v = browsercmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
