@@ -87,3 +87,7 @@ Important notes
 <p align="center">
   <img src=".github/images/previewScript2.png" alt="Image">
 </p>
+
+<p align="center">
+  <img src=".github/images/previewScript3.png" alt="Image">
+</p>
