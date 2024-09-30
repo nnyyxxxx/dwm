@@ -29,9 +29,6 @@ Updating dotfiles
   ```shell
   curl -fsSL https://github.com/nnyyxxxx/dwm/raw/main/update.sh | sh
   ```
-> [!IMPORTANT]  
-> This rice relies on having a permament existing ``dwm/`` directory. Do **NOT** remove the directory after setup.
-> Any changes to the dotfiles should be made in the ``dwm/`` directory, any changes made in ``~/.config/`` will **NOT** work.
 
 Uninstalling dotfiles
 - To uninstall the dotfiles, you can use the following command:
@@ -40,6 +37,10 @@ Uninstalling dotfiles
   ```
 > [!NOTE]  
 > This will restore any previous configuration files overwritten by the install script.
+
+> [!IMPORTANT]  
+> This rice relies on having a permament existing ``dwm/`` directory. Do **NOT** remove the directory after setup.
+> Any changes to the dotfiles should be made in the ``dwm/`` directory, any changes made in ``~/.config/`` will **NOT** work.
 
 <div align="center">
   <h2>Information</h2>

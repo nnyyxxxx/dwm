@@ -88,6 +88,7 @@ compileSuckless() {
 }
 
 success() {
+    printf "%b\n" "${YELLOW}Please reboot your system to apply the changes.${RC}"
     printf "%b\n" "${GREEN}Update complete.${RC}"
 }
 
