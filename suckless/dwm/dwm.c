@@ -804,6 +804,9 @@ drawbar(Monitor *m)
     if (!m->showbar)
         return;
 
+    drw_setscheme(drw, scheme[SchemeNorm]);
+    drw_rect(drw, 0, 0, m->ww, bh, 1, 1);
+
     if (m == selmon) {
         drw_setscheme(drw, scheme[SchemeStatus]);
         tw = TEXTW(stext) - lrpad + 2;
