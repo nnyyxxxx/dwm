@@ -26,6 +26,8 @@ alias rm='rm -rf'
 alias vim='nvim'
 alias debloat='~/Documents/debloat.sh'
 alias chmod='chmod +x'
+alias mpv='mpv --keep-open'
+alias record='ffmpeg -f x11grab -r 60 -s 2560x1440 -i :0.0 -c:v libx264 -preset fast -crf 23 -pix_fmt yuv420p -vf "scale=2560:1440" -threads 0 output.mp4'
 alias ..='cd ..'
 
 # git based actions
