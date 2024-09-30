@@ -59,7 +59,7 @@ removeDeps() {
     fastfetch xclip ttf-jetbrains-mono-nerd noto-fonts-emoji ttf-liberation ttf-dejavu \
     ttf-fira-sans ttf-fira-mono polkit-kde-agent xdg-desktop-portal zip unzip qt5-graphicaleffects \
     qt5-quickcontrols2 noto-fonts-extra noto-fonts-cjk cmatrix neovim hsetroot \
-    pamixer mpv feh dash easyeffects qt5ct bashtop zoxide cava pipes.sh picom-ftlabs-git > /dev/null 2>&1
+    pamixer mpv feh dash easyeffects qt5ct bashtop zoxide cava pipes.sh picom-ftlabs-git ffmpeg > /dev/null 2>&1
 }
 
 removeConfigurations() {
