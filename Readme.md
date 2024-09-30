@@ -27,12 +27,8 @@ Starting dwm
 Updating dotfiles
 - To sync your clone of DWM with the latest version, you can use the following command:
   ```shell
-  curl -fsSL https://github.com/nnyyxxxx/dwm/raw/main/install.sh | sh
+  curl -fsSL https://github.com/nnyyxxxx/dwm/raw/main/update.sh | sh
   ```
-> [!WARNING]  
-> This will overwrite your existing configuration, if you have made any changes to the dotfiles, make sure to back them up before running the install script.
-> This will also uninstall any existing display managers so compatibility can be reached.
-
 > [!IMPORTANT]  
 > This rice relies on having a permament existing ``dwm/`` directory. Do **NOT** remove the directory after setup.
 > Any changes to the dotfiles should be made in the ``dwm/`` directory, any changes made in ``~/.config/`` will **NOT** work.
