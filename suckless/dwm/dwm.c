@@ -62,6 +62,7 @@
 #define HEIGHT(X)               ((X)->h + 2 * (X)->bw + gappx)
 #define TAGMASK                 ((1 << LENGTH(tags)) - 1)
 #define TEXTW(X)                (drw_fontset_getwidth(drw, (X)) + lrpad)
+#define MAX(A, B)               ((A) > (B) ? (A) : (B))
 
 /* enums */
 enum { CurNormal, CurResize, CurMove, CurLast }; /* cursor */
@@ -810,7 +811,15 @@ drawbar(Monitor *m)
     if (m == selmon) {
         drw_setscheme(drw, scheme[SchemeStatus]);
         tw = TEXTW(stext) - lrpad + 2;
+        
+        int available_space = m->ww - x;
+        
         int right_padding = 40;
+        
+        if (tw + right_padding > available_space) {
+            right_padding = MAX(0, available_space - tw);
+        }
+        
         tx = 0;
         tp = stext;
         ts = stext;
