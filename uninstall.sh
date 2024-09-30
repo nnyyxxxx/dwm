@@ -74,7 +74,7 @@ removeConfigurations() {
     mv "$XDG_CONFIG_HOME/fastfetch-bak" "$XDG_CONFIG_HOME/fastfetch" > /dev/null 2>&1
     mv "$XDG_CONFIG_HOME/cava-bak" "$XDG_CONFIG_HOME/cava" > /dev/null 2>&1
 
-    rm -rf "$HOME/.xinitrc" "$HOME/Documents/debloat.sh" > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to remove debloat.sh.${RC}"; }
+    rm -rf "$HOME/.xinitrc" "$HOME/Documents/debloat.sh" > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to remove debloat.sh and .xinitrc.${RC}"; }
 
     $ESCALATION_TOOL rm -rf /usr/share/icons/BreezeX-Black /usr/share/themes/catppuccin-mocha > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to remove system-wide themes.${RC}"; }
     $ESCALATION_TOOL sed -i '/QT_QPA_PLATFORMTHEME=qt5ct/d' /etc/environment > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to remove QT_QPA_PLATFORMTHEME from environment.${RC}"; }
