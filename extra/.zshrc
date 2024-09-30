@@ -38,12 +38,6 @@ alias stash='git stash && git stash drop'
 alias status='git status'
 alias log='git log'
 
-pull() {
-    git stash
-    git pull
-    git stash pop
-}
-
 # env's
 export EDITOR='nvim'
 export VISUAL='nvim'
@@ -53,6 +47,13 @@ export BROWSER='firefox'
 # parse the branch and transfer it to the prompt
 parse_git_branch() {
     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'
+}
+
+# stashes changes before pulling and then releases the changes
+pull() {
+    git stash
+    git pull
+    git stash pop
 }
 
 # commit with a message dynamically
