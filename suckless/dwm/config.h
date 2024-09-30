@@ -10,15 +10,25 @@ static const int topbar             = 1;        /* 0 means bottom bar */
 static const char *fonts[]          = { "JetBrainsMono Nerd Font:size=10" };
 static const char col_bg[] = "#1d1d2d";
 static const char col_fg[] = "#cdd6f4";
-static const char *colors[][4] = {
+static const char col_black[]       = "#000000";
+static const char col_red[]         = "#f38ba8";
+static const char col_yellow[]      = "#ffff00";
+static const char col_white[]       = "#ffffff";
+static const char col_orange[]      = "#fab387";
+static const char col_pink[]        = "#cba6f7";
+
+static const char *colors[][3] = {
     /*               fg         bg         border   */
-    [SchemeNorm] = { col_fg, col_bg, col_fg },
-    [SchemeSel]  = { col_fg, col_fg, col_fg },
-	[SchemeStatus]  = { col_fg, col_bg,  "#000000"  }, // Statusbar right {text,background,not used but cannot be empty}
-	[SchemeTagsSel]  = { col_bg, col_fg,  "#000000"  }, // Tagbar left selected {text,background,not used but cannot be empty}
-	[SchemeTagsNorm]  = { col_fg, col_bg,  "#000000"  }, // Tagbar left unselected {text,background,not used but cannot be empty}
-	[SchemeInfoSel]  = { col_fg, col_bg,  "#000000"  }, // infobar middle  selected {text,background,not used but cannot be empty}
-	[SchemeInfoNorm]  = { col_fg, col_bg,  "#000000"  }, // infobar middle  unselected {text,background,not used but cannot be empty}
+    [SchemeNorm] = { col_fg,    col_bg,    col_fg },
+    [SchemeSel]  = { col_fg,    col_fg,    col_fg },
+    [SchemeStatus]  = { col_fg, col_bg,    col_bg }, // Statusbar right {text,background,border}
+    [SchemeTagsSel]  = { col_bg, col_fg,   col_fg }, // Tagbar left selected {text,background,border}
+    [SchemeTagsNorm]  = { col_fg, col_bg,  col_bg }, // Tagbar left unselected {text,background,border}
+    [SchemeInfoSel]  = { col_fg, col_bg,   col_bg }, // infobar middle selected {text,background,border}
+    [SchemeInfoNorm]  = { col_fg, col_bg,  col_bg }, // infobar middle unselected {text,background,border}
+    [SchemeEmoji1] = { col_orange, col_bg, col_bg }, // Date emoji color
+    [SchemeEmoji2] = { col_pink,   col_bg, col_bg }, // Updates emoji color
+    [SchemeEmoji3] = { col_red,    col_bg, col_bg }, // Sound emoji color
 };
 
 /* tagging */
