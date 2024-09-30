@@ -53,7 +53,6 @@ saveUserChanges() {
     if [ "$SAVE_USER_CHANGES" -eq 1 ]; then
         printf "%b\n" "${YELLOW}Saving user changes...${RC}"
         git stash > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to stash the changes.${RC}"; exit 1; }
-        printf "%b\n" "${GREEN}Changes saved.${RC}"
     fi
 }
 
