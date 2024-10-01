@@ -89,7 +89,7 @@ removeConfigurations() {
 
 uninstallSuckless() {
     printf "%b\n" "${YELLOW}Uninstalling suckless utils...${RC}"
-    total_steps=3
+    total_steps=4
     current_step=1
 
     { cd "$DWM_DIR/suckless/st" && $ESCALATION_TOOL make uninstall > /dev/null 2>&1 && cd - > /dev/null; } || { printf "%b\n" "${RED}Failed to uninstall st.${RC}"; }
