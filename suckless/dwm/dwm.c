@@ -796,11 +796,11 @@ drawbar(Monitor *m)
     int boxs = drw->fonts->h / 9;
     int boxw = drw->fonts->h / 6 + 2;
     unsigned int i, occ = 0, urg = 0;
-	char *ts = stext;
-	char *tp = stext;
-	int tx = 0;
-	char ctmp;
- 	Client *c;
+    char *ts = stext;
+    char *tp = stext;
+    int tx = 0;
+    char ctmp;
+    Client *c;
 
     if (!m->showbar)
         return;
@@ -810,25 +810,22 @@ drawbar(Monitor *m)
 
     if (m == selmon) {
         drw_setscheme(drw, scheme[SchemeStatus]);
-        tw = TEXTW(stext) - lrpad + 2;
+        tw = TEXTW(stext);
+
+        tx = m->ww - tw;
         
-        int available_space = m->ww - x;
-        
-        int right_padding = 40;
-        
-        if (tw + right_padding > available_space) {
-            right_padding = MAX(0, available_space - tw);
+        if (tx < 0) {
+            tx = 0;
         }
-        
-        tx = 0;
+
         tp = stext;
         ts = stext;
         while (1) {
-            if ((unsigned int)*ts > LENGTH(colors)) { ts++; continue ; }
+            if ((unsigned int)*ts > LENGTH(colors)) { ts++; continue; }
             ctmp = *ts;
             *ts = '\0';
-            drw_text(drw, m->ww - tw + tx + right_padding, 0, tw - tx, bh, 0, tp, 0);
-            tx += TEXTW(tp) - lrpad;
+            drw_text(drw, tx, 0, m->ww - tx, bh, 0, tp, 0);
+            tx += TEXTW(tp);
             if (ctmp == '\0') { break; }
             drw_setscheme(drw, scheme[(unsigned int)(ctmp-1)]);
             *ts = ctmp;
