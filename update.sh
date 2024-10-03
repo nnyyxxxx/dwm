@@ -58,9 +58,9 @@ saveUserChanges() {
 
 updateRepository() {
     printf "%b\n" "${YELLOW}Updating...${RC}"
-    git fetch origin minimal > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to fetch the repository.${RC}"; exit 1; }
-    git reset --hard origin/minimal > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to reset the repository.${RC}"; exit 1; }
-    git pull --rebase origin minimal > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to pull the repository.${RC}"; exit 1; }
+    git fetch origin main > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to fetch the repository.${RC}"; exit 1; }
+    git reset --hard origin/main > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to reset the repository.${RC}"; exit 1; }
+    git pull --rebase origin main > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to pull the repository.${RC}"; exit 1; }
 }
 
 reapplyUserChanges() {
