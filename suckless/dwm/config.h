@@ -8,7 +8,7 @@ static const int swallowfloating    = 1;        /* 1 means swallow floating wind
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const char *fonts[]          = { "JetBrainsMono Nerd Font:size=10" };
-static const char col_bg[] = "#1d1d2d";
+static const char col_bg[] = "#1e1e2e";
 static const char col_fg[] = "#cdd6f4";
 static const char *colors[][4] = {
     /*               fg         bg         border   */
