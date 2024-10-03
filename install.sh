@@ -172,12 +172,6 @@ compileSuckless() {
     { cd "$DWM_DIR/suckless/dwm" && $ESCALATION_TOOL make clean install > /dev/null 2>&1 && cd - > /dev/null; } || { printf "%b\n" "${RED}Failed to compile dwm.${RC}"; }
     printf "%b\n" "${GREEN}dwm compiled (${current_step}/${total_steps})${RC}"
     current_step=$((current_step + 1))
-
-    { cd "$DWM_DIR/suckless/dmenu" && $ESCALATION_TOOL make clean install > /dev/null 2>&1 && cd - > /dev/null; } || { printf "%b\n" "${RED}Failed to compile dmenu.${RC}"; }
-    printf "%b\n" "${GREEN}dmenu compiled (${current_step}/${total_steps})${RC}"
-
-    { cd "$DWM_DIR/suckless/dwmblocks" && $ESCALATION_TOOL make clean install > /dev/null 2>&1 && cd - > /dev/null; } || { printf "%b\n" "${RED}Failed to compile dwmblocks.${RC}"; }
-    printf "%b\n" "${GREEN}dwmblocks compiled (${current_step}/${total_steps})${RC}"
 }
 
 success() {
