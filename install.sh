@@ -101,7 +101,7 @@ installDeps() {
         ttf-fira-sans ttf-fira-mono polkit-kde-agent xdg-desktop-portal zip unzip \
         qt5-graphicaleffects qt5-quickcontrols2 noto-fonts-extra noto-fonts-cjk noto-fonts \
         cmatrix gtk3 neovim hsetroot pamixer mpv feh zsh dash pipewire-pulse easyeffects qt5ct \
-        bashtop zoxide zsh-syntax-highlighting picom ffmpeg > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to install dependencies.${RC}"; }
+        bashtop zoxide zsh-syntax-highlighting ffmpeg > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to install dependencies.${RC}"; }
     printf "%b\n" "${GREEN}Dependencies installed (${current_step}/${total_steps})${RC}"
     current_step=$((current_step + 1))
 
@@ -137,7 +137,6 @@ setupConfigurations() {
     ln -sf "$DWM_DIR/extra/nvim" "$XDG_CONFIG_HOME/nvim" > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to set up nvim configuration.${RC}"; }
     ln -sf "$DWM_DIR/extra/gtk-3.0" "$XDG_CONFIG_HOME/gtk-3.0" > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to set up gtk-3.0 configuration.${RC}"; }
     ln -sf "$DWM_DIR/extra/qt5ct" "$XDG_CONFIG_HOME/qt5ct" > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to set up qt5ct.${RC}"; }
-    ln -sf "$DWM_DIR/extra/picom" "$XDG_CONFIG_HOME/picom" > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to set up picom.${RC}"; }
     ln -sf "$DWM_DIR/extra/.xinitrc" "$HOME/.xinitrc" > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to set up .xinitrc.${RC}"; }
 
     echo "QT_QPA_PLATFORMTHEME=qt5ct" | $ESCALATION_TOOL tee -a /etc/environment > /dev/null 2>&1 || { printf "%b\n" "${RED}Failed to set qt5ct in environment.${RC}"; }
