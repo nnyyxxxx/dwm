@@ -161,7 +161,7 @@ setupConfigurations() {
 
 compileSuckless() {
     printf "%b\n" "${YELLOW}Compiling suckless utils...${RC}"
-    total_steps=4
+    total_steps=3
     current_step=1
 
     { cd "$DWM_DIR/suckless/st" && $ESCALATION_TOOL make clean install > /dev/null 2>&1 && cd - > /dev/null; } || { printf "%b\n" "${RED}Failed to compile st.${RC}"; }
@@ -174,9 +174,6 @@ compileSuckless() {
 
     { cd "$DWM_DIR/suckless/dmenu" && $ESCALATION_TOOL make clean install > /dev/null 2>&1 && cd - > /dev/null; } || { printf "%b\n" "${RED}Failed to compile dmenu.${RC}"; }
     printf "%b\n" "${GREEN}dmenu compiled (${current_step}/${total_steps})${RC}"
-
-    { cd "$DWM_DIR/suckless/dwmblocks" && $ESCALATION_TOOL make clean install > /dev/null 2>&1 && cd - > /dev/null; } || { printf "%b\n" "${RED}Failed to compile dwmblocks.${RC}"; }
-    printf "%b\n" "${GREEN}dwmblocks compiled (${current_step}/${total_steps})${RC}"
 }
 
 success() {

@@ -62,11 +62,10 @@
 #define HEIGHT(X)               ((X)->h + 2 * (X)->bw + gappx)
 #define TAGMASK                 ((1 << LENGTH(tags)) - 1)
 #define TEXTW(X)                (drw_fontset_getwidth(drw, (X)) + lrpad)
-#define MAX(A, B)               ((A) > (B) ? (A) : (B))
 
 /* enums */
 enum { CurNormal, CurResize, CurMove, CurLast }; /* cursor */
-enum { SchemeNorm, SchemeStatus, SchemeTagsSel, SchemeTagsNorm, SchemeInfoSel, SchemeInfoNorm, SchemeEmoji1, SchemeEmoji2, SchemeEmoji3 }; /* color schemes */
+enum { SchemeNorm, SchemeSel, SchemeStatus, SchemeTagsSel, SchemeTagsNorm, SchemeInfoSel, SchemeInfoNorm }; /* color schemes */
 enum { NetSupported, NetWMName, NetWMState, NetWMCheck,
        NetWMFullscreen, NetActiveWindow, NetWMWindowType,
        NetWMWindowTypeDialog, NetClientList, NetClientInfo, NetLast }; /* EWMH atoms */
@@ -791,49 +790,21 @@ dirtomon(int dir)
 void
 drawbar(Monitor *m)
 {
-    int x = 0, w, tw = 0;
+    int x, w, tw = 0;
     int tlpad;
     int boxs = drw->fonts->h / 9;
     int boxw = drw->fonts->h / 6 + 2;
     unsigned int i, occ = 0, urg = 0;
-	char *ts = stext;
-	char *tp = stext;
-	int tx = 0;
-	char ctmp;
- 	Client *c;
+    Client *c;
 
     if (!m->showbar)
         return;
 
-    drw_setscheme(drw, scheme[SchemeNorm]);
-    drw_rect(drw, 0, 0, m->ww, bh, 1, 1);
-
-    if (m == selmon) {
+    /* draw status first so it can be overdrawn by tags later */
+    if (m == selmon) { /* status is only drawn on selected monitor */
         drw_setscheme(drw, scheme[SchemeStatus]);
-        tw = TEXTW(stext) - lrpad + 2;
-        
-        int available_space = m->ww - x;
-        
-        int right_padding = 40;
-        
-        if (tw + right_padding > available_space) {
-            right_padding = MAX(0, available_space - tw);
-        }
-        
-        tx = 0;
-        tp = stext;
-        ts = stext;
-        while (1) {
-            if ((unsigned int)*ts > LENGTH(colors)) { ts++; continue ; }
-            ctmp = *ts;
-            *ts = '\0';
-            drw_text(drw, m->ww - tw + tx + right_padding, 0, tw - tx, bh, 0, tp, 0);
-            tx += TEXTW(tp) - lrpad;
-            if (ctmp == '\0') { break; }
-            drw_setscheme(drw, scheme[(unsigned int)(ctmp-1)]);
-            *ts = ctmp;
-            tp = ++ts;
-        }
+        tw = TEXTW(stext) - lrpad + 2; /* 2px right padding */
+        drw_text(drw, m->ww - tw, 0, tw, bh, 0, stext, 0);
     }
 
     for (c = m->clients; c; c = c->next) {
@@ -933,7 +904,7 @@ focus(Client *c)
 		attachstack(c);
 		grabbuttons(c, 1);
 		/* set new focused border first to avoid flickering */
-		XSetWindowBorder(dpy, c->win, scheme[SchemeNorm][ColBorder].pixel);
+		XSetWindowBorder(dpy, c->win, scheme[SchemeSel][ColBorder].pixel);
 		/* lastfocused may be us if another window was unmanaged */
 		if (lastfocused && lastfocused != c)
 			XSetWindowBorder(dpy, lastfocused->win, scheme[SchemeNorm][ColBorder].pixel);
