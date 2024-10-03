@@ -184,7 +184,7 @@
           "type": "select",
           "label": "Accent",
           "name": "accentColor",
-          "value": "red",
+          "value": "lavender",
           "default": "mauve",
           "options": [
             {
@@ -366,7 +366,7 @@
           "type": "select",
           "label": "Accent",
           "name": "accentColor",
-          "value": "red",
+          "value": "lavender",
           "default": "mauve",
           "options": [
             {
@@ -539,7 +539,7 @@
           "type": "select",
           "label": "Accent",
           "name": "accentColor",
-          "value": "red",
+          "value": "lavender",
           "default": "mauve",
           "options": [
             {
@@ -713,7 +713,7 @@
           "type": "select",
           "label": "Accent",
           "name": "accentColor",
-          "value": "red",
+          "value": "lavender",
           "default": "mauve",
           "options": [
             {
@@ -887,7 +887,7 @@
           "type": "select",
           "label": "Accent",
           "name": "accentColor",
-          "value": "red",
+          "value": "lavender",
           "default": "mauve",
           "options": [
             {
@@ -1060,7 +1060,7 @@
           "type": "select",
           "label": "Accent",
           "name": "accentColor",
-          "value": "red",
+          "value": "lavender",
           "default": "mauve",
           "options": [
             {
@@ -1250,7 +1250,7 @@
           "type": "select",
           "label": "Accent",
           "name": "accentColor",
-          "value": "red",
+          "value": "lavender",
           "default": "mauve",
           "options": [
             {
@@ -1423,7 +1423,7 @@
           "type": "select",
           "label": "Accent",
           "name": "accentColor",
-          "value": "red",
+          "value": "lavender",
           "default": "mauve",
           "options": [
             {
@@ -1597,7 +1597,7 @@
           "type": "select",
           "label": "Accent",
           "name": "accentColor",
-          "value": "red",
+          "value": "lavender",
           "default": "mauve",
           "options": [
             {
@@ -1779,7 +1779,7 @@
           "type": "select",
           "label": "Accent",
           "name": "accentColor",
-          "value": "red",
+          "value": "lavender",
           "default": "mauve",
           "options": [
             {
@@ -2037,7 +2037,7 @@
           "type": "select",
           "label": "Accent",
           "name": "accentColor",
-          "value": "red",
+          "value": "lavender",
           "default": "mauve",
           "options": [
             {
@@ -2211,7 +2211,7 @@
           "type": "select",
           "label": "Accent",
           "name": "accentColor",
-          "value": "red",
+          "value": "lavender",
           "default": "mauve",
           "options": [
             {
@@ -2384,7 +2384,7 @@
           "type": "select",
           "label": "Accent",
           "name": "accentColor",
-          "value": "red",
+          "value": "lavender",
           "default": "mauve",
           "options": [
             {
@@ -2558,7 +2558,7 @@
           "type": "select",
           "label": "Accent",
           "name": "accentColor",
-          "value": "red",
+          "value": "lavender",
           "default": "mauve",
           "options": [
             {
@@ -2732,7 +2732,7 @@
           "type": "select",
           "label": "Accent",
           "name": "accentColor",
-          "value": "red",
+          "value": "lavender",
           "default": "mauve",
           "options": [
             {
@@ -2906,7 +2906,7 @@
           "type": "select",
           "label": "Accent",
           "name": "accentColor",
-          "value": "red",
+          "value": "lavender",
           "default": "mauve",
           "options": [
             {
@@ -3080,7 +3080,7 @@
           "type": "select",
           "label": "Accent",
           "name": "accentColor",
-          "value": "red",
+          "value": "lavender",
           "default": "mauve",
           "options": [
             {
@@ -3254,7 +3254,7 @@
           "type": "select",
           "label": "Accent",
           "name": "accentColor",
-          "value": "red",
+          "value": "lavender",
           "default": "mauve",
           "options": [
             {
@@ -3436,7 +3436,7 @@
           "type": "select",
           "label": "Accent",
           "name": "accentColor",
-          "value": "red",
+          "value": "lavender",
           "default": "mauve",
           "options": [
             {
@@ -3610,7 +3610,7 @@
           "type": "select",
           "label": "Accent",
           "name": "accentColor",
-          "value": "red",
+          "value": "lavender",
           "default": "mauve",
           "options": [
             {
@@ -3784,7 +3784,7 @@
           "type": "select",
           "label": "Accent",
           "name": "accentColor",
-          "value": "red",
+          "value": "lavender",
           "default": "mauve",
           "options": [
             {
@@ -3958,7 +3958,7 @@
           "type": "select",
           "label": "Accent",
           "name": "accentColor",
-          "value": "red",
+          "value": "lavender",
           "default": "mauve",
           "options": [
             {
@@ -4132,7 +4132,7 @@
           "type": "select",
           "label": "Accent",
           "name": "accentColor",
-          "value": "red",
+          "value": "lavender",
           "default": "mauve",
           "options": [
             {
@@ -4306,7 +4306,7 @@
           "type": "select",
           "label": "Accent",
           "name": "accentColor",
-          "value": "red",
+          "value": "lavender",
           "default": "mauve",
           "options": [
             {
@@ -4480,7 +4480,7 @@
           "type": "select",
           "label": "Accent",
           "name": "accentColor",
-          "value": "red",
+          "value": "lavender",
           "default": "mauve",
           "options": [
             {
@@ -4654,7 +4654,7 @@
           "type": "select",
           "label": "Accent",
           "name": "accentColor",
-          "value": "red",
+          "value": "lavender",
           "default": "mauve",
           "options": [
             {
@@ -4836,7 +4836,7 @@
           "type": "select",
           "label": "Accent",
           "name": "accentColor",
-          "value": "red",
+          "value": "lavender",
           "default": "mauve",
           "options": [
             {
@@ -5009,7 +5009,7 @@
           "type": "select",
           "label": "Accent",
           "name": "accentColor",
-          "value": "red",
+          "value": "lavender",
           "default": "mauve",
           "options": [
             {
@@ -5185,7 +5185,7 @@
           "type": "select",
           "label": "Accent",
           "name": "accentColor",
-          "value": "red",
+          "value": "lavender",
           "default": "mauve",
           "options": [
             {
@@ -5358,7 +5358,7 @@
           "type": "select",
           "label": "Accent",
           "name": "accentColor",
-          "value": "red",
+          "value": "lavender",
           "default": "mauve",
           "options": [
             {
@@ -5532,7 +5532,7 @@
           "type": "select",
           "label": "Accent",
           "name": "accentColor",
-          "value": "red",
+          "value": "lavender",
           "default": "mauve",
           "options": [
             {
@@ -5706,7 +5706,7 @@
           "type": "select",
           "label": "Accent",
           "name": "accentColor",
-          "value": "red",
+          "value": "lavender",
           "default": "mauve",
           "options": [
             {
@@ -5879,7 +5879,7 @@
           "type": "select",
           "label": "Accent",
           "name": "accentColor",
-          "value": "red",
+          "value": "lavender",
           "default": "mauve",
           "options": [
             {
@@ -6053,7 +6053,7 @@
           "type": "select",
           "label": "Accent",
           "name": "accentColor",
-          "value": "red",
+          "value": "lavender",
           "default": "mauve",
           "options": [
             {
@@ -6234,7 +6234,7 @@
           "type": "select",
           "label": "Accent",
           "name": "accentColor",
-          "value": "red",
+          "value": "lavender",
           "default": "mauve",
           "options": [
             {
@@ -6407,7 +6407,7 @@
           "type": "select",
           "label": "Accent",
           "name": "accentColor",
-          "value": "red",
+          "value": "lavender",
           "default": "mauve",
           "options": [
             {
@@ -6589,7 +6589,7 @@
           "type": "select",
           "label": "Accent",
           "name": "accentColor",
-          "value": "red",
+          "value": "lavender",
           "default": "mauve",
           "options": [
             {
@@ -6763,7 +6763,7 @@
           "type": "select",
           "label": "Accent",
           "name": "accentColor",
-          "value": "red",
+          "value": "lavender",
           "default": "mauve",
           "options": [
             {
@@ -6937,7 +6937,7 @@
           "type": "select",
           "label": "Accent",
           "name": "accentColor",
-          "value": "red",
+          "value": "lavender",
           "default": "mauve",
           "options": [
             {
@@ -7111,7 +7111,7 @@
           "type": "select",
           "label": "Accent",
           "name": "accentColor",
-          "value": "red",
+          "value": "lavender",
           "default": "mauve",
           "options": [
             {
@@ -7284,7 +7284,7 @@
           "type": "select",
           "label": "Accent",
           "name": "accentColor",
-          "value": "red",
+          "value": "lavender",
           "default": "mauve",
           "options": [
             {
@@ -7466,7 +7466,7 @@
           "type": "select",
           "label": "Accent",
           "name": "accentColor",
-          "value": "red",
+          "value": "lavender",
           "default": "mauve",
           "options": [
             {
@@ -7640,7 +7640,7 @@
           "type": "select",
           "label": "Accent",
           "name": "accentColor",
-          "value": "red",
+          "value": "lavender",
           "default": "mauve",
           "options": [
             {
@@ -7822,7 +7822,7 @@
           "type": "select",
           "label": "Accent",
           "name": "accentColor",
-          "value": "red",
+          "value": "lavender",
           "default": "mauve",
           "options": [
             {
@@ -7995,7 +7995,7 @@
           "type": "select",
           "label": "Accent",
           "name": "accentColor",
-          "value": "red",
+          "value": "lavender",
           "default": "mauve",
           "options": [
             {
@@ -8192,7 +8192,7 @@
           "type": "select",
           "label": "Accent",
           "name": "accentColor",
-          "value": "red",
+          "value": "lavender",
           "default": "mauve",
           "options": [
             {
@@ -8366,7 +8366,7 @@
           "type": "select",
           "label": "Accent",
           "name": "accentColor",
-          "value": "red",
+          "value": "lavender",
           "default": "mauve",
           "options": [
             {
@@ -8539,7 +8539,7 @@
           "type": "select",
           "label": "Accent",
           "name": "accentColor",
-          "value": "red",
+          "value": "lavender",
           "default": "mauve",
           "options": [
             {
@@ -8713,7 +8713,7 @@
           "type": "select",
           "label": "Accent",
           "name": "accentColor",
-          "value": "red",
+          "value": "lavender",
           "default": "mauve",
           "options": [
             {
@@ -8887,7 +8887,7 @@
           "type": "select",
           "label": "Accent",
           "name": "accentColor",
-          "value": "red",
+          "value": "lavender",
           "default": "mauve",
           "options": [
             {
@@ -9061,7 +9061,7 @@
           "type": "select",
           "label": "Accent",
           "name": "accentColor",
-          "value": "red",
+          "value": "lavender",
           "default": "mauve",
           "options": [
             {
@@ -9235,7 +9235,7 @@
           "type": "select",
           "label": "Accent",
           "name": "accentColor",
-          "value": "red",
+          "value": "lavender",
           "default": "mauve",
           "options": [
             {
@@ -9409,7 +9409,7 @@
           "type": "select",
           "label": "Accent",
           "name": "accentColor",
-          "value": "red",
+          "value": "lavender",
           "default": "mauve",
           "options": [
             {
@@ -9583,7 +9583,7 @@
           "type": "select",
           "label": "Accent",
           "name": "accentColor",
-          "value": "red",
+          "value": "lavender",
           "default": "mauve",
           "options": [
             {
@@ -9757,7 +9757,7 @@
           "type": "select",
           "label": "Accent",
           "name": "accentColor",
-          "value": "red",
+          "value": "lavender",
           "default": "mauve",
           "options": [
             {
@@ -9930,7 +9930,7 @@
           "type": "select",
           "label": "Accent",
           "name": "accentColor",
-          "value": "red",
+          "value": "lavender",
           "default": "mauve",
           "options": [
             {
@@ -10104,7 +10104,7 @@
           "type": "select",
           "label": "Accent",
           "name": "accentColor",
-          "value": "red",
+          "value": "lavender",
           "default": "mauve",
           "options": [
             {
@@ -10277,7 +10277,7 @@
           "type": "select",
           "label": "Accent",
           "name": "accentColor",
-          "value": "red",
+          "value": "lavender",
           "default": "mauve",
           "options": [
             {
@@ -10450,7 +10450,7 @@
           "type": "select",
           "label": "Accent",
           "name": "accentColor",
-          "value": "red",
+          "value": "lavender",
           "default": "mauve",
           "options": [
             {
@@ -10624,7 +10624,7 @@
           "type": "select",
           "label": "Accent",
           "name": "accentColor",
-          "value": "red",
+          "value": "lavender",
           "default": "mauve",
           "options": [
             {
@@ -10797,7 +10797,7 @@
           "type": "select",
           "label": "Accent",
           "name": "accentColor",
-          "value": "red",
+          "value": "lavender",
           "default": "mauve",
           "options": [
             {
@@ -10986,7 +10986,7 @@
           "type": "select",
           "label": "Accent",
           "name": "accentColor",
-          "value": "red",
+          "value": "lavender",
           "default": "mauve",
           "options": [
             {
@@ -11160,7 +11160,7 @@
           "type": "select",
           "label": "Accent",
           "name": "accentColor",
-          "value": "red",
+          "value": "lavender",
           "default": "mauve",
           "options": [
             {
@@ -11334,7 +11334,7 @@
           "type": "select",
           "label": "Accent",
           "name": "accentColor",
-          "value": "red",
+          "value": "lavender",
           "default": "mauve",
           "options": [
             {
@@ -11507,7 +11507,7 @@
           "type": "select",
           "label": "Accent",
           "name": "accentColor",
-          "value": "red",
+          "value": "lavender",
           "default": "mauve",
           "options": [
             {
@@ -11680,7 +11680,7 @@
           "type": "select",
           "label": "Accent",
           "name": "accentColor",
-          "value": "red",
+          "value": "lavender",
           "default": "mauve",
           "options": [
             {
@@ -11854,7 +11854,7 @@
           "type": "select",
           "label": "Accent",
           "name": "accentColor",
-          "value": "red",
+          "value": "lavender",
           "default": "mauve",
           "options": [
             {
@@ -12028,7 +12028,7 @@
           "type": "select",
           "label": "Accent",
           "name": "accentColor",
-          "value": "red",
+          "value": "lavender",
           "default": "mauve",
           "options": [
             {
@@ -12202,7 +12202,7 @@
           "type": "select",
           "label": "Accent",
           "name": "accentColor",
-          "value": "red",
+          "value": "lavender",
           "default": "mauve",
           "options": [
             {
@@ -12376,7 +12376,7 @@
           "type": "select",
           "label": "Accent",
           "name": "accentColor",
-          "value": "red",
+          "value": "lavender",
           "default": "mauve",
           "options": [
             {
@@ -12550,7 +12550,7 @@
           "type": "select",
           "label": "Accent",
           "name": "accentColor",
-          "value": "red",
+          "value": "lavender",
           "default": "mauve",
           "options": [
             {
@@ -12723,7 +12723,7 @@
           "type": "select",
           "label": "Accent",
           "name": "accentColor",
-          "value": "red",
+          "value": "lavender",
           "default": "mauve",
           "options": [
             {
@@ -12896,7 +12896,7 @@
           "type": "select",
           "label": "Accent",
           "name": "accentColor",
-          "value": "red",
+          "value": "lavender",
           "default": "mauve",
           "options": [
             {
@@ -13070,7 +13070,7 @@
           "type": "select",
           "label": "Accent",
           "name": "accentColor",
-          "value": "red",
+          "value": "lavender",
           "default": "mauve",
           "options": [
             {
@@ -13244,7 +13244,7 @@
           "type": "select",
           "label": "Accent",
           "name": "accentColor",
-          "value": "red",
+          "value": "lavender",
           "default": "mauve",
           "options": [
             {
@@ -13418,7 +13418,7 @@
           "type": "select",
           "label": "Accent",
           "name": "accentColor",
-          "value": "red",
+          "value": "lavender",
           "default": "mauve",
           "options": [
             {
@@ -13591,7 +13591,7 @@
           "type": "select",
           "label": "Accent",
           "name": "accentColor",
-          "value": "red",
+          "value": "lavender",
           "default": "mauve",
           "options": [
             {
@@ -13765,7 +13765,7 @@
           "type": "select",
           "label": "Accent",
           "name": "accentColor",
-          "value": "red",
+          "value": "lavender",
           "default": "mauve",
           "options": [
             {
@@ -13938,7 +13938,7 @@
           "type": "select",
           "label": "Accent",
           "name": "accentColor",
-          "value": "red",
+          "value": "lavender",
           "default": "mauve",
           "options": [
             {
@@ -14112,7 +14112,7 @@
           "type": "select",
           "label": "Accent",
           "name": "accentColor",
-          "value": "red",
+          "value": "lavender",
           "default": "mauve",
           "options": [
             {
@@ -14286,7 +14286,7 @@
           "type": "select",
           "label": "Accent",
           "name": "accentColor",
-          "value": "red",
+          "value": "lavender",
           "default": "mauve",
           "options": [
             {
@@ -14459,7 +14459,7 @@
           "type": "select",
           "label": "Accent",
           "name": "accentColor",
-          "value": "red",
+          "value": "lavender",
           "default": "mauve",
           "options": [
             {
@@ -14633,7 +14633,7 @@
           "type": "select",
           "label": "Accent",
           "name": "accentColor",
-          "value": "red",
+          "value": "lavender",
           "default": "mauve",
           "options": [
             {
@@ -14806,7 +14806,7 @@
           "type": "select",
           "label": "Accent",
           "name": "accentColor",
-          "value": "red",
+          "value": "lavender",
           "default": "mauve",
           "options": [
             {
@@ -14980,7 +14980,7 @@
           "type": "select",
           "label": "Accent",
           "name": "accentColor",
-          "value": "red",
+          "value": "lavender",
           "default": "mauve",
           "options": [
             {
@@ -15154,7 +15154,7 @@
           "type": "select",
           "label": "Accent",
           "name": "accentColor",
-          "value": "red",
+          "value": "lavender",
           "default": "mauve",
           "options": [
             {
@@ -15336,7 +15336,7 @@
           "type": "select",
           "label": "Accent",
           "name": "accentColor",
-          "value": "red",
+          "value": "lavender",
           "default": "mauve",
           "options": [
             {
@@ -15510,7 +15510,7 @@
           "type": "select",
           "label": "Accent",
           "name": "accentColor",
-          "value": "red",
+          "value": "lavender",
           "default": "mauve",
           "options": [
             {
@@ -15684,7 +15684,7 @@
           "type": "select",
           "label": "Accent",
           "name": "accentColor",
-          "value": "red",
+          "value": "lavender",
           "default": "mauve",
           "options": [
             {
@@ -16030,7 +16030,7 @@
           "type": "select",
           "label": "Accent",
           "name": "accentColor",
-          "value": "red",
+          "value": "lavender",
           "default": "mauve",
           "options": [
             {
@@ -16204,7 +16204,7 @@
           "type": "select",
           "label": "Accent",
           "name": "accentColor",
-          "value": "red",
+          "value": "lavender",
           "default": "mauve",
           "options": [
             {
@@ -16551,7 +16551,7 @@
           "type": "select",
           "label": "Accent",
           "name": "accentColor",
-          "value": "red",
+          "value": "lavender",
           "default": "mauve",
           "options": [
             {
@@ -16725,7 +16725,7 @@
           "type": "select",
           "label": "Accent",
           "name": "accentColor",
-          "value": "red",
+          "value": "lavender",
           "default": "mauve",
           "options": [
             {
@@ -16899,7 +16899,7 @@
           "type": "select",
           "label": "Accent",
           "name": "accentColor",
-          "value": "red",
+          "value": "lavender",
           "default": "mauve",
           "options": [
             {
@@ -17073,7 +17073,7 @@
           "type": "select",
           "label": "Accent",
           "name": "accentColor",
-          "value": "red",
+          "value": "lavender",
           "default": "mauve",
           "options": [
             {
@@ -17246,7 +17246,7 @@
           "type": "select",
           "label": "Accent",
           "name": "accentColor",
-          "value": "red",
+          "value": "lavender",
           "default": "mauve",
           "options": [
             {
@@ -17419,7 +17419,7 @@
           "type": "select",
           "label": "Accent",
           "name": "accentColor",
-          "value": "red",
+          "value": "lavender",
           "default": "mauve",
           "options": [
             {
@@ -17593,7 +17593,7 @@
           "type": "select",
           "label": "Accent",
           "name": "accentColor",
-          "value": "red",
+          "value": "lavender",
           "default": "mauve",
           "options": [
             {

@@ -94,7 +94,7 @@ command_not_found_handler() {
     return 127
 }
 
-# Update the ls function with colored error message
+# custom command not found message 2
 ls() {
     command ls -hN --color=auto --group-directories-first "$@" 2>/dev/null || print -P "Directory '%F{#f38ba8}$*%f' does not exist, %F{#f38ba8}stupid! BONK!%f Owo."
 }
