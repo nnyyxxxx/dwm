@@ -64,12 +64,14 @@ static char dmenumon[2] = "0";
 static const char *dmenucmd[] = { "dmenu_run", NULL };
 static const char *screenshotcmd[] = { "sh", "-c", "maim -su | xclip -selection clipboard -t image/png -i", NULL };
 static const char *termcmd[] = { "st", NULL };
+static const char *librewolfcmd[] = { "librewolf", NULL };
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY|ShiftMask,             XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_Escape, spawn,          {.v = screenshotcmd } },
+	{ MODKEY|ShiftMask,             XK_b,      spawn,          {.v = librewolfcmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
