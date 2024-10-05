@@ -55,6 +55,8 @@ removeDeps() {
     printf "%b\n" "${YELLOW}Removing dependencies...${RC}"
     printf "%b\n" "${YELLOW}This might take a minute or two...${RC}"
 
+    $ESCALATION_TOOL pacman -Rns --noconfirm librewolf-bin > /dev/null 2>&1
+
     $ESCALATION_TOOL pacman -Rns --noconfirm maim bleachbit \
     fastfetch xclip ttf-jetbrains-mono-nerd noto-fonts-emoji ttf-liberation ttf-dejavu \
     ttf-fira-sans ttf-fira-mono polkit-kde-agent xdg-desktop-portal zip unzip qt5-graphicaleffects \
