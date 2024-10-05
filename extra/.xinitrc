@@ -17,6 +17,6 @@ while true; do
     sleep 1m
 done &
 
-hsetroot -solid "#1E1E2E"
+hsetroot -solid "#282828"
 
 exec dwm

@@ -102,18 +102,19 @@
 ; waveform = 0
 
 [color]
-background = '#1e1e2e'
+background = '#282828'
 
 gradient = 1
 
-gradient_color_1 = '#b4befe'
-gradient_color_2 = '#a6b3f7'
-gradient_color_3 = '#98a8f0'
-gradient_color_4 = '#8a9de9'
-gradient_color_5 = '#7c92e2'
-gradient_color_6 = '#6e87db'
-gradient_color_7 = '#607cd4'
-gradient_color_8 = '#5271cd'
+gradient_color_1 = '#fb4934'
+gradient_color_2 = '#fe8019'
+gradient_color_3 = '#fabd2f'
+gradient_color_4 = '#b8bb26'
+gradient_color_5 = '#8ec07c'
+gradient_color_6 = '#83a598'
+gradient_color_7 = '#d3869b'
+gradient_color_8 = '#d65d0e'
+
 
 [smoothing]
 

@@ -5,7 +5,7 @@ autoload -U colors && colors
 
 # prompt
 setopt PROMPT_SUBST
-PS1='%F{204}$(if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then echo "$(parse_git_branch) "; fi)%F{#89b4fa}%~ %F{#89b4fa}$ %f'
+PS1='%F{#fb4934}$(if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then echo "$(parse_git_branch) "; fi)%F{#83a598}%~ %F{#83a598}$ %f'
 
 # essential stuff
 stty -ixon # disable ctrl+s and ctrl+q
@@ -69,11 +69,11 @@ commit() {
 # cloning and cding into that cloned repo
 clone() { 
     if [ -z "$1" ]; then
-        print -P "You didn't type anything in, %F{#f38ba8}stupid! BONK!%f Owo."
+        print -P "You didn't type anything in, %F{#fb4934}stupid! BONK!%f Owo."
         return 1
     fi
     git clone "$1" 2>/dev/null && cd "$(basename "$1" .git)" || {
-        print -P "Repository '%F{#f38ba8}$1%f' does not exist, %F{#f38ba8}stupid! BONK!%f Owo."
+        print -P "Repository '%F{#fb4934}$1%f' does not exist, %F{#fb4934}stupid! BONK!%f Owo."
         return 1
     }
 }
@@ -90,34 +90,34 @@ branch() {
 
 # custom command not found message
 command_not_found_handler() {
-    print -P "Command '%F{#f38ba8}$1%f' not found, %F{#f38ba8}stupid! BONK!%f Owo." >&2
+    print -P "Command '%F{#fb4934}$1%f' not found, %F{#fb4934}stupid! BONK!%f Owo." >&2
     return 127
 }
 
 # custom command not found message 2
 ls() {
-    command ls -hN --color=auto --group-directories-first "$@" 2>/dev/null || print -P "Directory '%F{#f38ba8}$*%f' does not exist, %F{#f38ba8}stupid! BONK!%f Owo."
+    command ls -hN --color=auto --group-directories-first "$@" 2>/dev/null || print -P "Directory '%F{#fb4934}$*%f' does not exist, %F{#fb4934}stupid! BONK!%f Owo."
 }
 
 # rebasing
 rebase() {
     if [ "$1" = "--abort" ]; then
         git rebase --abort || {
-            print -P "Failed to abort rebase, %F{#f38ba8}stupid! BONK!%f Owo."
+            print -P "Failed to abort rebase, %F{#fb4934}stupid! BONK!%f Owo."
             return 1
         }
         return 0
     fi
     if ! [[ "$1" =~ ^[0-9]+$ ]]; then
-        print -P "You didn't specify a valid number of commits, %F{#f38ba8}stupid! BONK!%f Owo."
+        print -P "You didn't specify a valid number of commits, %F{#fb4934}stupid! BONK!%f Owo."
         return 1
     fi
     if ! git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
-        print -P "This is not a git repository, %F{#f38ba8}stupid! BONK!%f Owo."
+        print -P "This is not a git repository, %F{#fb4934}stupid! BONK!%f Owo."
         return 1
     fi
     git rebase -i HEAD~"$1" || {
-        print -P "Failed to rebase %F{#f38ba8}$1%f commits, %F{#f38ba8}stupid! BONK!%f Owo."
+        print -P "Failed to rebase %F{#fb4934}$1%f commits, %F{#fb4934}stupid! BONK!%f Owo."
         return 1
     }
 }
@@ -125,57 +125,57 @@ rebase() {
 eval "$(zoxide init zsh)"
 
 cd() {
-    z "$@" 2>/dev/null || print -P "Directory '%F{#f38ba8}$*%f' not found! %F{#f38ba8}stupid! BONK!%f Owo."
+    z "$@" 2>/dev/null || print -P "Directory '%F{#fb4934}$*%f' not found! %F{#fb4934}stupid! BONK!%f Owo."
 }
 
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main cursor)
 typeset -gA ZSH_HIGHLIGHT_STYLES
 
-ZSH_HIGHLIGHT_STYLES[comment]='fg=#585b70'
-ZSH_HIGHLIGHT_STYLES[alias]='fg=#a6e3a1'
-ZSH_HIGHLIGHT_STYLES[suffix-alias]='fg=#a6e3a1'
-ZSH_HIGHLIGHT_STYLES[global-alias]='fg=#a6e3a1'
-ZSH_HIGHLIGHT_STYLES[function]='fg=#a6e3a1'
-ZSH_HIGHLIGHT_STYLES[command]='fg=#a6e3a1'
-ZSH_HIGHLIGHT_STYLES[precommand]='fg=#a6e3a1,italic'
-ZSH_HIGHLIGHT_STYLES[autodirectory]='fg=#fab387,italic'
-ZSH_HIGHLIGHT_STYLES[single-hyphen-option]='fg=#fab387'
-ZSH_HIGHLIGHT_STYLES[double-hyphen-option]='fg=#fab387'
-ZSH_HIGHLIGHT_STYLES[back-quoted-argument]='fg=#cba6f7'
-ZSH_HIGHLIGHT_STYLES[builtin]='fg=#a6e3a1'
-ZSH_HIGHLIGHT_STYLES[reserved-word]='fg=#a6e3a1'
-ZSH_HIGHLIGHT_STYLES[hashed-command]='fg=#a6e3a1'
-ZSH_HIGHLIGHT_STYLES[commandseparator]='fg=#f38ba8'
-ZSH_HIGHLIGHT_STYLES[command-substitution-delimiter]='fg=#cdd6f4'
-ZSH_HIGHLIGHT_STYLES[command-substitution-delimiter-unquoted]='fg=#cdd6f4'
-ZSH_HIGHLIGHT_STYLES[process-substitution-delimiter]='fg=#cdd6f4'
-ZSH_HIGHLIGHT_STYLES[back-quoted-argument-delimiter]='fg=#f38ba8'
-ZSH_HIGHLIGHT_STYLES[back-double-quoted-argument]='fg=#f38ba8'
-ZSH_HIGHLIGHT_STYLES[back-dollar-quoted-argument]='fg=#f38ba8'
-ZSH_HIGHLIGHT_STYLES[command-substitution-quoted]='fg=#f9e2af'
-ZSH_HIGHLIGHT_STYLES[command-substitution-delimiter-quoted]='fg=#f9e2af'
-ZSH_HIGHLIGHT_STYLES[single-quoted-argument]='fg=#f9e2af'
-ZSH_HIGHLIGHT_STYLES[single-quoted-argument-unclosed]='fg=#eba0ac'
-ZSH_HIGHLIGHT_STYLES[double-quoted-argument]='fg=#f9e2af'
-ZSH_HIGHLIGHT_STYLES[double-quoted-argument-unclosed]='fg=#eba0ac'
-ZSH_HIGHLIGHT_STYLES[rc-quote]='fg=#f9e2af'
-ZSH_HIGHLIGHT_STYLES[dollar-quoted-argument]='fg=#cdd6f4'
-ZSH_HIGHLIGHT_STYLES[dollar-quoted-argument-unclosed]='fg=#eba0ac'
-ZSH_HIGHLIGHT_STYLES[dollar-double-quoted-argument]='fg=#cdd6f4'
-ZSH_HIGHLIGHT_STYLES[assign]='fg=#cdd6f4'
-ZSH_HIGHLIGHT_STYLES[named-fd]='fg=#cdd6f4'
-ZSH_HIGHLIGHT_STYLES[numeric-fd]='fg=#cdd6f4'
-ZSH_HIGHLIGHT_STYLES[unknown-token]='fg=#eba0ac'
-ZSH_HIGHLIGHT_STYLES[path]='fg=#cdd6f4,underline'
-ZSH_HIGHLIGHT_STYLES[path_pathseparator]='fg=#f38ba8,underline'
-ZSH_HIGHLIGHT_STYLES[path_prefix]='fg=#cdd6f4,underline'
-ZSH_HIGHLIGHT_STYLES[path_prefix_pathseparator]='fg=#f38ba8,underline'
-ZSH_HIGHLIGHT_STYLES[globbing]='fg=#cdd6f4'
-ZSH_HIGHLIGHT_STYLES[history-expansion]='fg=#cba6f7'
-ZSH_HIGHLIGHT_STYLES[back-quoted-argument-unclosed]='fg=#eba0ac'
-ZSH_HIGHLIGHT_STYLES[redirection]='fg=#cdd6f4'
-ZSH_HIGHLIGHT_STYLES[arg0]='fg=#cdd6f4'
-ZSH_HIGHLIGHT_STYLES[default]='fg=#cdd6f4'
-ZSH_HIGHLIGHT_STYLES[cursor]='fg=#cdd6f4'
+ZSH_HIGHLIGHT_STYLES[comment]='fg=#928374'
+ZSH_HIGHLIGHT_STYLES[alias]='fg=#b8bb26'
+ZSH_HIGHLIGHT_STYLES[suffix-alias]='fg=#b8bb26'
+ZSH_HIGHLIGHT_STYLES[global-alias]='fg=#b8bb26'
+ZSH_HIGHLIGHT_STYLES[function]='fg=#b8bb26'
+ZSH_HIGHLIGHT_STYLES[command]='fg=#b8bb26'
+ZSH_HIGHLIGHT_STYLES[precommand]='fg=#b8bb26,italic'
+ZSH_HIGHLIGHT_STYLES[autodirectory]='fg=#fe8019,italic'
+ZSH_HIGHLIGHT_STYLES[single-hyphen-option]='fg=#fe8019'
+ZSH_HIGHLIGHT_STYLES[double-hyphen-option]='fg=#fe8019'
+ZSH_HIGHLIGHT_STYLES[back-quoted-argument]='fg=#d3869b'
+ZSH_HIGHLIGHT_STYLES[builtin]='fg=#b8bb26'
+ZSH_HIGHLIGHT_STYLES[reserved-word]='fg=#b8bb26'
+ZSH_HIGHLIGHT_STYLES[hashed-command]='fg=#b8bb26'
+ZSH_HIGHLIGHT_STYLES[commandseparator]='fg=#fb4934'
+ZSH_HIGHLIGHT_STYLES[command-substitution-delimiter]='fg=#ebdbb2'
+ZSH_HIGHLIGHT_STYLES[command-substitution-delimiter-unquoted]='fg=#ebdbb2'
+ZSH_HIGHLIGHT_STYLES[process-substitution-delimiter]='fg=#ebdbb2'
+ZSH_HIGHLIGHT_STYLES[back-quoted-argument-delimiter]='fg=#fb4934'
+ZSH_HIGHLIGHT_STYLES[back-double-quoted-argument]='fg=#fb4934'
+ZSH_HIGHLIGHT_STYLES[back-dollar-quoted-argument]='fg=#fb4934'
+ZSH_HIGHLIGHT_STYLES[command-substitution-quoted]='fg=#fabd2f'
+ZSH_HIGHLIGHT_STYLES[command-substitution-delimiter-quoted]='fg=#fabd2f'
+ZSH_HIGHLIGHT_STYLES[single-quoted-argument]='fg=#fabd2f'
+ZSH_HIGHLIGHT_STYLES[single-quoted-argument-unclosed]='fg=#fb4934'
+ZSH_HIGHLIGHT_STYLES[double-quoted-argument]='fg=#fabd2f'
+ZSH_HIGHLIGHT_STYLES[double-quoted-argument-unclosed]='fg=#fb4934'
+ZSH_HIGHLIGHT_STYLES[rc-quote]='fg=#fabd2f'
+ZSH_HIGHLIGHT_STYLES[dollar-quoted-argument]='fg=#ebdbb2'
+ZSH_HIGHLIGHT_STYLES[dollar-quoted-argument-unclosed]='fg=#fb4934'
+ZSH_HIGHLIGHT_STYLES[dollar-double-quoted-argument]='fg=#ebdbb2'
+ZSH_HIGHLIGHT_STYLES[assign]='fg=#ebdbb2'
+ZSH_HIGHLIGHT_STYLES[named-fd]='fg=#ebdbb2'
+ZSH_HIGHLIGHT_STYLES[numeric-fd]='fg=#ebdbb2'
+ZSH_HIGHLIGHT_STYLES[unknown-token]='fg=#fb4934'
+ZSH_HIGHLIGHT_STYLES[path]='fg=#ebdbb2,underline'
+ZSH_HIGHLIGHT_STYLES[path_pathseparator]='fg=#fb4934,underline'
+ZSH_HIGHLIGHT_STYLES[path_prefix]='fg=#ebdbb2,underline'
+ZSH_HIGHLIGHT_STYLES[path_prefix_pathseparator]='fg=#fb4934,underline'
+ZSH_HIGHLIGHT_STYLES[globbing]='fg=#ebdbb2'
+ZSH_HIGHLIGHT_STYLES[history-expansion]='fg=#d3869b'
+ZSH_HIGHLIGHT_STYLES[back-quoted-argument-unclosed]='fg=#fb4934'
+ZSH_HIGHLIGHT_STYLES[redirection]='fg=#ebdbb2'
+ZSH_HIGHLIGHT_STYLES[arg0]='fg=#ebdbb2'
+ZSH_HIGHLIGHT_STYLES[default]='fg=#ebdbb2'
+ZSH_HIGHLIGHT_STYLES[cursor]='fg=#ebdbb2'
 
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

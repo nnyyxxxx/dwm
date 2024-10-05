@@ -1,5 +1,5 @@
 {
-    "workbench.colorTheme": "Catppuccin Mocha",
+    "workbench.colorTheme": "Gruvbox Dark Medium",
     "editor.fontSize": 15,
     "editor.scrollbar.vertical": "hidden",
     "editor.scrollbar.verticalScrollbarSize": 0,
@@ -14,7 +14,6 @@
     "terminal.explorerKind": "both",
     "terminal.sourceControlRepositoriesKind": "both",
     "telemetry.telemetryLevel": "off",
-    "catppuccin.accentColor": "lavender",
     "window.menuBarVisibility": "compact",
     "window.commandCenter": false
 }
