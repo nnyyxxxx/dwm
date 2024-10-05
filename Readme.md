@@ -64,7 +64,7 @@ Important notes
 | `ALT SHIFT + W` | Restarts dwm and keeps application positions |
 | `ALT SHIFT + F` | Toggles fullscreen (Actualfullscreen Patch) |
 | `ALT SHIFT + R` | Randomizes the wallpaper |
-| `ALT SHIFT + B` | Spawns librewolf (Browser) |
+| `ALT SHIFT + Q` | Spawns librewolf (Browser) |
 | `ALT + ESC` | Spawns maim (Screenshot utility) | 
 | `ALT + LMB` | Drags selected window |
 | `ALT + RMB` | Resizes window in floating & resizes mfact in tiled; when two or more windows are on screen |
