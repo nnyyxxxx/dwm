@@ -68,14 +68,7 @@ commit() {
 
 # cloning and cding into that cloned repo
 clone() { 
-    if [ -z "$1" ]; then
-        print -P "You didn't type anything in, %F{#f38ba8}stupid! BONK!%f Owo."
-        return 1
-    fi
-    git clone "$1" 2>/dev/null && cd "$(basename "$1" .git)" || {
-        print -P "Repository '%F{#f38ba8}$1%f' does not exist, %F{#f38ba8}stupid! BONK!%f Owo."
-        return 1
-    }
+    git clone "$1" 2>/dev/null && cd "$(basename "$1" .git)"
 }
 
 # dynamically delete branches while on the branch you want to delete
@@ -88,45 +81,18 @@ branch() {
     fi
 }
 
-# custom command not found message
-command_not_found_handler() {
-    print -P "Command '%F{#f38ba8}$1%f' not found, %F{#f38ba8}stupid! BONK!%f Owo." >&2
-    return 127
-}
-
-# custom command not found message 2
-ls() {
-    command ls -hN --color=auto --group-directories-first "$@" 2>/dev/null || print -P "Directory '%F{#f38ba8}$*%f' does not exist, %F{#f38ba8}stupid! BONK!%f Owo."
-}
-
 # rebasing
 rebase() {
     if [ "$1" = "--abort" ]; then
-        git rebase --abort || {
-            print -P "Failed to abort rebase, %F{#f38ba8}stupid! BONK!%f Owo."
-            return 1
-        }
-        return 0
+        git rebase --abort
+        return
     fi
-    if ! [[ "$1" =~ ^[0-9]+$ ]]; then
-        print -P "You didn't specify a valid number of commits, %F{#f38ba8}stupid! BONK!%f Owo."
-        return 1
+    if [[ "$1" =~ ^[0-9]+$ ]] && git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+        git rebase -i HEAD~"$1"
     fi
-    if ! git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
-        print -P "This is not a git repository, %F{#f38ba8}stupid! BONK!%f Owo."
-        return 1
-    fi
-    git rebase -i HEAD~"$1" || {
-        print -P "Failed to rebase %F{#f38ba8}$1%f commits, %F{#f38ba8}stupid! BONK!%f Owo."
-        return 1
-    }
 }
 
-eval "$(zoxide init zsh)"
-
-cd() {
-    z "$@" 2>/dev/null || print -P "Directory '%F{#f38ba8}$*%f' not found! %F{#f38ba8}stupid! BONK!%f Owo."
-}
+eval "$(zoxide init zsh --cmd cd)"
 
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main cursor)
 typeset -gA ZSH_HIGHLIGHT_STYLES
