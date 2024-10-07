@@ -63,7 +63,6 @@ Important notes
 | `ALT SHIFT + Q` | Kills dwm |  
 | `ALT SHIFT + W` | Restarts dwm and keeps application positions |
 | `ALT SHIFT + F` | Toggles fullscreen (Actualfullscreen Patch) |
-| `ALT SHIFT + R` | Randomizes the wallpaper |
 | `ALT + Q` | Spawns librewolf (Browser) |
 | `ALT + ESC` | Spawns maim (Screenshot utility) | 
 | `ALT + LMB` | Drags selected window |
